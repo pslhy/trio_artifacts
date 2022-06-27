@@ -112,46 +112,46 @@ let rec convert_pattern_to_burst (p: Trio.Expr.Pattern.t): Burst.Lang.Pattern.t 
   | Trio.Expr.Pattern.Wildcard -> Pattern.Wildcard
 
 (* counter changes proj ex) x.0 x.1 .. *)
-let rec convert_expr_to_burst (counter:int) (e: Trio.Expr.t) : Burst.Lang.Expr.t * int =
+let rec convert_expr_to_burst (e: Trio.Expr.t) : Burst.Lang.Expr.t =
   match e with
-  | Trio.Expr.Var id -> (Expr.mk_var (Id.create id), counter)
-  | Trio.Expr.Wildcard -> (Expr.mk_wildcard, counter)
-  | Trio.Expr.App (e1,e2) -> let (b_e1, counter) = (convert_expr_to_burst counter e1) in
-                             let (b_e2, counter) = (convert_expr_to_burst counter e2) in
-                             (Expr.mk_app b_e1 b_e2, counter)
+  | Trio.Expr.Var id -> Expr.mk_var (Id.create id)
+  | Trio.Expr.Wildcard -> Expr.mk_wildcard
+  | Trio.Expr.App (e1,e2) -> let b_e1 = (convert_expr_to_burst e1) in
+                             let b_e2 = (convert_expr_to_burst e2) in
+                             Expr.mk_app b_e1 b_e2
   | Trio.Expr.Func ((s,t), e) -> 
                         let b_t = (convert_type_to_burst t) in
-                        let (b_e, counter) = (convert_expr_to_burst counter e) in
-                        (Expr.mk_func (Id.create s, b_t) b_e, counter)
-  | Trio.Expr.Ctor (s,e) -> let (b_e, counter) = (convert_expr_to_burst counter e) in
-                            (Expr.mk_ctor (Id.create s) b_e, counter)
-  | Trio.Expr.Unctor (s,e) -> let (b_e, counter) = (convert_expr_to_burst counter e) in
-                              (Expr.mk_unctor (Id.create s) b_e, counter)
-  | Trio.Expr.Eq (b,e1,e2) -> let (b_e1, counter) = (convert_expr_to_burst counter e1) in
-                              let (b_e2, counter) = (convert_expr_to_burst counter e2) in
-                              (Expr.mk_eq b b_e1 b_e2, counter)
+                        let b_e = (convert_expr_to_burst e) in
+                        Expr.mk_func (Id.create s, b_t) b_e
+  | Trio.Expr.Ctor (s,e) -> let b_e = convert_expr_to_burst e in
+                            Expr.mk_ctor (Id.create s) b_e
+  | Trio.Expr.Unctor (s,e) -> let b_e = (convert_expr_to_burst e) in
+                              Expr.mk_unctor (Id.create s) b_e
+  | Trio.Expr.Eq (b,e1,e2) -> let b_e1 = (convert_expr_to_burst e1) in
+                              let b_e2 = (convert_expr_to_burst e2) in
+                              Expr.mk_eq b b_e1 b_e2
   | Trio.Expr.Match (e,branches) -> 
-        let (b_e, counter) = (convert_expr_to_burst counter e) in
+        let b_e = convert_expr_to_burst e in
         let b_branches = List.map ~f:(fun (p,e) -> 
-                                        let (b_e', counter) = convert_expr_to_burst counter e in
+                                        let b_e' = convert_expr_to_burst e in
                                         let b_p = (convert_pattern_to_burst p) in 
                                         (b_p, b_e')) branches
         in
-        (Expr.mk_match b_e b_branches, counter)
+        Expr.mk_match b_e b_branches
   | Trio.Expr.Fix (i,t,e) -> let b_t= (convert_type_to_burst t) in
-                             let (b_e, counter) = (convert_expr_to_burst counter e) in
-                             (Expr.mk_fix (Id.create i) b_t b_e, counter)
+                             let b_e = (convert_expr_to_burst e) in
+                             Expr.mk_fix (Id.create i) b_t b_e
   | Trio.Expr.Tuple explist -> 
-          let (es,counter) = 
-            List.fold_right ~f:(fun e (es,counter) -> 
-                                let (e, counter) = convert_expr_to_burst counter e in
-                                (e::es,counter))
-                            ~init:([],counter)
+          let es = 
+            List.fold_right ~f:(fun e es -> 
+                                let e = convert_expr_to_burst e in
+                                (e::es))
+                            ~init:([])
                             explist
           in
-          (Expr.mk_tuple es,counter)
-  | Trio.Expr.Proj (i,e) -> let (b_e, counter) = (convert_expr_to_burst counter e) in
-                            (Expr.mk_proj (i) b_e, counter)
+          Expr.mk_tuple es
+  | Trio.Expr.Proj (i,e) -> let b_e= (convert_expr_to_burst e) in
+                            (Expr.mk_proj (i) b_e)
 
 module T : Burst.Synthesizers.IOSynth.S = struct
   type t = (Context.t * Type.t * Type.t) * Problem.t
@@ -248,7 +248,7 @@ module T : Burst.Synthesizers.IOSynth.S = struct
       Trio.Generator.wrap spec sol
     in
     (* Trio to Burst.. *)
-    let (convert_result, counter) = convert_expr_to_burst 0 result in
+    let convert_result = convert_expr_to_burst result in
     (* prerr_endline ("convert_result");
     prerr_endline (Burst.Lang.Expr.show convert_result); *)
     convert_result
