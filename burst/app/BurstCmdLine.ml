@@ -192,6 +192,7 @@ let synthesize_solution
     ~(log:bool)
     ~(no_experiments:bool)
     ~(print_times:bool)
+    ~(print_data:bool)
     ~(tc_synth:bool)
   : unit =
   Consts.logging := log;
@@ -273,8 +274,8 @@ let synthesize_solution
           ~tc_synth
     end
   in
-  if no_experiments then
-    begin
+  (* if no_experiments then *)
+    (* begin
       print_endline (Expr.show e);
       print_endline ";";
       print_endline (Float.to_string (Consts.total Consts.isect_times));
@@ -302,6 +303,12 @@ let synthesize_solution
       print_endline (Float.to_string (Consts.total Consts.full_synth_times));
       print_endline ";";
       print_endline (Float.to_string (Consts.max Consts.full_synth_times));
+    end *)
+  if print_data then
+    begin
+      print_endline (Expr.show e);
+      print_endline ("Solution Size: " ^ (Int.to_string (Expr.size e)));
+      print_endline ("Iter: " ^ (Int.to_string !Consts.loop_count));
     end
   else
     begin
@@ -323,6 +330,7 @@ let synthesize_solution
         end
     end
 
+
 let handle_inputs
     ~(fname:string)
     ~(use_myth:bool)
@@ -335,6 +343,7 @@ let handle_inputs
     ~(log:bool)
     ~(no_experiments:bool)
     ~(print_times:bool)
+    ~(print_data:bool)
     ~(tc_synth:bool)
     ~(use_random:bool)
   : unit =
@@ -357,6 +366,7 @@ let handle_inputs
         ~log
         ~no_experiments
         ~print_times
+        ~print_data
         ~tc_synth
   end
 
@@ -372,6 +382,7 @@ let param =
       and log   = flag "log" no_arg ~doc:"log process"
       and use_l2   = flag "use-l2" no_arg ~doc:"Solve using the l2 synthesis engine"
       and print_times   = flag "print-times" no_arg ~doc:"print the times to run various components"
+      and print_data   = flag "print-data" no_arg ~doc:"print the size and iteration"
       and no_experiments   = flag "no-experiments" no_arg ~doc:"print the times to run various components"
       and check_equiv1   = flag "check-equiv1" (optional string) ~doc:"check equivalence of two synthesized solutions"
       and check_equiv2   = flag "check-equiv2" (optional string) ~doc:"check equivalence of two synthesized solutions"
@@ -397,6 +408,7 @@ let param =
           ~use_l2
           ~log
           ~print_times
+          ~print_data
           ~no_experiments
           ~tc_synth
           ~check_equiv1
