@@ -215,15 +215,15 @@ module T : Burst.Synthesizers.IOSynth.S = struct
     let burst_problem = (problem a) in
 
     let problem_spec = burst_problem.spec in
-    prerr_endline (Burst.Problem.show_spec problem_spec);
+    (* prerr_endline (Burst.Problem.show_spec problem_spec); *)
 
     (* make trio.specification.spec  *)
     let (ss, ds, t, dss, unspec) = burst_problem.unprocessed in
     (* prerr_endline ("====unspec====="); *)
-    prerr_endline (Burst.Problem.show_unprocessed_spec unspec);
+    (* prerr_endline (Burst.Problem.show_unprocessed_spec unspec); *)
     let trio_unspec = convert_unprocessed_spec_to_trio unspec in
-    prerr_endline ("====converted unspec=====");
-    prerr_endline (Trio.Specification.show_unprocessed_spec trio_unspec);
+    (* prerr_endline ("====converted unspec=====");
+    prerr_endline (Trio.Specification.show_unprocessed_spec trio_unspec); *)
     let trio_ds = convert_decl_list_to_trio ds in
     let trio_t = convert_type_to_trio t in
     (* converted datas *)
@@ -245,8 +245,8 @@ module T : Burst.Synthesizers.IOSynth.S = struct
         Trio.Bidirectional.synthesis spec
       with Trio.Generator.SolutionFound sol -> sol
     in
-    let e = Trio.Generator.wrap spec result in
-    prerr_endline (Trio.Expr.show e);
+    (* let e = Trio.Generator.wrap spec result in *)
+    (* prerr_endline (Trio.Expr.show e); *)
     (* Trio to Burst.. *)
     let (convert_result, counter) = convert_expr_to_burst 0 result in
     convert_result
