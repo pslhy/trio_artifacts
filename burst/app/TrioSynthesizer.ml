@@ -88,13 +88,13 @@ let convert_decl_list_to_trio
   in
   trio_ds
 
-(* let rec convert_value_to_trio (vs: Burst.Problem.spec)
-  : Trio.Specification.spec = 
-  match vs with
-  | IOEs vals -> 
-  | Equiv vals -> 
-  | _ -> failwith ("not apply") *)
-
+let rec convert_value_to_trio (v: Burst.Lang.Value.t)
+  : Trio.Expr.value = 
+  match Burst.Lang.Value.node v with
+  | Func ((i,t), e) -> Trio.Expr.FuncV ((Id.to_string i, convert_type_to_trio t), convert_exp_to_trio e)
+  | Ctor (i, v) -> Trio.Expr.CtorV (Id.to_string i, convert_value_to_trio v)
+  | Tuple vs -> Trio.Expr.TupleV (List.map ~f:convert_value_to_trio vs)
+  | Wildcard -> Trio.Expr.WildcardV
 
 (* Trio -> Burst *)
 let rec convert_type_to_burst (t: Trio.Type.t): Burst.Type.t =
@@ -192,6 +192,8 @@ module T : Burst.Synthesizers.IOSynth.S = struct
       (ios:(Value.t * Value.t) list)
     : Expr.t =
     (* ios preprocess *)
+
+    let trio_ios = List.map ~f:(fun (v1,v2) -> (convert_value_to_trio v1, convert_value_to_trio v2)) ios in
     if (List.length ios = 0) then
       term_of_type (context a) (Type.mk_arrow (tin a) (tout a))
     else
@@ -205,7 +207,6 @@ module T : Burst.Synthesizers.IOSynth.S = struct
             end)
         ios
     in
-    (* *)
     let tins =
       begin match Type.destruct_tuple (tin a) with
         | None -> [(tin a)]
@@ -237,16 +238,17 @@ module T : Burst.Synthesizers.IOSynth.S = struct
       {spec with tc = tc}
     in
     (* prerr_endline (Trio.Specification.show spec); *)
-    (* let spec = {spec with spec = ios}
-    in *)
+    let spec = {spec with spec = trio_ios}
+    in
+    prerr_endline (Trio.Specification.show spec);
     (* Trio synthesizer ! *)
     let result = 
       try
         Trio.Bidirectional.synthesis spec
       with Trio.Generator.SolutionFound sol -> sol
     in
-    (* let e = Trio.Generator.wrap spec result in *)
-    (* prerr_endline (Trio.Expr.show e); *)
+    (* let e = Trio.Generator.wrap spec result in
+    prerr_endline (Trio.Expr.show e); *)
     (* Trio to Burst.. *)
     let (convert_result, counter) = convert_expr_to_burst 0 result in
     convert_result
