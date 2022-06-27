@@ -1,2 +1,7 @@
-Please refer to $/README.pdf for instructions on installing and running the
-artifact.
+. setenv
+make
+
+
+run example
+
+burst/BurstCmdLine.exe -use-trio burst/benchmarks/io/list_append.mls
