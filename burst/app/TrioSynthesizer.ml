@@ -28,7 +28,7 @@ let rec convert_pattern_to_trio
   : Trio.Expr.Pattern.t =
   match p with
   | Tuple ps -> Trio.Expr.Pattern.Tuple (List.map ~f:convert_pattern_to_trio ps)
-  | Ctor (i,t) -> failwith ("convert pattern trio")
+  | Ctor (i,p') -> Trio.Expr.Pattern.Ctor (Id.to_string i, convert_pattern_to_trio p')
   | Var i -> Trio.Expr.Pattern.Var (Id.to_string i)
   | Wildcard -> Trio.Expr.Pattern.Wildcard
 
