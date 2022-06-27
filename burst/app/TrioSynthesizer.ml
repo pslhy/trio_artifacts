@@ -192,8 +192,8 @@ module T : Burst.Synthesizers.IOSynth.S = struct
       (ios:(Value.t * Value.t) list)
     : Expr.t =
     (* ios preprocess *)
-
     let trio_ios = List.map ~f:(fun (v1,v2) -> (convert_value_to_trio v1, convert_value_to_trio v2)) ios in
+
     if (List.length ios = 0) then
       term_of_type (context a) (Type.mk_arrow (tin a) (tout a))
     else
@@ -237,21 +237,22 @@ module T : Burst.Synthesizers.IOSynth.S = struct
       let tc = BatMap.add Trio.Expr.target_func_arg src_ty tc in   
       {spec with tc = tc}
     in
-    (* prerr_endline (Trio.Specification.show spec); *)
     let spec = {spec with spec = trio_ios}
     in
-    prerr_endline (Trio.Specification.show spec);
+    (* prerr_endline (Trio.Specification.show spec); *)
     (* Trio synthesizer ! *)
     let result = 
       try
         Trio.Bidirectional.synthesis spec
-      with Trio.Generator.SolutionFound sol -> sol
+      with Trio.Generator.SolutionFound sol -> 
+      Trio.Generator.wrap spec sol
     in
-    (* let e = Trio.Generator.wrap spec result in
-    prerr_endline (Trio.Expr.show e); *)
     (* Trio to Burst.. *)
     let (convert_result, counter) = convert_expr_to_burst 0 result in
+    (* prerr_endline ("convert_result");
+    prerr_endline (Burst.Lang.Expr.show convert_result); *)
     convert_result
+
   
   let synth
       (a:t)

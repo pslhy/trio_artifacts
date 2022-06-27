@@ -1,0 +1,347 @@
+2022-06-27 12:46:45.566493+09:00 inputs: []
+2022-06-27 12:46:45.585400+09:00 Synthesis started with size 2
+2022-06-27 12:46:45.585484+09:00 Candidate Found: fix (f : list * list -> list) = fun (x:list * list) -> Nil
+2022-06-27 12:46:45.586769+09:00 CEx Found: (Nil, Cons (0, Nil))
+2022-06-27 12:46:45.586992+09:00 inputs: [(Nil, Cons (0, Nil))]
+2022-06-27 12:46:45.587008+09:00 Synthesis started with size 2
+2022-06-27 12:46:45.587109+09:00 new synth begun
+2022-06-27 12:46:45.588856+09:00 PQ Size: 1
+2022-06-27 12:46:45.588890+09:00 
+
+Popped:
+2022-06-27 12:46:45.588911+09:00 term: x . 1
+constraints: []
+nonpermitted: []
+2022-06-27 12:46:45.588941+09:00 Priority: (1., 0, 0, 0)
+2022-06-27 12:46:45.588965+09:00 
+
+Done Intersecting! All Values[(Nil, Cons (0, Nil))]
+2022-06-27 12:46:45.589000+09:00 Candidate Found: fix (f : list * list -> list) = fun (x:list * list) -> x . 1
+2022-06-27 12:46:45.589155+09:00 CEx Found: (Cons (0, Nil), Nil)
+2022-06-27 12:46:45.589356+09:00 inputs: [(Cons (0, Nil), Nil);(Nil, Cons (0, Nil))]
+2022-06-27 12:46:45.589379+09:00 Synthesis started with size 2
+2022-06-27 12:46:45.589578+09:00 PQ Size: 1
+2022-06-27 12:46:45.589589+09:00 
+
+Popped:
+2022-06-27 12:46:45.589604+09:00 term: x . 1
+constraints: []
+nonpermitted: []
+2022-06-27 12:46:45.589620+09:00 Priority: (1., 0, 0, 0)
+2022-06-27 12:46:45.590733+09:00 succeeded update with priority: (1., 0, 0, 0)
+2022-06-27 12:46:45.590809+09:00 new discovered value was: x . 1
+2022-06-27 12:46:45.590850+09:00 PQ Size: 1
+2022-06-27 12:46:45.590862+09:00 
+
+Popped:
+2022-06-27 12:46:45.590881+09:00 term: x . 1
+constraints: []
+nonpermitted: []
+2022-06-27 12:46:45.590898+09:00 Priority: (1., 0, 0, 0)
+2022-06-27 12:46:45.590944+09:00 Now intersecting: (Cons (0, Nil), Nil)
+2022-06-27 12:46:45.591170+09:00 Now minimizing: (Cons (0, Nil), Nil)
+2022-06-27 12:46:45.591585+09:00 succeeded intersect with priority: (10., 0, 0, 0)
+2022-06-27 12:46:45.591608+09:00 new discovered value was: Cons (0, Nil)
+2022-06-27 12:46:45.591616+09:00 PQ Size: 1
+2022-06-27 12:46:45.591624+09:00 
+
+Popped:
+2022-06-27 12:46:45.591636+09:00 term: Cons (0, Nil)
+constraints: []
+nonpermitted: []
+2022-06-27 12:46:45.591645+09:00 Priority: (10., 0, 0, 0)
+2022-06-27 12:46:45.591662+09:00 
+
+Done Intersecting! All Values[(Cons (0, Nil), Nil);(Nil, Cons (0, Nil))]
+2022-06-27 12:46:45.591688+09:00 Candidate Found: fix (f : list * list -> list) = fun (x:list * list) -> Cons (0, Nil)
+2022-06-27 12:46:45.591721+09:00 CEx Found: (Nil, Nil)
+2022-06-27 12:46:45.591875+09:00 inputs: [(Nil, Nil);(Cons (0, Nil), Nil);(Nil, Cons (0, Nil))]
+2022-06-27 12:46:45.591884+09:00 Synthesis started with size 2
+2022-06-27 12:46:45.592122+09:00 PQ Size: 1
+2022-06-27 12:46:45.592134+09:00 
+
+Popped:
+2022-06-27 12:46:45.592150+09:00 term: Cons (0, Nil)
+constraints: []
+nonpermitted: []
+2022-06-27 12:46:45.592161+09:00 Priority: (10., 0, 0, 0)
+2022-06-27 12:46:45.594738+09:00 succeeded update with priority: (1., 0, 0, 0)
+2022-06-27 12:46:45.594781+09:00 new discovered value was: x . 0
+2022-06-27 12:46:45.594790+09:00 PQ Size: 1
+2022-06-27 12:46:45.594796+09:00 
+
+Popped:
+2022-06-27 12:46:45.594829+09:00 term: x . 0
+constraints: []
+nonpermitted: []
+2022-06-27 12:46:45.594837+09:00 Priority: (1., 0, 0, 0)
+2022-06-27 12:46:45.594897+09:00 Now intersecting: (Nil, Cons (0, Nil))
+2022-06-27 12:46:45.595243+09:00 Now minimizing: (Nil, Cons (0, Nil))
+2022-06-27 12:46:45.595560+09:00 succeeded intersect with priority: (1., 0, 0, 0)
+2022-06-27 12:46:45.595660+09:00 new discovered value was: x . 1
+2022-06-27 12:46:45.595693+09:00 PQ Size: 1
+2022-06-27 12:46:45.595704+09:00 
+
+Popped:
+2022-06-27 12:46:45.595736+09:00 term: x . 1
+constraints: []
+nonpermitted: []
+2022-06-27 12:46:45.595753+09:00 Priority: (1., 0, 0, 0)
+2022-06-27 12:46:45.595805+09:00 Now intersecting: (Cons (0, Nil), Nil)
+2022-06-27 12:46:45.597201+09:00 Now minimizing: (Cons (0, Nil), Nil)
+2022-06-27 12:46:45.597985+09:00 succeeded intersect with priority: (11., 0, 0, 0)
+2022-06-27 12:46:45.598076+09:00 new discovered value was: match x . 1 with
+  | Nil _ -> x . 0
+  | Cons _ -> x . 1
+2022-06-27 12:46:45.598111+09:00 PQ Size: 1
+2022-06-27 12:46:45.598145+09:00 
+
+Popped:
+2022-06-27 12:46:45.598176+09:00 term: match x . 1 with
+  | Nil _ -> x . 0
+  | Cons _ -> x . 1
+constraints: []
+nonpermitted: []
+2022-06-27 12:46:45.598191+09:00 Priority: (11., 0, 0, 0)
+2022-06-27 12:46:45.598239+09:00 
+
+Done Intersecting! All Values[(Cons (0, Nil), Nil);(Nil, Cons (0, Nil));(Nil, Nil)]
+2022-06-27 12:46:45.598299+09:00 Candidate Found: fix (f : list * list -> list) =
+  fun (x:list * list) -> match x . 1 with
+                           | Nil _ -> x . 0
+                           | Cons _ -> x . 1
+2022-06-27 12:46:45.599043+09:00 CEx Found: (Cons (0, Nil), Cons (0, Nil))
+2022-06-27 12:46:45.599759+09:00 inputs: [(Cons (0, Nil), Cons (0, Nil));(Nil, Nil);(Cons (0, Nil), Nil);(Nil, Cons (0, Nil))]
+2022-06-27 12:46:45.599807+09:00 Synthesis started with size 2
+2022-06-27 12:46:45.600285+09:00 PQ Size: 1
+2022-06-27 12:46:45.600299+09:00 
+
+Popped:
+2022-06-27 12:46:45.600325+09:00 term: match x . 1 with
+  | Nil _ -> x . 0
+  | Cons _ -> x . 1
+constraints: []
+nonpermitted: []
+2022-06-27 12:46:45.600337+09:00 Priority: (11., 0, 0, 0)
+2022-06-27 12:46:45.602707+09:00 succeeded update with priority: (11., 0, 0, 0)
+2022-06-27 12:46:45.602771+09:00 new discovered value was: match x . 1 with
+  | Nil _ -> x . 0
+  | Cons _ -> x . 1
+2022-06-27 12:46:45.602786+09:00 PQ Size: 1
+2022-06-27 12:46:45.602792+09:00 
+
+Popped:
+2022-06-27 12:46:45.602810+09:00 term: match x . 1 with
+  | Nil _ -> x . 0
+  | Cons _ -> x . 1
+constraints: []
+nonpermitted: []
+2022-06-27 12:46:45.602820+09:00 Priority: (11., 0, 0, 0)
+2022-06-27 12:46:45.602851+09:00 Now intersecting: (Cons (0, Nil), Cons (0, Nil))
+2022-06-27 12:46:45.603549+09:00 Now minimizing: (Cons (0, Nil), Cons (0, Nil))
+2022-06-27 12:46:45.604544+09:00 succeeded intersect with priority: (18., 0, 0, 0)
+2022-06-27 12:46:45.604600+09:00 new discovered value was: match x . 0 with
+  | Nil _ -> x . 1
+  | Cons _ -> Cons (Un_Cons (x . 0) . 0, x . 1)
+2022-06-27 12:46:45.604610+09:00 PQ Size: 1
+2022-06-27 12:46:45.604614+09:00 
+
+Popped:
+2022-06-27 12:46:45.604636+09:00 term: match x . 0 with
+  | Nil _ -> x . 1
+  | Cons _ -> Cons (Un_Cons (x . 0) . 0, x . 1)
+constraints: []
+nonpermitted: []
+2022-06-27 12:46:45.604645+09:00 Priority: (18., 0, 0, 0)
+2022-06-27 12:46:45.604678+09:00 
+
+Done Intersecting! All Values[(Cons (0, Nil), Cons (0, Nil));(Cons (0, Nil), Nil);(Nil, Cons (0, Nil));(Nil, Nil)]
+2022-06-27 12:46:45.604895+09:00 Candidate Found: fix (f : list * list -> list) =
+  fun (x:list * list) ->
+    match x . 0 with
+      | Nil _ -> x . 1
+      | Cons _ -> Cons (Un_Cons (x . 0) . 0, x . 1)
+2022-06-27 12:46:45.605391+09:00 CEx Found: (Cons (0, Cons (0, Nil)), Nil)
+2022-06-27 12:46:45.608200+09:00 inputs: [(Cons (0, Cons (0, Nil)), Nil);(Cons (0, Nil), Cons (0, Nil));(Nil, Nil);(Cons (0, Nil), Nil);(Nil, Cons (0, Nil))]
+2022-06-27 12:46:45.608279+09:00 Synthesis started with size 2
+2022-06-27 12:46:45.609042+09:00 PQ Size: 1
+2022-06-27 12:46:45.609069+09:00 
+
+Popped:
+2022-06-27 12:46:45.609107+09:00 term: match x . 0 with
+  | Nil _ -> x . 1
+  | Cons _ -> Cons (Un_Cons (x . 0) . 0, x . 1)
+constraints: []
+nonpermitted: []
+2022-06-27 12:46:45.609124+09:00 Priority: (18., 0, 0, 0)
+2022-06-27 12:46:45.612430+09:00 succeeded update with priority: (18., 0, 0, 0)
+2022-06-27 12:46:45.612487+09:00 new discovered value was: match x . 0 with
+  | Nil _ -> x . 1
+  | Cons _ -> Cons (Un_Cons (x . 0) . 0, x . 1)
+2022-06-27 12:46:45.612495+09:00 PQ Size: 1
+2022-06-27 12:46:45.612500+09:00 
+
+Popped:
+2022-06-27 12:46:45.612652+09:00 term: match x . 0 with
+  | Nil _ -> x . 1
+  | Cons _ -> Cons (Un_Cons (x . 0) . 0, x . 1)
+constraints: []
+nonpermitted: []
+2022-06-27 12:46:45.612664+09:00 Priority: (18., 0, 0, 0)
+2022-06-27 12:46:45.612693+09:00 Now intersecting: (Cons (0, Cons (0, Nil)), Nil)
+2022-06-27 12:46:45.614490+09:00 Now minimizing: (Cons (0, Cons (0, Nil)), Nil)
+2022-06-27 12:46:45.616516+09:00 succeeded intersect with priority: (18., 0, 0, 0)
+2022-06-27 12:46:45.616559+09:00 new discovered value was: match x . 1 with
+  | Nil _ -> x . 0
+  | Cons _ -> Cons (Un_Cons (x . 1) . 0, x . 0)
+2022-06-27 12:46:45.616651+09:00 PQ Size: 1
+2022-06-27 12:46:45.616665+09:00 
+
+Popped:
+2022-06-27 12:46:45.616694+09:00 term: match x . 1 with
+  | Nil _ -> x . 0
+  | Cons _ -> Cons (Un_Cons (x . 1) . 0, x . 0)
+constraints: []
+nonpermitted: []
+2022-06-27 12:46:45.616705+09:00 Priority: (18., 0, 0, 0)
+2022-06-27 12:46:45.616740+09:00 
+
+Done Intersecting! All Values[(Cons (0, Cons (0, Nil)), Nil);(Cons (0, Nil), Cons (0, Nil));(Cons (0, Nil), Nil);(Nil, Cons (0, Nil));(Nil, Nil)]
+2022-06-27 12:46:45.616801+09:00 Candidate Found: fix (f : list * list -> list) =
+  fun (x:list * list) ->
+    match x . 1 with
+      | Nil _ -> x . 0
+      | Cons _ -> Cons (Un_Cons (x . 1) . 0, x . 0)
+2022-06-27 12:46:45.617205+09:00 CEx Found: (Nil, Cons (0, Cons (0, Nil)))
+2022-06-27 12:46:45.618437+09:00 inputs: [(Nil, Cons (0, Cons (0, Nil)));(Cons (0, Cons (0, Nil)), Nil);(Cons (0, Nil), Cons (0, Nil));(Nil, Nil);(Cons (0, Nil), Nil);(Nil, Cons (0, Nil))]
+2022-06-27 12:46:45.618528+09:00 Synthesis started with size 2
+2022-06-27 12:46:45.619593+09:00 PQ Size: 1
+2022-06-27 12:46:45.619615+09:00 
+
+Popped:
+2022-06-27 12:46:45.619678+09:00 term: match x . 1 with
+  | Nil _ -> x . 0
+  | Cons _ -> Cons (Un_Cons (x . 1) . 0, x . 0)
+constraints: []
+nonpermitted: []
+2022-06-27 12:46:45.619693+09:00 Priority: (18., 0, 0, 0)
+2022-06-27 12:46:45.624550+09:00 succeeded update with priority: (18., 0, 0, 0)
+2022-06-27 12:46:45.624604+09:00 new discovered value was: match x . 1 with
+  | Nil _ -> x . 0
+  | Cons _ -> Cons (Un_Cons (x . 1) . 0, x . 0)
+2022-06-27 12:46:45.624612+09:00 PQ Size: 1
+2022-06-27 12:46:45.624617+09:00 
+
+Popped:
+2022-06-27 12:46:45.624636+09:00 term: match x . 1 with
+  | Nil _ -> x . 0
+  | Cons _ -> Cons (Un_Cons (x . 1) . 0, x . 0)
+constraints: []
+nonpermitted: []
+2022-06-27 12:46:45.624644+09:00 Priority: (18., 0, 0, 0)
+2022-06-27 12:46:45.624694+09:00 Now intersecting: (Nil, Cons (0, Cons (0, Nil)))
+2022-06-27 12:46:45.628053+09:00 Now minimizing: (Nil, Cons (0, Cons (0, Nil)))
+2022-06-27 12:46:45.631658+09:00 succeeded intersect with priority: (23., 0, 0, 0)
+2022-06-27 12:46:45.631715+09:00 new discovered value was: match x . 1 with
+  | Nil _ -> x . 0
+  | Cons _ -> Cons (Un_Cons (x . 1) . 0, f (x . 0, Un_Cons (x . 1) . 1))
+2022-06-27 12:46:45.631723+09:00 PQ Size: 1
+2022-06-27 12:46:45.631728+09:00 
+
+Popped:
+2022-06-27 12:46:45.631752+09:00 term: match x . 1 with
+  | Nil _ -> x . 0
+  | Cons _ -> Cons (Un_Cons (x . 1) . 0, f (x . 0, Un_Cons (x . 1) . 1))
+constraints: []
+nonpermitted: []
+2022-06-27 12:46:45.631760+09:00 Priority: (23., 0, 0, 0)
+2022-06-27 12:46:45.631798+09:00 
+
+Done Intersecting! All Values[(Nil, Cons (0, Cons (0, Nil)));(Cons (0, Cons (0, Nil)), Nil);(Cons (0, Nil), Cons (0, Nil));(Cons (0, Nil), Nil);(Nil, Cons (0, Nil));(Nil, Nil)]
+2022-06-27 12:46:45.631913+09:00 Candidate Found: fix (f : list * list -> list) =
+  fun (x:list * list) ->
+    match x . 1 with
+      | Nil _ -> x . 0
+      | Cons _ -> Cons (Un_Cons (x . 1) . 0, f (x . 0, Un_Cons (x . 1) . 1))
+2022-06-27 12:46:45.632563+09:00 CEx Found: (Cons (0, Nil), Cons (1, Nil))
+2022-06-27 12:46:45.634004+09:00 inputs: [(Cons (0, Nil), Cons (1, Nil));(Nil, Cons (0, Cons (0, Nil)));(Cons (0, Cons (0, Nil)), Nil);(Cons (0, Nil), Cons (0, Nil));(Nil, Nil);(Cons (0, Nil), Nil);(Nil, Cons (0, Nil))]
+2022-06-27 12:46:45.634015+09:00 Synthesis started with size 2
+2022-06-27 12:46:45.635314+09:00 PQ Size: 1
+2022-06-27 12:46:45.635321+09:00 
+
+Popped:
+2022-06-27 12:46:45.635349+09:00 term: match x . 1 with
+  | Nil _ -> x . 0
+  | Cons _ -> Cons (Un_Cons (x . 1) . 0, f (x . 0, Un_Cons (x . 1) . 1))
+constraints: []
+nonpermitted: []
+2022-06-27 12:46:45.635359+09:00 Priority: (23., 0, 0, 0)
+2022-06-27 12:46:45.644990+09:00 succeeded update with priority: (23., 0, 0, 0)
+2022-06-27 12:46:45.645073+09:00 new discovered value was: match x . 1 with
+  | Nil _ -> x . 0
+  | Cons _ -> Cons (Un_Cons (x . 1) . 0, f (x . 0, Un_Cons (x . 1) . 1))
+2022-06-27 12:46:45.645083+09:00 PQ Size: 1
+2022-06-27 12:46:45.645089+09:00 
+
+Popped:
+2022-06-27 12:46:45.645134+09:00 term: match x . 1 with
+  | Nil _ -> x . 0
+  | Cons _ -> Cons (Un_Cons (x . 1) . 0, f (x . 0, Un_Cons (x . 1) . 1))
+constraints: []
+nonpermitted: []
+2022-06-27 12:46:45.645144+09:00 Priority: (23., 0, 0, 0)
+2022-06-27 12:46:45.645186+09:00 Now intersecting: (Cons (0, Nil), Cons (1, Nil))
+2022-06-27 12:46:45.652287+09:00 Now minimizing: (Cons (0, Nil), Cons (1, Nil))
+2022-06-27 12:46:45.659696+09:00 succeeded intersect with priority: (23., 0, 0, 0)
+2022-06-27 12:46:45.659772+09:00 new discovered value was: match x . 0 with
+  | Nil _ -> x . 1
+  | Cons _ -> Cons (Un_Cons (x . 0) . 0, f (Un_Cons (x . 0) . 1, x . 1))
+2022-06-27 12:46:45.659781+09:00 PQ Size: 1
+2022-06-27 12:46:45.659786+09:00 
+
+Popped:
+2022-06-27 12:46:45.659810+09:00 term: match x . 0 with
+  | Nil _ -> x . 1
+  | Cons _ -> Cons (Un_Cons (x . 0) . 0, f (Un_Cons (x . 0) . 1, x . 1))
+constraints: []
+nonpermitted: []
+2022-06-27 12:46:45.659818+09:00 Priority: (23., 0, 0, 0)
+2022-06-27 12:46:45.660030+09:00 
+
+Done Intersecting! All Values[(Cons (0, Nil), Cons (1, Nil));(Nil, Cons (0, Cons (0, Nil)));(Cons (0, Cons (0, Nil)), Nil);(Cons (0, Nil), Cons (0, Nil));(Cons (0, Nil), Nil);(Nil, Cons (0, Nil));(Nil, Nil)]
+2022-06-27 12:46:45.660187+09:00 Candidate Found: fix (f : list * list -> list) =
+  fun (x:list * list) ->
+    match x . 0 with
+      | Nil _ -> x . 1
+      | Cons _ -> Cons (Un_Cons (x . 0) . 0, f (Un_Cons (x . 0) . 1, x . 1))
+fix (f : list * list -> list) =
+  fun (x:list * list) ->
+    match x . 0 with
+      | Nil _ -> x . 1
+      | Cons _ -> Cons (Un_Cons (x . 0) . 0, f (Un_Cons (x . 0) . 1, x . 1))
+;
+0.014142000000000016
+;
+0.0070270000000000055
+;
+0.017926999999999971
+;
+0.0022670000000000051
+;
+0.0097899999999999723
+;
+0.0049769999999999814
+;
+0.012253999999999987
+;
+0.0021079999999999988
+;
+0.
+;
+0.
+;
+7
+;
+0.081544
+;
+0.02745800000000001

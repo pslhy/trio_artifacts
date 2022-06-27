@@ -1,0 +1,314 @@
+2022-06-27 13:24:08.857101+09:00 Candidate Found: fun (x:list * list) -> Nil
+2022-06-27 13:24:08.867239+09:00 CEx Found: (Nil, Cons (0, Nil))
+synth_type: (list, list) -> list
+ ec: empty
+ tc: {f -> ((list, list) -> list),
+x -> (list, list)}
+ td: {list -> Nil of ()
+ | Cons of (nat, list),
+nat -> O of ()
+ | S of nat}
+ vc: {Cons -> (nat, list), list,
+Nil -> (), list,
+O -> (), nat,
+S -> nat, nat}
+ spec: [[Nil([]), Cons([O([]), Nil([])])], Cons([O([]), Nil([])])]
+
+-----------result----------
+let rec (f : ((list, list) -> list)) = 
+  fun (x:(list, list)) -> 
+    (x).1
+-----------wrap------------
+let rec (f : ((list, list) -> list)) = 
+  fun (x:(list, list)) -> 
+    let rec (f : ((list, list) -> list)) = 
+      fun (x:(list, list)) -> 
+        (x).1
+-----------unwrap----------
+let rec (f : ((list, list) -> list)) = 
+  fun (x:(list, list)) -> 
+    (x).1
+convert_result
+fix (f : list * list -> list) = fun (x:list * list) -> x . 1
+2022-06-27 13:24:08.867439+09:00 Candidate Found: fix (f : list * list -> list) = fun (x:list * list) -> x . 1
+2022-06-27 13:24:08.868348+09:00 CEx Found: (Cons (0, Nil), Nil)
+synth_type: (list, list) -> list
+ ec: empty
+ tc: {f -> ((list, list) -> list),
+x -> (list, list)}
+ td: {list -> Nil of ()
+ | Cons of (nat, list),
+nat -> O of ()
+ | S of nat}
+ vc: {Cons -> (nat, list), list,
+Nil -> (), list,
+O -> (), nat,
+S -> nat, nat}
+ spec: [[Cons([O([]), Nil([])]), Nil([])], Cons([O([]), Nil([])]);[Nil([]), Cons([O([]), Nil([])])], Cons([O([]), Nil([])])]
+
+-----------result----------
+let rec (f : ((list, list) -> list)) = 
+  fun (x:(list, list)) -> 
+    Cons([O([]), Nil([])])
+-----------wrap------------
+let rec (f : ((list, list) -> list)) = 
+  fun (x:(list, list)) -> 
+    let rec (f : ((list, list) -> list)) = 
+      fun (x:(list, list)) -> 
+        Cons([O([]), Nil([])])
+-----------unwrap----------
+let rec (f : ((list, list) -> list)) = 
+  fun (x:(list, list)) -> 
+    Cons([O([]), Nil([])])
+convert_result
+fix (f : list * list -> list) = fun (x:list * list) -> Cons (0, Nil)
+2022-06-27 13:24:08.870240+09:00 Candidate Found: fix (f : list * list -> list) = fun (x:list * list) -> Cons (0, Nil)
+2022-06-27 13:24:08.870270+09:00 CEx Found: (Nil, Nil)
+synth_type: (list, list) -> list
+ ec: empty
+ tc: {f -> ((list, list) -> list),
+x -> (list, list)}
+ td: {list -> Nil of ()
+ | Cons of (nat, list),
+nat -> O of ()
+ | S of nat}
+ vc: {Cons -> (nat, list), list,
+Nil -> (), list,
+O -> (), nat,
+S -> nat, nat}
+ spec: [[Nil([]), Nil([])], Nil([]);[Cons([O([]), Nil([])]), Nil([])], Cons([O([]), Nil([])]);[Nil([]), Cons([O([]), Nil([])])], Cons([O([]), Nil([])])]
+
+-----------result----------
+let rec (f : ((list, list) -> list)) = 
+  fun (x:(list, list)) -> 
+    match (x).0 with
+    Nil(_) -> 
+      (x).1
+    Cons(_) -> 
+      (x).0
+    
+-----------wrap------------
+let rec (f : ((list, list) -> list)) = 
+  fun (x:(list, list)) -> 
+    let rec (f : ((list, list) -> list)) = 
+      fun (x:(list, list)) -> 
+        match (x).0 with
+        Nil(_) -> 
+          (x).1
+        Cons(_) -> 
+          (x).0
+        
+-----------unwrap----------
+let rec (f : ((list, list) -> list)) = 
+  fun (x:(list, list)) -> 
+    match (x).0 with
+    Nil(_) -> 
+      (x).1
+    Cons(_) -> 
+      (x).0
+    
+convert_result
+fix (f : list * list -> list) =
+  fun (x:list * list) -> match x . 0 with
+                           | Nil _ -> x . 1
+                           | Cons _ -> x . 0
+2022-06-27 13:24:08.881394+09:00 Candidate Found: fix (f : list * list -> list) =
+  fun (x:list * list) -> match x . 0 with
+                           | Nil _ -> x . 1
+                           | Cons _ -> x . 0
+2022-06-27 13:24:08.881760+09:00 CEx Found: (Cons (0, Nil), Cons (0, Nil))
+synth_type: (list, list) -> list
+ ec: empty
+ tc: {f -> ((list, list) -> list),
+x -> (list, list)}
+ td: {list -> Nil of ()
+ | Cons of (nat, list),
+nat -> O of ()
+ | S of nat}
+ vc: {Cons -> (nat, list), list,
+Nil -> (), list,
+O -> (), nat,
+S -> nat, nat}
+ spec: [[Cons([O([]), Nil([])]), Cons([O([]), Nil([])])], Cons([O([]), Cons([O([]), Nil([])])]);[Nil([]), Nil([])], Nil([]);[Cons([O([]), Nil([])]), Nil([])], Cons([O([]), Nil([])]);[Nil([]), Cons([O([]), Nil([])])], Cons([O([]), Nil([])])]
+
+-----------result----------
+let rec (f : ((list, list) -> list)) = 
+  fun (x:(list, list)) -> 
+    match (x).0 with
+    Nil(_) -> 
+      (x).1
+    Cons(_) -> 
+      Cons([(Un_Cons((x).0)).0, (x).1])
+    
+-----------wrap------------
+let rec (f : ((list, list) -> list)) = 
+  fun (x:(list, list)) -> 
+    let rec (f : ((list, list) -> list)) = 
+      fun (x:(list, list)) -> 
+        match (x).0 with
+        Nil(_) -> 
+          (x).1
+        Cons(_) -> 
+          Cons([(Un_Cons((x).0)).0, (x).1])
+        
+-----------unwrap----------
+let rec (f : ((list, list) -> list)) = 
+  fun (x:(list, list)) -> 
+    match (x).0 with
+    Nil(_) -> 
+      (x).1
+    Cons(_) -> 
+      Cons([(Un_Cons((x).0)).0, (x).1])
+    
+convert_result
+fix (f : list * list -> list) =
+  fun (x:list * list) ->
+    match x . 0 with
+      | Nil _ -> x . 1
+      | Cons _ -> Cons (Un_Cons (x . 0) . 0, x . 1)
+2022-06-27 13:24:08.893086+09:00 Candidate Found: fix (f : list * list -> list) =
+  fun (x:list * list) ->
+    match x . 0 with
+      | Nil _ -> x . 1
+      | Cons _ -> Cons (Un_Cons (x . 0) . 0, x . 1)
+2022-06-27 13:24:08.893549+09:00 CEx Found: (Cons (0, Cons (0, Nil)), Nil)
+synth_type: (list, list) -> list
+ ec: empty
+ tc: {f -> ((list, list) -> list),
+x -> (list, list)}
+ td: {list -> Nil of ()
+ | Cons of (nat, list),
+nat -> O of ()
+ | S of nat}
+ vc: {Cons -> (nat, list), list,
+Nil -> (), list,
+O -> (), nat,
+S -> nat, nat}
+ spec: [[Cons([O([]), Cons([O([]), Nil([])])]), Nil([])], Cons([O([]), Cons([O([]), Nil([])])]);[Cons([O([]), Nil([])]), Cons([O([]), Nil([])])], Cons([O([]), Cons([O([]), Nil([])])]);[Nil([]), Nil([])], Nil([]);[Cons([O([]), Nil([])]), Nil([])], Cons([O([]), Nil([])]);[Nil([]), Cons([O([]), Nil([])])], Cons([O([]), Nil([])])]
+
+-----------result----------
+let rec (f : ((list, list) -> list)) = 
+  fun (x:(list, list)) -> 
+    match (x).0 with
+    Nil(_) -> 
+      (x).1
+    Cons(_) -> 
+      Cons([(Un_Cons((x).0)).0, (f [(x).1, (Un_Cons((x).0)).1])])
+    
+-----------wrap------------
+let rec (f : ((list, list) -> list)) = 
+  fun (x:(list, list)) -> 
+    let rec (f : ((list, list) -> list)) = 
+      fun (x:(list, list)) -> 
+        match (x).0 with
+        Nil(_) -> 
+          (x).1
+        Cons(_) -> 
+          Cons([(Un_Cons((x).0)).0, (f [(x).1, (Un_Cons((x).0)).1])])
+        
+-----------unwrap----------
+let rec (f : ((list, list) -> list)) = 
+  fun (x:(list, list)) -> 
+    match (x).0 with
+    Nil(_) -> 
+      (x).1
+    Cons(_) -> 
+      Cons([(Un_Cons((x).0)).0, (f [(x).1, (Un_Cons((x).0)).1])])
+    
+convert_result
+fix (f : list * list -> list) =
+  fun (x:list * list) ->
+    match x . 0 with
+      | Nil _ -> x . 1
+      | Cons _ -> Cons (Un_Cons (x . 0) . 0, f (x . 1, Un_Cons (x . 0) . 1))
+2022-06-27 13:24:08.908781+09:00 Candidate Found: fix (f : list * list -> list) =
+  fun (x:list * list) ->
+    match x . 0 with
+      | Nil _ -> x . 1
+      | Cons _ -> Cons (Un_Cons (x . 0) . 0, f (x . 1, Un_Cons (x . 0) . 1))
+2022-06-27 13:24:08.914141+09:00 CEx Found: (Cons (0, Cons (0, Nil)), Cons (1, Nil))
+synth_type: (list, list) -> list
+ ec: empty
+ tc: {f -> ((list, list) -> list),
+x -> (list, list)}
+ td: {list -> Nil of ()
+ | Cons of (nat, list),
+nat -> O of ()
+ | S of nat}
+ vc: {Cons -> (nat, list), list,
+Nil -> (), list,
+O -> (), nat,
+S -> nat, nat}
+ spec: [[Cons([O([]), Cons([O([]), Nil([])])]), Cons([S(O([])), Nil([])])], Cons([O([]), Cons([O([]), Cons([S(O([])), Nil([])])])]);[Cons([O([]), Cons([O([]), Nil([])])]), Nil([])], Cons([O([]), Cons([O([]), Nil([])])]);[Cons([O([]), Nil([])]), Cons([O([]), Nil([])])], Cons([O([]), Cons([O([]), Nil([])])]);[Nil([]), Nil([])], Nil([]);[Cons([O([]), Nil([])]), Nil([])], Cons([O([]), Nil([])]);[Nil([]), Cons([O([]), Nil([])])], Cons([O([]), Nil([])])]
+
+-----------result----------
+let rec (f : ((list, list) -> list)) = 
+  fun (x:(list, list)) -> 
+    match (x).0 with
+    Nil(_) -> 
+      (x).1
+    Cons(_) -> 
+      Cons([(Un_Cons((x).0)).0, (f [(Un_Cons((x).0)).1, (x).1])])
+    
+-----------wrap------------
+let rec (f : ((list, list) -> list)) = 
+  fun (x:(list, list)) -> 
+    let rec (f : ((list, list) -> list)) = 
+      fun (x:(list, list)) -> 
+        match (x).0 with
+        Nil(_) -> 
+          (x).1
+        Cons(_) -> 
+          Cons([(Un_Cons((x).0)).0, (f [(Un_Cons((x).0)).1, (x).1])])
+        
+-----------unwrap----------
+let rec (f : ((list, list) -> list)) = 
+  fun (x:(list, list)) -> 
+    match (x).0 with
+    Nil(_) -> 
+      (x).1
+    Cons(_) -> 
+      Cons([(Un_Cons((x).0)).0, (f [(Un_Cons((x).0)).1, (x).1])])
+    
+convert_result
+fix (f : list * list -> list) =
+  fun (x:list * list) ->
+    match x . 0 with
+      | Nil _ -> x . 1
+      | Cons _ -> Cons (Un_Cons (x . 0) . 0, f (Un_Cons (x . 0) . 1, x . 1))
+2022-06-27 13:24:08.937509+09:00 Candidate Found: fix (f : list * list -> list) =
+  fun (x:list * list) ->
+    match x . 0 with
+      | Nil _ -> x . 1
+      | Cons _ -> Cons (Un_Cons (x . 0) . 0, f (Un_Cons (x . 0) . 1, x . 1))
+fix (f : list * list -> list) =
+  fun (x:list * list) ->
+    match x . 0 with
+      | Nil _ -> x . 1
+      | Cons _ -> Cons (Un_Cons (x . 0) . 0, f (Un_Cons (x . 0) . 1, x . 1))
+;
+0.
+;
+0.
+;
+0.
+;
+0.
+;
+0.
+;
+0.
+;
+0.
+;
+0.
+;
+0.
+;
+0.
+;
+6
+;
+0.062446
+;
+0.023056999999999994

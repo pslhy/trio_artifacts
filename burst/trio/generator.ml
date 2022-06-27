@@ -17,6 +17,13 @@ let wrap spec e =
 	Fix(target_func, Type.Arrow(from_ty, to_ty), 
 		Func(p, e)
 	)
+
+(* let unwrap e =
+	match e with
+	| Fix(_,_,e') -> match e' with 
+										| Func(_,e'') -> e''
+										| _ ->  failwith ("unwrap fail")
+	| _ -> failwith ("unwrap fail") *)
 	
 let compute_signature_simple ?(input_values=[]) spec e =
 	let input_values = 
