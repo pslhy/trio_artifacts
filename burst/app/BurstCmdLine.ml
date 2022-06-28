@@ -307,7 +307,11 @@ let synthesize_solution
   if print_data then
     begin
       print_endline (Expr.show e);
-      print_endline ("Solution Size: " ^ (Int.to_string (Expr.size e)));
+      let fix_e = match Burst.Lang.Expr.node e with 
+                    | Fix (i,t,e') -> e'
+                    | _ -> e 
+      in
+      print_endline ("Size: " ^ (Int.to_string (Expr.size fix_e)));
       print_endline ("Iter: " ^ (Int.to_string !Consts.loop_count));
     end
   else
