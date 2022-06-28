@@ -169,23 +169,57 @@ module T : Burst.Synthesizers.IOSynth.S = struct
   let tout = trd3 % fst
   let problem = snd
 
+  let first = ref true 
   let rec term_of_type
       (c:Context.t)
       (t:Type.t)
     : Expr.t =
-    begin match Type.node t with
-      | Named i -> term_of_type c (Context.find_exn c.tc i)
-      | Arrow (t1,t2) ->
-        Expr.mk_func
-          (Id.create "x",t1)
-          (term_of_type c t2)
-      | Tuple ts ->
-        Expr.mk_tuple (List.map ~f:(term_of_type c) ts)
-      | Mu _ -> failwith "TODO"
-      | Variant bs ->
-        let (i,t) = List.hd_exn bs in
-        Expr.mk_ctor i (term_of_type c t)
-    end
+        begin match Type.node t with
+          | Named i -> term_of_type c (Context.find_exn c.tc i)
+          | Arrow (t1,t2) ->
+            Expr.mk_func
+              (Id.create "x",t1)
+              (term_of_type c t2)
+          | Tuple ts ->
+            Expr.mk_tuple (List.map ~f:(term_of_type c) ts)
+          | Mu _ -> failwith "TODO"
+          | Variant bs ->
+            (* let (i,t) = List.hd_exn bs in *)
+            (* let _ = prerr_endline (string_of_int (List.length bs)) in  *)
+
+            (* let (i,t) = 
+              if !first then List.last_exn bs 
+              else List.hd_exn bs
+            in *)
+            
+            (* let _ = prerr_endline (Type.show t) in  *)
+            (* let (i,t) = List.random_element_exn bs in *)
+
+            (* let type_compare t1 t2 = 
+              match (t1, t2) with 
+              Type.Tuple [], _ -> 1
+              | _, Type.Tuple [] -> -1 
+              | _ -> Stdlib.compare t1 t2
+            in
+            let bs = 
+              List.sort (List.map bs ~f:(fun (i,t) -> (i, Type.node t)))
+                 ~compare:(fun (_,t1) (_, t2) -> type_compare t1 t2) 
+            in
+            let (i,t) = List.hd_exn bs in *)
+
+            let (i,t) = 
+              if !first then List.last_exn bs 
+              (* List.find_exn bs ~f:(fun (_,t) -> 
+                match (Type.node t) with 
+                | Type.Tuple [] -> false
+                | _ -> true
+              ) *)
+              else 
+              List.hd_exn bs
+            in
+            let _ = first := false in
+            Expr.mk_ctor i (term_of_type c t)
+        end
 
   let synthesize
       (a:t)
