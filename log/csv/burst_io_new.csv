@@ -1,0 +1,16 @@
+testcases/new/expr_b.mls,52,0,0.60,24604
+testcases/new/expr.mls,33,0,433.76,4674948
+testcases/new/expr_sub.mls,600.93,9295124
+testcases/new/expr_div.mls,600.92,9426024
+testcases/new/list_dropeven.mls,28,0,581.22,3449680
+testcases/new/list_last2.mls,39,0,0.11,19976
+testcases/new/list_make.mls,14,0,0.88,23320
+testcases/new/list_range.mls,601.14,9436000
+testcases/new/nat_mod.mls,600.41,5578480
+testcases/new/nat_mul.mls,600.97,9368092
+testcases/new/nat_sub.mls,22,0,91.85,833456
+testcases/new/tree_balanced.mls,599.99,578884
+testcases/new/tree_height.mls,600.04,1661288
+testcases/new/tree_lastleft.mls,21,0,0.04,17100
+testcases/new/tree_max.mls,601.32,9988304
+testcases/new/tree_notexist.mls,38,0,12.82,146716

@@ -15,3 +15,4 @@ synth list -> bool satisfying
 [Cons(False,Cons(True,Nil))] -> False,
 [Cons(True,Cons(False,Nil))] -> False,
 [Cons(True,Cons(True,Nil))] -> True,
+[Cons(True,Cons(True,Cons(True,Nil)))] -> False,

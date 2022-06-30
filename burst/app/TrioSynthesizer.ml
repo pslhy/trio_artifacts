@@ -281,6 +281,7 @@ module T : Burst.Synthesizers.IOSynth.S = struct
       with Trio.Generator.SolutionFound sol -> 
       Trio.Generator.wrap spec sol
     in
+    (* prerr_endline (Trio.Expr.show result); *)
     (* Trio to Burst.. *)
     let convert_result = convert_expr_to_burst result in
     (* prerr_endline ("convert_result");

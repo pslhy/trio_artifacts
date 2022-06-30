@@ -52,9 +52,24 @@ let height =
 
 synth tree -> bool satisfying
 
-[Leaf] -> True,
-[Node (2, Leaf, Leaf)] -> True,
-[Node (0, Node (1, Leaf, Leaf), Leaf)] -> True,
-[Node (0, Node (1, Node (2, Leaf, Leaf), Leaf), Leaf)] -> False,
-[Node (0, Node (1, Node (3, Leaf, Leaf), Node (4, Leaf, Leaf)), Node (2, Leaf, Leaf))] -> True,
-[Node (0, Node (1, Node (3, Leaf, Leaf), Node (4, Leaf, Node (5, Leaf, Leaf))), Node (2, Leaf, Leaf))] ->  False
+equiv
+
+fix (f : tree -> bool) =
+  fun (x:tree) ->
+    match x with
+      | Leaf _ -> True
+      | Node (v,l,r) -> 
+        (match l with
+         | Leaf _ -> match r with
+                     | Leaf -> True
+                     | Node (v2,l2,r2) ->
+         | Node _ -> (match compare
+                            (height
+                                (Un_Node (Un_Node x . 1) . 2))
+                            1 with
+                    | EQ _ -> True
+                    | GT _ -> False
+                    | LT _ -> (match Un_Node (Un_Node x . 1)
+                                        . 1 with
+                                    | Leaf _ -> True
+                                    | Node _ -> False)))

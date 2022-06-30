@@ -1,0 +1,694 @@
+synthesizer :smyth
+prog : testcases/basic/bool_always_false.mls
+fix (f : ) = fun (x0:) -> False
+Size: 4
+Iter: 0
+
+Time(s): 0.04 
+Mem(Kb): 14620
+
+
+synthesizer :smyth
+prog : testcases/basic/bool_always_true.mls
+fix (f : ) = fun (x0:) -> True
+Size: 4
+Iter: 0
+
+Time(s): 0.02 
+Mem(Kb): 14616
+
+
+synthesizer :smyth
+prog : testcases/basic/bool_band.mls
+fun (x:bool * bool) ->
+  (fix (f : ) =
+     fun (x1:) ->
+       fun (x0:) -> match x0 with
+                      | True y1 -> x1
+                      | False y1 -> False)
+    (x . 0) (x . 1)
+Size: 23
+Iter: 0
+
+Time(s): 0.02 
+Mem(Kb): 15828
+
+
+synthesizer :smyth
+prog : testcases/basic/bool_bor.mls
+fun (x:bool * bool) ->
+  (fix (f : ) =
+     fun (x1:) -> fun (x0:) -> match x0 with
+                                 | True y1 -> True
+                                 | False y1 -> x1)
+    (x . 0) (x . 1)
+Size: 23
+Iter: 0
+
+Time(s): 0.02 
+Mem(Kb): 15796
+
+
+synthesizer :smyth
+prog : testcases/basic/bool_impl.mls
+fun (x:bool * bool) ->
+  (fix (f : ) =
+     fun (x1:) -> fun (x0:) -> match x1 with
+                                 | True y1 -> x0
+                                 | False y1 -> True)
+    (x . 0) (x . 1)
+Size: 23
+Iter: 0
+
+Time(s): 0.02 
+Mem(Kb): 15792
+
+
+synthesizer :smyth
+prog : testcases/basic/bool_neg.mls
+fix (f : ) = fun (x0:) -> match x0 with
+                            | True y1 -> False
+                            | False y1 -> True
+Size: 8
+Iter: 0
+
+Time(s): 0.02 
+Mem(Kb): 14992
+
+
+synthesizer :smyth
+prog : testcases/basic/bool_xor.mls
+fun (x:bool * bool) ->
+  (fix (f : ) =
+     fun (x1:) ->
+       fun (x0:) ->
+         match x0 with
+           | True y1 -> (match x1 with
+                           | True y2 -> False
+                           | False y2 -> True)
+           | False y1 -> x1)
+    (x . 0) (x . 1)
+Size: 27
+Iter: 0
+
+Time(s): 0.02 
+Mem(Kb): 15900
+
+
+synthesizer :smyth
+prog : testcases/basic/list_append.mls
+fun (x:list * list) ->
+  (fix (f : ) =
+     fun (x1:) ->
+       fun (x0:) ->
+         match x1 with
+           | Nil y1 -> x0
+           | Cons y1 -> Cons (y1 . 0, f (y1 . 1) x0))
+    (x . 0) (x . 1)
+Size: 33
+Iter: 0
+
+Time(s): 0.02 
+Mem(Kb): 15956
+
+
+synthesizer :smyth
+prog : testcases/basic/list_compress.mls
+
+Uncaught exception:
+  
+  Stack overflow
+
+Raised at file "src/exn.ml" (inlined), line 102, characters 6-10
+Called from file "src/exn.ml" (inlined), line 122, characters 33-77
+Called from file "src/command.ml" (inlined), line 29, characters 11-41
+Called from file "src/command.ml" (inlined), line 2931, characters 4-659
+Called from file "app/BurstCmdLine.ml", line 424, characters 2-28
+Command exited with non-zero status 1
+Time(s): 165.28 
+Mem(Kb): 719700
+
+
+synthesizer :smyth
+prog : testcases/basic/list_concat.mls
+fix (f : ) =
+  fun (x0:) ->
+    match x0 with
+      | LNil y1 -> Nil
+      | LCons y1 -> append (y1 . 0) (f (y1 . 1))
+Size: 17
+Iter: 0
+
+Time(s): 0.03 
+Mem(Kb): 15940
+
+
+synthesizer :smyth
+prog : testcases/basic/list_drop.mls
+fun (x:list * nat) ->
+  (fix (f : ) =
+     fun (x1:) ->
+       fun (x0:) ->
+         match x1 with
+           | Nil y1 -> Nil
+           | Cons y1 -> (match x0 with
+                           | S y2 -> f (y1 . 1) y2
+                           | O y2 -> x1))
+    (x . 0) (x . 1)
+Size: 32
+Iter: 0
+
+Time(s): 0.03 
+Mem(Kb): 16236
+
+
+synthesizer :smyth
+prog : testcases/basic/list_even_parity.mls
+fix (f : ) =
+  fun (x0:) ->
+    match x0 with
+      | Nil y1 -> True
+      | Cons y1 -> (match y1 . 0 with
+                      | True y2 -> (match y1 . 1 with
+                                      | Nil y3 -> False
+                                      | Cons y3 -> y3 . 0)
+                      | False y2 -> f (y1 . 1))
+Size: 24
+Iter: 0
+
+Time(s): 0.04 
+Mem(Kb): 16840
+
+
+synthesizer :smyth
+prog : testcases/basic/list_filter.mls
+fun (x:(nat -> bool) * list) ->
+  (fix (f : ) =
+     fun (x1:) ->
+       fun (x0:) ->
+         match x1 0 with
+           | True y1 -> (match x0 with
+                           | Nil y2 -> Nil
+                           | Cons y2 -> (match is_even (y2 . 0) with
+                                           | True y3 -> x0
+                                           | False y3 -> Cons (0, Nil)))
+           | False y1 -> Nil)
+    (x . 0) (x . 1)
+Size: 44
+Iter: 0
+
+Time(s): 0.07 
+Mem(Kb): 17052
+
+
+synthesizer :smyth
+prog : testcases/basic/list_fold.mls
+fun (x:(nat -> nat -> nat) * nat * list) ->
+  (fix (f : ) =
+     fun (x2:) ->
+       fun (x1:) ->
+         fun (x0:) ->
+           match x0 with
+             | Nil y1 -> 0
+             | Cons y1 -> S (count_odd (count_odd (y1 . 0) (y1 . 0)) (y1 . 0)))
+    (x . 0) (x . 1) (x . 2)
+Size: 49
+Iter: 0
+
+Time(s): 1.25 
+Mem(Kb): 27960
+
+
+synthesizer :smyth
+prog : testcases/basic/list_hd.mls
+fix (f : ) = fun (x0:) -> match x0 with
+                            | Nil y1 -> 0
+                            | Cons y1 -> y1 . 0
+Size: 9
+Iter: 0
+
+Time(s): 0.02 
+Mem(Kb): 15780
+
+
+synthesizer :smyth
+prog : testcases/basic/list_inc.mls
+fix (f : ) = fun (x0:) -> map x0 (fix (f1 : ) = fun (x1:) -> S x1)
+Size: 12
+Iter: 0
+
+Time(s): 0.04 
+Mem(Kb): 16072
+
+
+synthesizer :smyth
+prog : testcases/basic/list_last.mls
+fix (f : ) =
+  fun (x0:) ->
+    match x0 with
+      | Nil y1 -> None
+      | Cons y1 -> (match y1 . 1 with
+                      | Nil y2 -> Some (y1 . 0)
+                      | Cons y2 -> f (y1 . 1))
+Size: 19
+Iter: 0
+
+Time(s): 0.03 
+Mem(Kb): 15928
+
+
+synthesizer :smyth
+prog : testcases/basic/list_length.mls
+fix (f : ) =
+  fun (x0:) -> match x0 with
+                 | Nil y1 -> 0
+                 | Cons y1 -> S (f (y1 . 1))
+Size: 12
+Iter: 0
+
+Time(s): 0.02 
+Mem(Kb): 15800
+
+
+synthesizer :smyth
+prog : testcases/basic/list_map.mls
+fun (x:(nat -> nat) * list) ->
+  (fix (f : ) =
+     fun (x1:) ->
+       fun (x0:) ->
+         match x0 with
+           | Nil y1 -> Nil
+           | Cons y1 -> (match y1 . 1 with
+                           | Nil y2 -> Cons (1, Nil)
+                           | Cons y2 -> Cons (x1 (y1 . 0),
+                                               Cons (x1 (y1 . 0), Nil))))
+    (x . 0) (x . 1)
+Size: 51
+Iter: 0
+
+Time(s): 0.39 
+Mem(Kb): 24912
+
+
+synthesizer :smyth
+prog : testcases/basic/list_nth.mls
+fun (x:list * nat) ->
+  (fix (f : ) =
+     fun (x1:) ->
+       fun (x0:) ->
+         match x1 with
+           | Nil y1 -> 0
+           | Cons y1 -> (match x0 with
+                           | S y2 -> f (y1 . 1) y2
+                           | O y2 -> y1 . 0))
+    (x . 0) (x . 1)
+Size: 34
+Iter: 0
+
+Time(s): 0.05 
+Mem(Kb): 16876
+
+
+synthesizer :smyth
+prog : testcases/basic/list_pairwise_swap.mls
+fix (f : ) =
+  fun (x0:) ->
+    match x0 with
+      | Nil y1 -> Nil
+      | Cons y1 -> (match y1 . 1 with
+                      | Nil y2 -> Nil
+                      | Cons y2 -> (match f (y1 . 1) with
+                                      | Nil y3 -> Cons (y2 . 0,
+                                                         Cons (y1 . 0,
+                                                                f (y2 . 1)))
+                                      | Cons y3 -> Nil))
+Size: 35
+Iter: 0
+
+Time(s): 0.23 
+Mem(Kb): 21004
+
+
+synthesizer :smyth
+prog : testcases/basic/list_rev_append.mls
+fix (f : ) =
+  fun (x0:) ->
+    match x0 with
+      | Nil y1 -> x0
+      | Cons y1 -> append (f (y1 . 1)) Cons (y1 . 0, Nil)
+Size: 20
+Iter: 0
+
+Time(s): 0.05 
+Mem(Kb): 17116
+
+
+synthesizer :smyth
+prog : testcases/basic/list_rev_fold.mls
+fix (f : ) =
+  fun (x0:) ->
+    match x0 with
+      | Nil y1 -> Nil
+      | Cons y1 -> snoc (y1 . 1) (y1 . 0)
+Size: 15
+Iter: 0
+
+Time(s): 0.04 
+Mem(Kb): 16344
+
+
+synthesizer :smyth
+prog : testcases/basic/list_rev_snoc.mls
+fix (f : ) =
+  fun (x0:) ->
+    match x0 with
+      | Nil y1 -> x0
+      | Cons y1 -> snoc (f (y1 . 1)) (y1 . 0)
+Size: 16
+Iter: 0
+
+Time(s): 0.02 
+Mem(Kb): 15960
+
+
+synthesizer :smyth
+prog : testcases/basic/list_rev_tailcall.mls
+fun (x:list * list) ->
+  (fix (f : ) =
+     fun (x1:) ->
+       fun (x0:) ->
+         match x1 with
+           | Nil y1 -> x0
+           | Cons y1 -> f (y1 . 1) Cons (y1 . 0, x0))
+    (x . 0) (x . 1)
+Size: 33
+Iter: 0
+
+Time(s): 0.02 
+Mem(Kb): 15888
+
+
+synthesizer :smyth
+prog : testcases/basic/list_snoc.mls
+fun (x:list * nat) ->
+  (fix (f : ) =
+     fun (x1:) ->
+       fun (x0:) ->
+         match x1 with
+           | Nil y1 -> Cons (x0, Nil)
+           | Cons y1 -> Cons (y1 . 0, f (y1 . 1) x0))
+    (x . 0) (x . 1)
+Size: 37
+Iter: 0
+
+Time(s): 0.03 
+Mem(Kb): 16132
+
+
+synthesizer :smyth
+prog : testcases/basic/list_sort_sorted_insert.mls
+fix (f : ) =
+  fun (x0:) ->
+    match x0 with
+      | Nil y1 -> x0
+      | Cons y1 -> insert (f (y1 . 1)) (y1 . 0)
+Size: 16
+Iter: 0
+
+Time(s): 0.03 
+Mem(Kb): 16020
+
+
+synthesizer :smyth
+prog : testcases/basic/list_sorted_insert.mls
+fun (x:list * nat) ->
+  (fix (f : ) =
+     fun (x1:) ->
+       fun (x0:) ->
+         match x1 with
+           | Nil y1 -> Cons (x0, Nil)
+           | Cons y1 -> (match compare x0 (y1 . 0) with
+                           | LT y2 -> Cons (x0, x1)
+                           | GT y2 -> Cons (y1 . 0, f (y1 . 1) x0)
+                           | EQ y2 -> Cons (x0, y1 . 1)))
+    (x . 0) (x . 1)
+Size: 55
+Iter: 0
+
+Time(s): 1.50 
+Mem(Kb): 19788
+
+
+synthesizer :smyth
+prog : testcases/basic/list_stutter.mls
+fix (f : ) =
+  fun (x0:) ->
+    match x0 with
+      | Nil y1 -> Nil
+      | Cons y1 -> Cons (y1 . 0, Cons (y1 . 0, f (y1 . 1)))
+Size: 21
+Iter: 0
+
+Time(s): 0.02 
+Mem(Kb): 15856
+
+
+synthesizer :smyth
+prog : testcases/basic/list_sum.mls
+fix (f : ) = fun (x0:) -> fold add 0 x0
+Size: 10
+Iter: 0
+
+Time(s): 0.05 
+Mem(Kb): 16220
+
+
+synthesizer :smyth
+prog : testcases/basic/list_take.mls
+fun (x:nat * list) ->
+  (fix (f : ) =
+     fun (x1:) ->
+       fun (x0:) ->
+         match x0 with
+           | Nil y1 -> Nil
+           | Cons y1 -> (match x1 with
+                           | S y2 -> Cons (y1 . 0, f y2 (y1 . 1))
+                           | O y2 -> Nil))
+    (x . 0) (x . 1)
+Size: 38
+Iter: 0
+
+Time(s): 0.03 
+Mem(Kb): 16272
+
+
+synthesizer :smyth
+prog : testcases/basic/list_tl.mls
+fix (f : ) = fun (x0:) -> match x0 with
+                            | Nil y1 -> Nil
+                            | Cons y1 -> y1 . 1
+Size: 9
+Iter: 0
+
+Time(s): 0.02 
+Mem(Kb): 15796
+
+
+synthesizer :smyth
+prog : testcases/basic/nat_add.mls
+fun (x:nat * nat) ->
+  (fix (f : ) =
+     fun (x1:) -> fun (x0:) -> match x1 with
+                                 | S y1 -> S (f y1 x0)
+                                 | O y1 -> x0)
+    (x . 0) (x . 1)
+Size: 27
+Iter: 0
+
+Time(s): 0.02 
+Mem(Kb): 15860
+
+
+synthesizer :smyth
+prog : testcases/basic/nat_iseven.mls
+fix (f : ) =
+  fun (x0:) ->
+    match x0 with
+      | S y1 -> (match y1 with
+                   | S y2 -> f y2
+                   | O y2 -> False)
+      | O y1 -> True
+Size: 13
+Iter: 0
+
+Time(s): 0.03 
+Mem(Kb): 15796
+
+
+synthesizer :smyth
+prog : testcases/basic/nat_max.mls
+fun (x:nat * nat) ->
+  (fix (f : ) =
+     fun (x1:) ->
+       fun (x0:) ->
+         match x0 with
+           | S y1 -> (match x1 with
+                        | S y2 -> S (f y2 y1)
+                        | O y2 -> x0)
+           | O y1 -> (match x1 with
+                        | S y2 -> x1
+                        | O y2 -> 0))
+    (x . 0) (x . 1)
+Size: 34
+Iter: 0
+
+Time(s): 0.07 
+Mem(Kb): 17164
+
+
+synthesizer :smyth
+prog : testcases/basic/nat_pred.mls
+fix (f : ) = fun (x0:) -> match x0 with
+                            | S y1 -> y1
+                            | O y1 -> 0
+Size: 7
+Iter: 0
+
+Time(s): 0.04
+Mem(Kb): 15380
+
+synthesizer :smyth
+prog : testcases/basic/tree_binsert.mls
+
+Uncaught exception:
+  
+  Stack overflow
+
+Raised at file "src/exn.ml" (inlined), line 102, characters 6-10
+Called from file "src/exn.ml" (inlined), line 122, characters 33-77
+Called from file "src/command.ml" (inlined), line 29, characters 11-41
+Called from file "src/command.ml" (inlined), line 2931, characters 4-659
+Called from file "app/BurstCmdLine.ml", line 424, characters 2-28
+Command exited with non-zero status 1
+Time(s): 21.30 
+Mem(Kb): 1316524
+
+
+synthesizer :smyth
+prog : testcases/basic/tree_collect_leaves.mls
+fix (f : ) =
+  fun (x0:) ->
+    match x0 with
+      | Node y1 -> append (f (y1 . 0)) Cons (y1 . 1, f (y1 . 2))
+      | Leaf y1 -> Nil
+Size: 24
+Iter: 0
+
+Time(s): 0.05 
+Mem(Kb): 16288
+
+
+synthesizer :smyth
+prog : testcases/basic/tree_count_leaves.mls
+fix (f : ) =
+  fun (x0:) ->
+    match x0 with
+      | Node y1 -> sum (f (y1 . 0)) (f (y1 . 2))
+      | Leaf y1 -> sum O y1 1
+Size: 25
+Iter: 0
+
+Time(s): 0.46 
+Mem(Kb): 17404
+
+
+synthesizer :smyth
+prog : testcases/basic/tree_count_nodes.mls
+fix (f : ) =
+  fun (x0:) ->
+    match x0 with
+      | Node y1 -> S (sum (f (y1 . 0)) (f (y1 . 2)))
+      | Leaf y1 -> 0
+Size: 20
+Iter: 0
+
+Time(s): 0.17 
+Mem(Kb): 17260
+
+
+synthesizer :smyth
+prog : testcases/basic/tree_inorder.mls
+fix (f : ) =
+  fun (x0:) ->
+    match x0 with
+      | Node y1 -> append (f (y1 . 0)) Cons (y1 . 1, f (y1 . 2))
+      | Leaf y1 -> Nil
+Size: 24
+Iter: 0
+
+Time(s): 0.07 
+Mem(Kb): 16624
+
+
+synthesizer :smyth
+prog : testcases/basic/tree_map.mls
+fun (x:(nat -> nat) * tree) ->
+  (fix (f : ) =
+     fun (x1:) ->
+       fun (x0:) ->
+         match x0 with
+           | Node y1 -> Node (match y1 . 0 with
+                                | Node y2 -> Node (Leaf, 1, Leaf)
+                                | Leaf y2 -> Leaf,
+                               x1 (y1 . 1),
+                               match y1 . 2 with
+                                 | Node y2 -> Node (Leaf, 1, Leaf)
+                                 | Leaf y2 -> Leaf)
+           | Leaf y1 -> Leaf)
+    (x . 0) (x . 1)
+Size: 61
+Iter: 0
+
+Time(s): 0.91 
+Mem(Kb): 20324
+
+
+synthesizer :smyth
+prog : testcases/basic/tree_nodes_at_level.mls
+
+Uncaught exception:
+  
+  Stack overflow
+
+Raised at file "src/exn.ml" (inlined), line 102, characters 6-10
+Called from file "src/exn.ml" (inlined), line 122, characters 33-77
+Called from file "src/command.ml" (inlined), line 29, characters 11-41
+Called from file "src/command.ml" (inlined), line 2931, characters 4-659
+Called from file "app/BurstCmdLine.ml", line 424, characters 2-28
+Command exited with non-zero status 1
+Time(s): 329.68 
+Mem(Kb): 91448
+
+
+synthesizer :smyth
+prog : testcases/basic/tree_postorder.mls
+
+Command exited with non-zero status 124
+Time(s): 599.99 
+Mem(Kb): 66036
+
+
+synthesizer :smyth
+prog : testcases/basic/tree_preorder.mls
+fix (f : ) =
+  fun (x0:) ->
+    match x0 with
+      | Node y1 -> Cons (y1 . 1, append (f (y1 . 0)) (f (y1 . 2)))
+      | Leaf y1 -> Nil
+Size: 24
+Iter: 0
+
+Time(s): 0.08 
+Mem(Kb): 16816
+
+

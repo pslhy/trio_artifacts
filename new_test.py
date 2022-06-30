@@ -12,10 +12,10 @@ import subprocess
 
 args = sys.argv
 synth = args[1]
-# print(len(sys.argv))
+# print((sys.argv))
 # print(args[0])
 
-if len(sys.argv) < 3 :
+if len(sys.argv) < 4 :
     target_dir=args[2]
     print(target_dir)
     for file in os.listdir(target_dir):

@@ -29,4 +29,6 @@ synth nat -> nat -> list satisfying
 [3,1] -> Cons(3,Cons(2,Cons(1, Nil))),
 [5,2] -> Cons(5,Cons(4,Cons(3,Cons(2, Nil)))),
 [2,2] -> Cons(2,Nil),
-[1,2] -> Nil,
+[4,1] -> Cons(4,Cons(3,Cons(2,Cons(1, Nil)))),
+[1,0] -> Cons(1,Cons(0,Nil)),
+[0,0] -> Cons(0,Nil)

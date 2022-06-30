@@ -1,0 +1,825 @@
+synthesizer :smyth
+prog : burst/benchmarks/ref/bool_always_false.mls
+fun (x:bool) -> False
+Size: 4
+Iter: 0
+
+Time(s): 0.02 
+Mem(Kb): 14108
+
+
+synthesizer :smyth
+prog : burst/benchmarks/ref/bool_always_true.mls
+fix (f : ) = fun (x0:) -> True
+Size: 4
+Iter: 1
+
+Time(s): 0.02 
+Mem(Kb): 14696
+
+
+synthesizer :smyth
+prog : burst/benchmarks/ref/bool_band.mls
+fun (x:bool * bool) ->
+  (fix (f : ) =
+     fun (x1:) ->
+       fun (x0:) -> match x0 with
+                      | True y1 -> x1
+                      | False y1 -> False)
+    (x . 0) (x . 1)
+Size: 23
+Iter: 3
+
+Time(s): 0.02 
+Mem(Kb): 16008
+
+
+synthesizer :smyth
+prog : burst/benchmarks/ref/bool_bor.mls
+fun (x:bool * bool) ->
+  (fix (f : ) =
+     fun (x1:) -> fun (x0:) -> match x0 with
+                                 | True y1 -> True
+                                 | False y1 -> x1)
+    (x . 0) (x . 1)
+Size: 23
+Iter: 4
+
+Time(s): 0.02 
+Mem(Kb): 16092
+
+
+synthesizer :smyth
+prog : burst/benchmarks/ref/bool_impl.mls
+fun (x:bool * bool) ->
+  (fix (f : ) =
+     fun (x1:) -> fun (x0:) -> match x1 with
+                                 | True y1 -> x0
+                                 | False y1 -> True)
+    (x . 0) (x . 1)
+Size: 23
+Iter: 3
+
+Time(s): 0.03 
+Mem(Kb): 16032
+
+
+synthesizer :smyth
+prog : burst/benchmarks/ref/bool_neg.mls
+fix (f : ) = fun (x0:) -> match x0 with
+                            | True y1 -> False
+                            | False y1 -> True
+Size: 8
+Iter: 2
+
+Time(s): 0.02 
+Mem(Kb): 15860
+
+
+synthesizer :smyth
+prog : burst/benchmarks/ref/bool_xor.mls
+fun (x:bool * bool) ->
+  (fix (f : ) =
+     fun (x1:) ->
+       fun (x0:) -> match x1 with
+                      | True y1 -> False
+                      | False y1 -> x0)
+    (x . 0) (x . 1)
+Size: 23
+Iter: 3
+
+Time(s): 0.02 
+Mem(Kb): 16064
+
+
+synthesizer :smyth
+prog : burst/benchmarks/ref/list_append.mls
+fun (x:list * list) ->
+  (fix (f : ) =
+     fun (x1:) ->
+       fun (x0:) ->
+         match x1 with
+           | Nil y1 -> x0
+           | Cons y1 -> Cons (y1 . 0, f (y1 . 1) x0))
+    (x . 0) (x . 1)
+Size: 33
+Iter: 8
+
+Time(s): 0.45 
+Mem(Kb): 18488
+
+
+synthesizer :smyth
+prog : burst/benchmarks/ref/list_compress.mls
+
+Uncaught exception:
+  
+  Stack overflow
+
+Raised at file "src/exn.ml" (inlined), line 102, characters 6-10
+Called from file "src/exn.ml" (inlined), line 122, characters 33-77
+Called from file "src/command.ml" (inlined), line 29, characters 11-41
+Called from file "src/command.ml" (inlined), line 2931, characters 4-659
+Called from file "app/BurstCmdLine.ml", line 424, characters 2-28
+Command exited with non-zero status 1
+Time(s): 79.39 
+Mem(Kb): 496980
+
+
+synthesizer :smyth
+prog : burst/benchmarks/ref/list_concat.mls
+fix (f : ) =
+  fun (x0:) ->
+    match x0 with
+      | LNil y1 -> Nil
+      | LCons y1 -> append (y1 . 0) (f (y1 . 1))
+Size: 17
+Iter: 4
+
+Time(s): 0.94 
+Mem(Kb): 19836
+
+
+synthesizer :smyth
+prog : burst/benchmarks/ref/list_drop.mls
+
+Uncaught exception:
+  
+  (Failure "No solutions found")
+
+Raised at file "stdlib.ml" (inlined), line 29, characters 17-33
+Called from file "app/SmythSynthesizer.ml", line 136, characters 12-41
+Called from file "src/Synthesizers.ml" (inlined), line 231, characters 23-39
+Called from file "src/consts.ml" (inlined), line 26, characters 12-16
+Called from file "src/Synthesizers.ml" (inlined), line 229, characters 10-98
+Called from file "src/Synthesizers.ml" (inlined), line 241, characters 12-52
+Called from file "src/Synthesizers.ml" (inlined), line 241, characters 12-52
+Called from file "src/Synthesizers.ml" (inlined), line 241, characters 12-52
+Called from file "src/Synthesizers.ml", line 244, characters 6-61
+Called from file "app/BurstCmdLine.ml" (inlined), line 78, characters 2-44
+Called from file "app/BurstCmdLine.ml", line 263, characters 8-251
+Called from file "app/BurstCmdLine.ml", line 363, characters 6-227
+Called from file "app/BurstCmdLine.ml", line 406, characters 8-326
+Called from file "src/command.ml" (inlined), line 1294, characters 18-33
+Called from file "src/command.ml" (inlined), line 2819, characters 6-70
+Called from file "src/command.ml" (inlined), line 2937, characters 8-205
+Called from file "src/exn.ml" (inlined), line 102, characters 6-10
+Called from file "src/exn.ml" (inlined), line 122, characters 33-77
+Called from file "src/command.ml" (inlined), line 29, characters 11-41
+Called from file "src/command.ml" (inlined), line 2931, characters 4-659
+Called from file "app/BurstCmdLine.ml", line 424, characters 2-28
+Re-raised at file "src/exn.ml" (inlined), line 102, characters 6-10
+Called from file "src/exn.ml" (inlined), line 122, characters 33-77
+Called from file "src/command.ml" (inlined), line 29, characters 11-41
+Called from file "src/command.ml" (inlined), line 2931, characters 4-659
+Called from file "app/BurstCmdLine.ml", line 424, characters 2-28
+Command exited with non-zero status 1
+Time(s): 0.03 
+Mem(Kb): 16224
+
+
+synthesizer :smyth
+prog : burst/benchmarks/ref/list_even_parity.mls
+fix (f : ) =
+  fun (x0:) ->
+    match x0 with
+      | Nil y1 -> True
+      | Cons y1 -> (match y1 . 0 with
+                      | True y2 -> f (y1 . 1)
+                      | False y2 -> (match f (y1 . 1) with
+                                       | True y3 -> False
+                                       | False y3 -> True))
+Size: 25
+Iter: 7
+
+Time(s): 0.14 
+Mem(Kb): 17460
+
+
+synthesizer :smyth
+prog : burst/benchmarks/ref/list_filter.mls
+
+Uncaught exception:
+  
+  (Failure "No solutions found")
+
+Raised at file "stdlib.ml" (inlined), line 29, characters 17-33
+Called from file "app/SmythSynthesizer.ml", line 136, characters 12-41
+Called from file "src/Synthesizers.ml" (inlined), line 231, characters 23-39
+Called from file "src/consts.ml" (inlined), line 26, characters 12-16
+Called from file "src/Synthesizers.ml" (inlined), line 229, characters 10-98
+Called from file "src/Synthesizers.ml" (inlined), line 241, characters 12-52
+Called from file "src/Synthesizers.ml" (inlined), line 241, characters 12-52
+Called from file "src/Synthesizers.ml" (inlined), line 241, characters 12-52
+Called from file "src/Synthesizers.ml", line 244, characters 6-61
+Called from file "app/BurstCmdLine.ml" (inlined), line 78, characters 2-44
+Called from file "app/BurstCmdLine.ml", line 263, characters 8-251
+Called from file "app/BurstCmdLine.ml", line 363, characters 6-227
+Called from file "app/BurstCmdLine.ml", line 406, characters 8-326
+Called from file "src/command.ml" (inlined), line 1294, characters 18-33
+Called from file "src/command.ml" (inlined), line 2819, characters 6-70
+Called from file "src/command.ml" (inlined), line 2937, characters 8-205
+Called from file "src/exn.ml" (inlined), line 102, characters 6-10
+Called from file "src/exn.ml" (inlined), line 122, characters 33-77
+Called from file "src/command.ml" (inlined), line 29, characters 11-41
+Called from file "src/command.ml" (inlined), line 2931, characters 4-659
+Called from file "app/BurstCmdLine.ml", line 424, characters 2-28
+Re-raised at file "src/exn.ml" (inlined), line 102, characters 6-10
+Called from file "src/exn.ml" (inlined), line 122, characters 33-77
+Called from file "src/command.ml" (inlined), line 29, characters 11-41
+Called from file "src/command.ml" (inlined), line 2931, characters 4-659
+Called from file "app/BurstCmdLine.ml", line 424, characters 2-28
+Command exited with non-zero status 1
+Time(s): 0.06 
+Mem(Kb): 16924
+
+
+synthesizer :smyth
+prog : burst/benchmarks/ref/list_fold.mls
+
+Uncaught exception:
+  
+  (Failure "O _")
+
+Raised at file "stdlib.ml" (inlined), line 29, characters 17-33
+Called from file "app/ToSmythConverter.ml", line 79, characters 16-41
+Called from file "app/ToSmythConverter.ml", line 108, characters 35-44
+Called from file "src/list.ml", line 364, characters 13-17
+Called from file "src/list.ml" (inlined), line 352, characters 18-680
+Called from file "src/list.ml" (inlined), line 387, characters 15-31
+Called from file "app/ToSmythConverter.ml", line 104, characters 8-251
+Called from file "app/ToSmythConverter.ml" (inlined), line 89, characters 23-63
+Called from file "app/ToSmythConverter.ml", line 116, characters 15-29
+Called from file "app/ToSmythConverter.ml" (inlined), line 89, characters 23-63
+Called from file "app/ToSmythConverter.ml", line 96, characters 45-60
+Called from file "app/ToSmythConverter.ml" (inlined), line 89, characters 23-63
+Called from file "app/ToSmythConverter.ml", line 102, characters 15-29
+Called from file "app/ToSmythConverter.ml" (inlined), line 89, characters 23-63
+Called from file "app/ToSmythConverter.ml", line 98, characters 71-85
+Called from file "app/ToSmythConverter.ml" (inlined), line 89, characters 23-63
+Called from file "app/ToSmythConverter.ml", line 98, characters 71-85
+Called from file "app/ToSmythConverter.ml" (inlined), line 134, characters 2-39
+Called from file "app/ToSmythConverter.ml" (inlined), line 177, characters 48-65
+Called from file "src/list.ml", line 363, characters 13-17
+Called from file "src/list.ml" (inlined), line 352, characters 18-680
+Called from file "src/list.ml" (inlined), line 387, characters 15-31
+Called from file "app/ToSmythConverter.ml", line 177, characters 26-69
+Called from file "src/list.ml", line 374, characters 13-17
+Called from file "src/list.ml" (inlined), line 352, characters 18-680
+Called from file "src/list.ml" (inlined), line 387, characters 15-31
+Called from file "app/ToSmythConverter.ml", line 176, characters 4-119
+Called from file "app/SmythSynthesizer.ml", line 61, characters 44-125
+Called from file "src/Synthesizers.ml" (inlined), line 231, characters 23-39
+Called from file "src/consts.ml" (inlined), line 26, characters 12-16
+Called from file "src/Synthesizers.ml", line 229, characters 10-98
+Called from file "app/BurstCmdLine.ml" (inlined), line 78, characters 2-44
+Called from file "app/BurstCmdLine.ml", line 263, characters 8-251
+Called from file "app/BurstCmdLine.ml", line 363, characters 6-227
+Called from file "app/BurstCmdLine.ml", line 406, characters 8-326
+Called from file "src/command.ml" (inlined), line 1294, characters 18-33
+Called from file "src/command.ml" (inlined), line 2819, characters 6-70
+Called from file "src/command.ml" (inlined), line 2937, characters 8-205
+Called from file "src/exn.ml" (inlined), line 102, characters 6-10
+Called from file "src/exn.ml" (inlined), line 122, characters 33-77
+Called from file "src/command.ml" (inlined), line 29, characters 11-41
+Called from file "src/command.ml" (inlined), line 2931, characters 4-659
+Called from file "app/BurstCmdLine.ml", line 424, characters 2-28
+Re-raised at file "src/exn.ml" (inlined), line 102, characters 6-10
+Called from file "src/exn.ml" (inlined), line 122, characters 33-77
+Called from file "src/command.ml" (inlined), line 29, characters 11-41
+Called from file "src/command.ml" (inlined), line 2931, characters 4-659
+Called from file "app/BurstCmdLine.ml", line 424, characters 2-28
+Command exited with non-zero status 1
+Time(s): 78.19 
+Mem(Kb): 31628
+
+
+synthesizer :smyth
+prog : burst/benchmarks/ref/list_hd.mls
+fix (f : ) = fun (x0:) -> match x0 with
+                            | Nil y1 -> 0
+                            | Cons y1 -> y1 . 0
+Size: 9
+Iter: 2
+
+Time(s): 0.19 
+Mem(Kb): 18404
+
+
+synthesizer :smyth
+prog : burst/benchmarks/ref/list_inc.mls
+fix (f : ) = fun (x0:) -> map x0 (fix (f1 : ) = fun (x1:) -> S x1)
+Size: 12
+Iter: 2
+
+Time(s): 0.51 
+Mem(Kb): 19068
+
+
+synthesizer :smyth
+prog : burst/benchmarks/ref/list_last.mls
+fix (f : ) =
+  fun (x0:) ->
+    match x0 with
+      | Nil y1 -> None
+      | Cons y1 -> (match y1 . 1 with
+                      | Nil y2 -> Some (y1 . 0)
+                      | Cons y2 -> f (y1 . 1))
+Size: 19
+Iter: 5
+
+Time(s): 0.39 
+Mem(Kb): 18876
+
+
+synthesizer :smyth
+prog : burst/benchmarks/ref/list_length.mls
+fix (f : ) =
+  fun (x0:) -> match x0 with
+                 | Nil y1 -> 0
+                 | Cons y1 -> S (f (y1 . 1))
+Size: 12
+Iter: 3
+
+Time(s): 0.33 
+Mem(Kb): 18532
+
+
+synthesizer :smyth
+prog : burst/benchmarks/ref/list_map.mls
+
+Command exited with non-zero status 124
+Time(s): 599.95 
+Mem(Kb): 37504
+
+
+synthesizer :smyth
+prog : burst/benchmarks/ref/list_nth.mls
+fun (x:list * nat) ->
+  (fix (f : ) =
+     fun (x1:) ->
+       fun (x0:) ->
+         match x1 with
+           | Nil y1 -> 0
+           | Cons y1 -> (match x0 with
+                           | S y2 -> f (y1 . 1) y2
+                           | O y2 -> y1 . 0))
+    (x . 0) (x . 1)
+Size: 34
+Iter: 5
+
+Time(s): 0.42 
+Mem(Kb): 18580
+
+
+synthesizer :smyth
+prog : burst/benchmarks/ref/list_pairwise_swap.mls
+
+Uncaught exception:
+  
+  (Failure "No solutions found")
+
+Raised at file "stdlib.ml" (inlined), line 29, characters 17-33
+Called from file "app/SmythSynthesizer.ml", line 136, characters 12-41
+Called from file "src/Synthesizers.ml" (inlined), line 231, characters 23-39
+Called from file "src/consts.ml" (inlined), line 26, characters 12-16
+Called from file "src/Synthesizers.ml" (inlined), line 229, characters 10-98
+Called from file "src/Synthesizers.ml" (inlined), line 241, characters 12-52
+Called from file "src/Synthesizers.ml" (inlined), line 241, characters 12-52
+Called from file "src/Synthesizers.ml", line 244, characters 6-61
+Called from file "app/BurstCmdLine.ml" (inlined), line 78, characters 2-44
+Called from file "app/BurstCmdLine.ml", line 263, characters 8-251
+Called from file "app/BurstCmdLine.ml", line 363, characters 6-227
+Called from file "app/BurstCmdLine.ml", line 406, characters 8-326
+Called from file "src/command.ml" (inlined), line 1294, characters 18-33
+Called from file "src/command.ml" (inlined), line 2819, characters 6-70
+Called from file "src/command.ml" (inlined), line 2937, characters 8-205
+Called from file "src/exn.ml" (inlined), line 102, characters 6-10
+Called from file "src/exn.ml" (inlined), line 122, characters 33-77
+Called from file "src/command.ml" (inlined), line 29, characters 11-41
+Called from file "src/command.ml" (inlined), line 2931, characters 4-659
+Called from file "app/BurstCmdLine.ml", line 424, characters 2-28
+Re-raised at file "src/exn.ml" (inlined), line 102, characters 6-10
+Called from file "src/exn.ml" (inlined), line 122, characters 33-77
+Called from file "src/command.ml" (inlined), line 29, characters 11-41
+Called from file "src/command.ml" (inlined), line 2931, characters 4-659
+Called from file "app/BurstCmdLine.ml", line 424, characters 2-28
+Command exited with non-zero status 1
+Time(s): 0.02 
+Mem(Kb): 15912
+
+
+synthesizer :smyth
+prog : burst/benchmarks/ref/list_rev_append.mls
+
+Uncaught exception:
+  
+  (Failure "No solutions found")
+
+Raised at file "stdlib.ml" (inlined), line 29, characters 17-33
+Called from file "app/SmythSynthesizer.ml", line 136, characters 12-41
+Called from file "src/Synthesizers.ml" (inlined), line 231, characters 23-39
+Called from file "src/consts.ml" (inlined), line 26, characters 12-16
+Called from file "src/Synthesizers.ml" (inlined), line 229, characters 10-98
+Called from file "src/Synthesizers.ml" (inlined), line 241, characters 12-52
+Called from file "src/Synthesizers.ml" (inlined), line 241, characters 12-52
+Called from file "src/Synthesizers.ml", line 244, characters 6-61
+Called from file "app/BurstCmdLine.ml" (inlined), line 78, characters 2-44
+Called from file "app/BurstCmdLine.ml", line 263, characters 8-251
+Called from file "app/BurstCmdLine.ml", line 363, characters 6-227
+Called from file "app/BurstCmdLine.ml", line 406, characters 8-326
+Called from file "src/command.ml" (inlined), line 1294, characters 18-33
+Called from file "src/command.ml" (inlined), line 2819, characters 6-70
+Called from file "src/command.ml" (inlined), line 2937, characters 8-205
+Called from file "src/exn.ml" (inlined), line 102, characters 6-10
+Called from file "src/exn.ml" (inlined), line 122, characters 33-77
+Called from file "src/command.ml" (inlined), line 29, characters 11-41
+Called from file "src/command.ml" (inlined), line 2931, characters 4-659
+Called from file "app/BurstCmdLine.ml", line 424, characters 2-28
+Re-raised at file "src/exn.ml" (inlined), line 102, characters 6-10
+Called from file "src/exn.ml" (inlined), line 122, characters 33-77
+Called from file "src/command.ml" (inlined), line 29, characters 11-41
+Called from file "src/command.ml" (inlined), line 2931, characters 4-659
+Called from file "app/BurstCmdLine.ml", line 424, characters 2-28
+Command exited with non-zero status 1
+Time(s): 0.04 
+Mem(Kb): 16100
+
+
+synthesizer :smyth
+prog : burst/benchmarks/ref/list_rev_fold.mls
+
+Uncaught exception:
+  
+  (Failure "No solutions found")
+
+Raised at file "stdlib.ml" (inlined), line 29, characters 17-33
+Called from file "app/SmythSynthesizer.ml", line 136, characters 12-41
+Called from file "src/Synthesizers.ml" (inlined), line 231, characters 23-39
+Called from file "src/consts.ml" (inlined), line 26, characters 12-16
+Called from file "src/Synthesizers.ml" (inlined), line 229, characters 10-98
+Called from file "src/Synthesizers.ml" (inlined), line 241, characters 12-52
+Called from file "src/Synthesizers.ml" (inlined), line 241, characters 12-52
+Called from file "src/Synthesizers.ml", line 244, characters 6-61
+Called from file "app/BurstCmdLine.ml" (inlined), line 78, characters 2-44
+Called from file "app/BurstCmdLine.ml", line 263, characters 8-251
+Called from file "app/BurstCmdLine.ml", line 363, characters 6-227
+Called from file "app/BurstCmdLine.ml", line 406, characters 8-326
+Called from file "src/command.ml" (inlined), line 1294, characters 18-33
+Called from file "src/command.ml" (inlined), line 2819, characters 6-70
+Called from file "src/command.ml" (inlined), line 2937, characters 8-205
+Called from file "src/exn.ml" (inlined), line 102, characters 6-10
+Called from file "src/exn.ml" (inlined), line 122, characters 33-77
+Called from file "src/command.ml" (inlined), line 29, characters 11-41
+Called from file "src/command.ml" (inlined), line 2931, characters 4-659
+Called from file "app/BurstCmdLine.ml", line 424, characters 2-28
+Re-raised at file "src/exn.ml" (inlined), line 102, characters 6-10
+Called from file "src/exn.ml" (inlined), line 122, characters 33-77
+Called from file "src/command.ml" (inlined), line 29, characters 11-41
+Called from file "src/command.ml" (inlined), line 2931, characters 4-659
+Called from file "app/BurstCmdLine.ml", line 424, characters 2-28
+Command exited with non-zero status 1
+Time(s): 0.05 
+Mem(Kb): 16840
+
+
+synthesizer :smyth
+prog : burst/benchmarks/ref/list_rev_snoc.mls
+
+Uncaught exception:
+  
+  (Failure "No solutions found")
+
+Raised at file "stdlib.ml" (inlined), line 29, characters 17-33
+Called from file "app/SmythSynthesizer.ml", line 136, characters 12-41
+Called from file "src/Synthesizers.ml" (inlined), line 231, characters 23-39
+Called from file "src/consts.ml" (inlined), line 26, characters 12-16
+Called from file "src/Synthesizers.ml" (inlined), line 229, characters 10-98
+Called from file "src/Synthesizers.ml" (inlined), line 241, characters 12-52
+Called from file "src/Synthesizers.ml" (inlined), line 241, characters 12-52
+Called from file "src/Synthesizers.ml", line 244, characters 6-61
+Called from file "app/BurstCmdLine.ml" (inlined), line 78, characters 2-44
+Called from file "app/BurstCmdLine.ml", line 263, characters 8-251
+Called from file "app/BurstCmdLine.ml", line 363, characters 6-227
+Called from file "app/BurstCmdLine.ml", line 406, characters 8-326
+Called from file "src/command.ml" (inlined), line 1294, characters 18-33
+Called from file "src/command.ml" (inlined), line 2819, characters 6-70
+Called from file "src/command.ml" (inlined), line 2937, characters 8-205
+Called from file "src/exn.ml" (inlined), line 102, characters 6-10
+Called from file "src/exn.ml" (inlined), line 122, characters 33-77
+Called from file "src/command.ml" (inlined), line 29, characters 11-41
+Called from file "src/command.ml" (inlined), line 2931, characters 4-659
+Called from file "app/BurstCmdLine.ml", line 424, characters 2-28
+Re-raised at file "src/exn.ml" (inlined), line 102, characters 6-10
+Called from file "src/exn.ml" (inlined), line 122, characters 33-77
+Called from file "src/command.ml" (inlined), line 29, characters 11-41
+Called from file "src/command.ml" (inlined), line 2931, characters 4-659
+Called from file "app/BurstCmdLine.ml", line 424, characters 2-28
+Command exited with non-zero status 1
+Time(s): 0.03 
+Mem(Kb): 16100
+
+
+synthesizer :smyth
+prog : burst/benchmarks/ref/list_rev_tailcall.mls
+fun (x:list * list) ->
+  (fix (f : ) =
+     fun (x1:) ->
+       fun (x0:) ->
+         match x1 with
+           | Nil y1 -> x0
+           | Cons y1 -> f (y1 . 1) Cons (y1 . 0, x0))
+    (x . 0) (x . 1)
+Size: 33
+Iter: 9
+
+Time(s): 0.43 
+Mem(Kb): 18480
+
+
+synthesizer :smyth
+prog : burst/benchmarks/ref/list_snoc.mls
+fun (x:list * nat) ->
+  (fix (f : ) =
+     fun (x1:) ->
+       fun (x0:) ->
+         Cons (match x1 with
+                 | Nil y1 -> (x0, Nil)
+                 | Cons y1 -> (y1 . 0, f (y1 . 1) x0)))
+    (x . 0) (x . 1)
+Size: 36
+Iter: 7
+
+Time(s): 0.47 
+Mem(Kb): 18664
+
+
+synthesizer :smyth
+prog : burst/benchmarks/ref/list_sort_sorted_insert.mls
+fix (f : ) =
+  fun (x0:) ->
+    match x0 with
+      | Nil y1 -> x0
+      | Cons y1 -> insert (f (y1 . 1)) (y1 . 0)
+Size: 16
+Iter: 6
+
+Time(s): 1.40 
+Mem(Kb): 20128
+
+
+synthesizer :smyth
+prog : burst/benchmarks/ref/list_sorted_insert.mls
+fun (x:list * nat) ->
+  (fix (f : ) =
+     fun (x1:) ->
+       fun (x0:) ->
+         match x1 with
+           | Nil y1 -> (match compare x0 O y1 with
+                          | LT y2 -> ()
+                          | GT y2 -> Cons (x0, Nil)
+                          | EQ y2 -> Cons (0, Nil))
+           | Cons y1 -> (match compare x0 (y1 . 0) with
+                           | LT y2 -> Cons (x0, x1)
+                           | GT y2 -> Cons (y1 . 0, f (y1 . 1) x0)
+                           | EQ y2 -> Cons (x0, y1 . 1)))
+    (x . 0) (x . 1)
+Size: 69
+Iter: 12
+
+Time(s): 12.48 
+Mem(Kb): 24380
+
+
+synthesizer :smyth
+prog : burst/benchmarks/ref/list_stutter.mls
+fix (f : ) =
+  fun (x0:) ->
+    match x0 with
+      | Nil y1 -> Nil
+      | Cons y1 -> Cons (y1 . 0, Cons (y1 . 0, f (y1 . 1)))
+Size: 21
+Iter: 4
+
+Time(s): 0.38 
+Mem(Kb): 18960
+
+
+synthesizer :smyth
+prog : burst/benchmarks/ref/list_sum.mls
+fix (f : ) = fun (x0:) -> fold add 0 x0
+Size: 10
+Iter: 2
+
+Time(s): 0.70 
+Mem(Kb): 19048
+
+
+synthesizer :smyth
+prog : burst/benchmarks/ref/list_take.mls
+fun (x:nat * list) ->
+  (fix (f : ) =
+     fun (x1:) ->
+       fun (x0:) ->
+         match x0 with
+           | Nil y1 -> Nil
+           | Cons y1 -> (match x1 with
+                           | S y2 -> Cons (y1 . 0, f y2 (y1 . 1))
+                           | O y2 -> Nil))
+    (x . 0) (x . 1)
+Size: 38
+Iter: 7
+
+Time(s): 0.42 
+Mem(Kb): 18504
+
+
+synthesizer :smyth
+prog : burst/benchmarks/ref/list_tl.mls
+fix (f : ) = fun (x0:) -> match x0 with
+                            | Nil y1 -> Nil
+                            | Cons y1 -> y1 . 1
+Size: 9
+Iter: 2
+
+Time(s): 0.20 
+Mem(Kb): 18348
+
+
+synthesizer :smyth
+prog : burst/benchmarks/ref/nat_add.mls
+fun (x:nat * nat) ->
+  (fix (f : ) =
+     fun (x1:) -> fun (x0:) -> match x1 with
+                                 | S y1 -> S (f y1 x0)
+                                 | O y1 -> x0)
+    (x . 0) (x . 1)
+Size: 27
+Iter: 6
+
+Time(s): 0.07 
+Mem(Kb): 16508
+
+
+synthesizer :smyth
+prog : burst/benchmarks/ref/nat_iseven.mls
+fix (f : ) =
+  fun (x0:) ->
+    match x0 with
+      | S y1 -> (match y1 with
+                   | S y2 -> f y2
+                   | O y2 -> False)
+      | O y1 -> True
+Size: 13
+Iter: 4
+
+Time(s): 0.02 
+Mem(Kb): 16048
+
+
+synthesizer :smyth
+prog : burst/benchmarks/ref/nat_max.mls
+fun (x:nat * nat) ->
+  (fix (f : ) =
+     fun (x1:) ->
+       fun (x0:) ->
+         match x0 with
+           | S y1 -> (match x1 with
+                        | S y2 -> S (f y2 y1)
+                        | O y2 -> x0)
+           | O y1 -> (match x1 with
+                        | S y2 -> x1
+                        | O y2 -> 0))
+    (x . 0) (x . 1)
+Size: 34
+Iter: 7
+
+Time(s): 0.15 
+Mem(Kb): 17468
+
+
+synthesizer :smyth
+prog : burst/benchmarks/ref/nat_pred.mls
+fix (f : ) = fun (x0:) -> match x0 with
+                            | S y1 -> y1
+                            | O y1 -> 0
+Size: 7
+Iter: 2
+
+Time(s): 0.02 
+Mem(Kb): 15872
+
+
+synthesizer :smyth
+prog : burst/benchmarks/ref/tree_binsert.mls
+
+Command exited with non-zero status 124
+Time(s): 600.01 
+Mem(Kb): 21104
+
+
+synthesizer :smyth
+prog : burst/benchmarks/ref/tree_collect_leaves.mls
+fix (f : ) =
+  fun (x0:) ->
+    match x0 with
+      | Node y1 -> append (f (y1 . 0)) Cons (y1 . 1, f (y1 . 2))
+      | Leaf y1 -> Nil
+Size: 24
+Iter: 5
+
+Time(s): 5.27 
+Mem(Kb): 18440
+
+
+synthesizer :smyth
+prog : burst/benchmarks/ref/tree_count_leaves.mls
+fix (f : ) =
+  fun (x0:) ->
+    match x0 with
+      | Node y1 -> sum (f (y1 . 0)) (f (y1 . 2))
+      | Leaf y1 -> sum O y1 1
+Size: 25
+Iter: 4
+
+Time(s): 5.69 
+Mem(Kb): 18464
+
+
+synthesizer :smyth
+prog : burst/benchmarks/ref/tree_count_nodes.mls
+fix (f : ) =
+  fun (x0:) ->
+    match x0 with
+      | Node y1 -> S (sum (f (y1 . 0)) (f (y1 . 2)))
+      | Leaf y1 -> 0
+Size: 20
+Iter: 4
+
+Time(s): 5.28 
+Mem(Kb): 17940
+
+
+synthesizer :smyth
+prog : burst/benchmarks/ref/tree_inorder.mls
+fix (f : ) =
+  fun (x0:) ->
+    match x0 with
+      | Node y1 -> append (f (y1 . 0)) Cons (y1 . 1, f (y1 . 2))
+      | Leaf y1 -> Nil
+Size: 24
+Iter: 6
+
+Time(s): 7.73 
+Mem(Kb): 19668
+
+
+synthesizer :smyth
+prog : burst/benchmarks/ref/tree_map.mls
+
+Command exited with non-zero status 124
+Time(s): 600.01 
+Mem(Kb): 48680
+
+
+synthesizer :smyth
+prog : burst/benchmarks/ref/tree_nodes_at_level.mls
+fun (x:tree * nat) ->
+  (fix (f : ) =
+     fun (x1:) ->
+       fun (x0:) ->
+         match x1 with
+           | Node y1 -> (match x0 with
+                           | S y2 -> sum (f (y1 . 0) y2) (f (y1 . 2) y2)
+                           | O y2 -> S x0)
+           | Leaf y1 -> 0)
+    (x . 0) (x . 1)
+Size: 43
+Iter: 5
+
+Time(s): 21.92 
+Mem(Kb): 20408
+
+
+synthesizer :smyth
+prog : burst/benchmarks/ref/tree_postorder.mls
+
+Command exited with non-zero status 124
+Time(s): 599.96 
+Mem(Kb): 115984
+
+
+synthesizer :smyth
+prog : burst/benchmarks/ref/tree_preorder.mls
+fix (f : ) =
+  fun (x0:) ->
+    match x0 with
+      | Node y1 -> Cons (y1 . 1, append (f (y1 . 0)) (f (y1 . 2)))
+      | Leaf y1 -> Nil
+Size: 24
+Iter: 5
+
+Time(s): 7.79 
+Mem(Kb): 19088
+
+

@@ -1,0 +1,194 @@
+synthesizer :burst
+prog : testcases/new/expr_b.mls
+fix (f : formula -> bool) =
+  fun (x:formula) ->
+    match x with
+      | BOOL _ -> Un_BOOL x
+      | NOT _ -> bnot Un_BOOL (Un_NOT x)
+      | ANDALSO _ -> band Un_BOOL (Un_ANDALSO x . 0)
+                       Un_BOOL (Un_ANDALSO x . 1)
+      | ORELSE _ -> bor Un_BOOL (Un_ORELSE x . 1) Un_BOOL (Un_ORELSE x . 0)
+      | IMPLY _ -> bor (bnot Un_BOOL (Un_IMPLY x . 0))
+                     Un_BOOL (Un_IMPLY x . 1)
+Size: 52
+Iter: 0
+
+Time(s): 0.60 
+Mem(Kb): 24604
+
+
+synthesizer :burst
+prog : testcases/new/expr.mls
+fix (f : exp -> nat) =
+  fun (x:exp) ->
+    match x with
+      | INT _ -> Un_INT x
+      | ADD _ -> Un_S (add Un_INT (Un_ADD x . 1) Un_INT (Un_ADD x . 1))
+      | MUL _ -> mul Un_INT (Un_MUL x . 0) Un_INT (Un_MUL x . 1)
+Size: 33
+Iter: 0
+
+Time(s): 433.76 
+Mem(Kb): 4674948
+
+
+synthesizer :burst
+prog : testcases/new/expr_sub.mls
+
+Command exited with non-zero status 124
+Time(s): 600.93 
+Mem(Kb): 9295124
+
+
+synthesizer :burst
+prog : testcases/new/expr_div.mls
+
+Command exited with non-zero status 124
+Time(s): 600.92 
+Mem(Kb): 9426024
+
+
+synthesizer :burst
+prog : testcases/new/list_dropeven.mls
+fix (f : list -> list) =
+  fun (x:list) ->
+    match x with
+      | Nil _ -> x
+      | Cons _ -> (match is_even (Un_Cons x . 0) with
+                     | True _ -> Un_Cons x . 1
+                     | False _ -> Cons (Un_Cons x . 0, f (Un_Cons x . 1)))
+Size: 28
+Iter: 0
+
+Time(s): 581.22 
+Mem(Kb): 3449680
+
+
+synthesizer :burst
+prog : testcases/new/list_last2.mls
+fix (f : list -> natopt) =
+  fun (x:list) ->
+    match x with
+      | Nil _ -> None
+      | Cons _ -> (match Un_Cons x . 1 with
+                     | Nil _ -> None
+                     | Cons _ -> (match f (Un_Cons x . 1) with
+                                    | None _ -> Some (Un_Cons x . 0,
+                                                       Un_Cons (Un_Cons x . 1)
+                                                         . 0)
+                                    | Some _ -> f (Un_Cons x . 1)))
+Size: 39
+Iter: 0
+
+Time(s): 0.11 
+Mem(Kb): 19976
+
+
+synthesizer :burst
+prog : testcases/new/list_make.mls
+fix (f : nat -> list) =
+  fun (x:nat) -> match x with
+                   | O _ -> Nil
+                   | S _ -> Cons (0, f Un_S x)
+Size: 14
+Iter: 0
+
+Time(s): 0.88 
+Mem(Kb): 23320
+
+
+synthesizer :burst
+prog : testcases/new/list_range.mls
+
+Command exited with non-zero status 124
+Time(s): 601.14 
+Mem(Kb): 9436000
+
+
+synthesizer :burst
+prog : testcases/new/nat_mod.mls
+
+Command exited with non-zero status 124
+Time(s): 600.41 
+Mem(Kb): 5578480
+
+
+synthesizer :burst
+prog : testcases/new/nat_mul.mls
+
+Command exited with non-zero status 124
+Time(s): 600.97 
+Mem(Kb): 9368092
+
+
+synthesizer :burst
+prog : testcases/new/nat_sub.mls
+fix (f : nat * nat -> nat) =
+  fun (x:nat * nat) ->
+    match x . 1 with
+      | O _ -> x . 0
+      | S _ -> f (Un_S (x . 0), Un_S (x . 1))
+Size: 22
+Iter: 0
+
+Time(s): 91.85 
+Mem(Kb): 833456
+
+
+synthesizer :burst
+prog : testcases/new/tree_balanced.mls
+
+Command exited with non-zero status 124
+Time(s): 599.99 
+Mem(Kb): 578884
+
+
+synthesizer :burst
+prog : testcases/new/tree_height.mls
+
+Command exited with non-zero status 124
+Time(s): 600.04 
+Mem(Kb): 1661288
+
+
+synthesizer :burst
+prog : testcases/new/tree_lastleft.mls
+fix (f : tree -> nat) =
+  fun (x:tree) ->
+    match x with
+      | Leaf _ -> 0
+      | Node _ -> (match Un_Node x . 1 with
+                     | Leaf _ -> Un_Node x . 0
+                     | Node _ -> f (Un_Node x . 1))
+Size: 21
+Iter: 0
+
+Time(s): 0.04 
+Mem(Kb): 17100
+
+
+synthesizer :burst
+prog : testcases/new/tree_max.mls
+
+Command exited with non-zero status 124
+Time(s): 601.32 
+Mem(Kb): 9988304
+
+
+synthesizer :burst
+prog : testcases/new/tree_notexist.mls
+fix (f : nat * tree -> bool) =
+  fun (x:nat * tree) ->
+    match x . 1 with
+      | Leaf _ -> True
+      | Node _ -> (match compare (Un_Node (x . 1) . 0) (x . 0) with
+                     | LT _ -> f (x . 0, Un_Node (x . 1) . 2)
+                     | EQ _ -> False
+                     | GT _ -> ())
+Size: 38
+Iter: 0
+
+Time(s): 12.82 
+Mem(Kb): 146716
+
+
