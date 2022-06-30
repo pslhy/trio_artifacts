@@ -33,19 +33,20 @@ let band =
   fun (x: bool) ->
    fun (y: bool) ->
     match x with
-     | False ->
-        x
-     | True ->
-        y
+     | False -> x
+     | True -> y
 ;;
 
 synth nat -> tree -> bool satisfying
 
-[1, Leaf] -> True,
-[0, Leaf] -> True,
-[0, Node (0, Leaf, Leaf)] -> False,
-[1, Node (0, Leaf, Leaf)] -> True,
-[2, Node (0, Node (1, Leaf, Leaf), Leaf)] -> True,
-[2, Node (0, Leaf, Node (1, Leaf, Leaf))] -> True,
-[2, Node (0, Node (1, Leaf, Leaf), Node (2, Leaf, Leaf))] -> False,
-[3, Node (0, Node (1, Node (2, Leaf, Leaf), Leaf), Leaf)] -> True,
+equiv
+
+fix (f : nat -> tree -> bool) =
+  fun (x:nat) -> 
+   fun (t:tree) ->
+    match t with
+      | Leaf _ -> True
+      | Node (v,l,r) -> (match compare x v with
+                        | EQ _ -> False
+                        | LT _ -> band (f x l) (f x r)
+                        | GT _ -> band (f x l) (f x r))

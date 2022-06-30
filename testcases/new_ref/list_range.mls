@@ -27,7 +27,7 @@ let compare =
 synth nat -> nat -> list satisfying
 
 equiv
-fix (f : nat * nat -> list) =
+fix (f : nat -> nat -> list) =
     fun (n1 : nat) ->
       fun (n2 : nat) ->
         match n1 with
@@ -35,4 +35,4 @@ fix (f : nat * nat -> list) =
         | S n1p -> (match compare n1 n2 with
                     | LT -> Nil
                     | EQ -> Cons (n1, Nil)
-                    | GT -> Cons (n1, f (n1p, n2)))
+                    | GT -> Cons (n1, (f n1p n2)))

@@ -3,13 +3,14 @@ import sys
 # args[1] : log name
 args = sys.argv
 file = args[1]
+outfile = args[2]
 
 f = open(file)
 # f.close()
-s = ""
+s = "file,size,iter,time,mem\n"
 data = f.readlines()
 # print(data)
-out = open('log/output.csv','w')
+out = open('log/csv/'+outfile+'.csv','w')
 for line in data :
     # print(line)
     if "prog : " in line:

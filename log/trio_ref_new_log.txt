@@ -1,0 +1,352 @@
+synthesizer :trio
+prog : testcases/new_ref/expr_b.mls
+
+Uncaught exception:
+  
+  (Failure "No solution within depth of 6.")
+
+Raised at file "stdlib.ml", line 29, characters 17-33
+Called from file "trio/bidirectional.ml", line 1300, characters 4-83
+Called from file "trio/bidirectional.ml", line 1324, characters 2-47
+Called from file "app/TrioSynthesizer.ml", line 280, characters 8-41
+Called from file "src/Synthesizers.ml" (inlined), line 231, characters 23-39
+Called from file "src/consts.ml" (inlined), line 26, characters 12-16
+Called from file "src/Synthesizers.ml" (inlined), line 229, characters 10-98
+Called from file "src/Synthesizers.ml" (inlined), line 241, characters 12-52
+Called from file "src/Synthesizers.ml" (inlined), line 241, characters 12-52
+Called from file "src/Synthesizers.ml", line 244, characters 6-61
+Called from file "app/BurstCmdLine.ml" (inlined), line 78, characters 2-44
+Called from file "app/BurstCmdLine.ml", line 263, characters 8-251
+Called from file "app/BurstCmdLine.ml", line 363, characters 6-227
+Called from file "app/BurstCmdLine.ml", line 406, characters 8-326
+Called from file "src/command.ml" (inlined), line 1294, characters 18-33
+Called from file "src/command.ml" (inlined), line 2819, characters 6-70
+Called from file "src/command.ml" (inlined), line 2937, characters 8-205
+Called from file "src/exn.ml" (inlined), line 102, characters 6-10
+Called from file "src/exn.ml" (inlined), line 122, characters 33-77
+Called from file "src/command.ml" (inlined), line 29, characters 11-41
+Called from file "src/command.ml" (inlined), line 2931, characters 4-659
+Called from file "app/BurstCmdLine.ml", line 424, characters 2-28
+Re-raised at file "src/exn.ml" (inlined), line 102, characters 6-10
+Called from file "src/exn.ml" (inlined), line 122, characters 33-77
+Called from file "src/command.ml" (inlined), line 29, characters 11-41
+Called from file "src/command.ml" (inlined), line 2931, characters 4-659
+Called from file "app/BurstCmdLine.ml", line 424, characters 2-28
+Command exited with non-zero status 1
+Time(s): 1.13 
+Mem(Kb): 42828
+
+
+synthesizer :trio
+prog : testcases/new_ref/expr.mls
+
+Uncaught exception:
+  
+  (Failure "No solution within depth of 6.")
+
+Raised at file "stdlib.ml", line 29, characters 17-33
+Called from file "trio/bidirectional.ml", line 1300, characters 4-83
+Called from file "trio/bidirectional.ml", line 1324, characters 2-47
+Called from file "app/TrioSynthesizer.ml", line 280, characters 8-41
+Called from file "src/Synthesizers.ml" (inlined), line 231, characters 23-39
+Called from file "src/consts.ml" (inlined), line 26, characters 12-16
+Called from file "src/Synthesizers.ml" (inlined), line 229, characters 10-98
+Called from file "src/Synthesizers.ml" (inlined), line 241, characters 12-52
+Called from file "src/Synthesizers.ml" (inlined), line 241, characters 12-52
+Called from file "src/Synthesizers.ml" (inlined), line 241, characters 12-52
+Called from file "src/Synthesizers.ml", line 244, characters 6-61
+Called from file "app/BurstCmdLine.ml" (inlined), line 78, characters 2-44
+Called from file "app/BurstCmdLine.ml", line 263, characters 8-251
+Called from file "app/BurstCmdLine.ml", line 363, characters 6-227
+Called from file "app/BurstCmdLine.ml", line 406, characters 8-326
+Called from file "src/command.ml" (inlined), line 1294, characters 18-33
+Called from file "src/command.ml" (inlined), line 2819, characters 6-70
+Called from file "src/command.ml" (inlined), line 2937, characters 8-205
+Called from file "src/exn.ml" (inlined), line 102, characters 6-10
+Called from file "src/exn.ml" (inlined), line 122, characters 33-77
+Called from file "src/command.ml" (inlined), line 29, characters 11-41
+Called from file "src/command.ml" (inlined), line 2931, characters 4-659
+Called from file "app/BurstCmdLine.ml", line 424, characters 2-28
+Re-raised at file "src/exn.ml" (inlined), line 102, characters 6-10
+Called from file "src/exn.ml" (inlined), line 122, characters 33-77
+Called from file "src/command.ml" (inlined), line 29, characters 11-41
+Called from file "src/command.ml" (inlined), line 2931, characters 4-659
+Called from file "app/BurstCmdLine.ml", line 424, characters 2-28
+Command exited with non-zero status 1
+Time(s): 0.28 
+Mem(Kb): 39040
+
+
+synthesizer :trio
+prog : testcases/new_ref/expr_sub.mls
+
+Uncaught exception:
+  
+  (Failure "No solution within depth of 6.")
+
+Raised at file "stdlib.ml", line 29, characters 17-33
+Called from file "trio/bidirectional.ml", line 1300, characters 4-83
+Called from file "trio/bidirectional.ml", line 1324, characters 2-47
+Called from file "app/TrioSynthesizer.ml", line 280, characters 8-41
+Called from file "src/Synthesizers.ml" (inlined), line 231, characters 23-39
+Called from file "src/consts.ml" (inlined), line 26, characters 12-16
+Called from file "src/Synthesizers.ml" (inlined), line 229, characters 10-98
+Called from file "src/Synthesizers.ml" (inlined), line 241, characters 12-52
+Called from file "src/Synthesizers.ml" (inlined), line 241, characters 12-52
+Called from file "src/Synthesizers.ml" (inlined), line 241, characters 12-52
+Called from file "src/Synthesizers.ml", line 244, characters 6-61
+Called from file "app/BurstCmdLine.ml" (inlined), line 78, characters 2-44
+Called from file "app/BurstCmdLine.ml", line 263, characters 8-251
+Called from file "app/BurstCmdLine.ml", line 363, characters 6-227
+Called from file "app/BurstCmdLine.ml", line 406, characters 8-326
+Called from file "src/command.ml" (inlined), line 1294, characters 18-33
+Called from file "src/command.ml" (inlined), line 2819, characters 6-70
+Called from file "src/command.ml" (inlined), line 2937, characters 8-205
+Called from file "src/exn.ml" (inlined), line 102, characters 6-10
+Called from file "src/exn.ml" (inlined), line 122, characters 33-77
+Called from file "src/command.ml" (inlined), line 29, characters 11-41
+Called from file "src/command.ml" (inlined), line 2931, characters 4-659
+Called from file "app/BurstCmdLine.ml", line 424, characters 2-28
+Re-raised at file "src/exn.ml" (inlined), line 102, characters 6-10
+Called from file "src/exn.ml" (inlined), line 122, characters 33-77
+Called from file "src/command.ml" (inlined), line 29, characters 11-41
+Called from file "src/command.ml" (inlined), line 2931, characters 4-659
+Called from file "app/BurstCmdLine.ml", line 424, characters 2-28
+Command exited with non-zero status 1
+Time(s): 0.99 
+Mem(Kb): 42212
+
+
+synthesizer :trio
+prog : testcases/new_ref/expr_div.mls
+
+Uncaught exception:
+  
+  (Failure "No solution within depth of 6.")
+
+Raised at file "stdlib.ml", line 29, characters 17-33
+Called from file "trio/bidirectional.ml", line 1300, characters 4-83
+Called from file "trio/bidirectional.ml", line 1324, characters 2-47
+Called from file "app/TrioSynthesizer.ml", line 280, characters 8-41
+Called from file "src/Synthesizers.ml" (inlined), line 231, characters 23-39
+Called from file "src/consts.ml" (inlined), line 26, characters 12-16
+Called from file "src/Synthesizers.ml" (inlined), line 229, characters 10-98
+Called from file "src/Synthesizers.ml" (inlined), line 241, characters 12-52
+Called from file "src/Synthesizers.ml" (inlined), line 241, characters 12-52
+Called from file "src/Synthesizers.ml" (inlined), line 241, characters 12-52
+Called from file "src/Synthesizers.ml", line 244, characters 6-61
+Called from file "app/BurstCmdLine.ml" (inlined), line 78, characters 2-44
+Called from file "app/BurstCmdLine.ml", line 263, characters 8-251
+Called from file "app/BurstCmdLine.ml", line 363, characters 6-227
+Called from file "app/BurstCmdLine.ml", line 406, characters 8-326
+Called from file "src/command.ml" (inlined), line 1294, characters 18-33
+Called from file "src/command.ml" (inlined), line 2819, characters 6-70
+Called from file "src/command.ml" (inlined), line 2937, characters 8-205
+Called from file "src/exn.ml" (inlined), line 102, characters 6-10
+Called from file "src/exn.ml" (inlined), line 122, characters 33-77
+Called from file "src/command.ml" (inlined), line 29, characters 11-41
+Called from file "src/command.ml" (inlined), line 2931, characters 4-659
+Called from file "app/BurstCmdLine.ml", line 424, characters 2-28
+Re-raised at file "src/exn.ml" (inlined), line 102, characters 6-10
+Called from file "src/exn.ml" (inlined), line 122, characters 33-77
+Called from file "src/command.ml" (inlined), line 29, characters 11-41
+Called from file "src/command.ml" (inlined), line 2931, characters 4-659
+Called from file "app/BurstCmdLine.ml", line 424, characters 2-28
+Command exited with non-zero status 1
+Time(s): 2.78 
+Mem(Kb): 47384
+
+
+synthesizer :trio
+prog : testcases/new_ref/list_dropeven.mls
+fix (f : list -> list) =
+  fun (x:list) ->
+    match x with
+      | Nil _ -> x
+      | Cons _ -> (match is_even (Un_Cons x . 0) with
+                     | False _ -> Cons (Un_Cons x . 0, f (Un_Cons x . 1))
+                     | True _ -> f (Un_Cons x . 1))
+Size: 30
+Iter: 8
+
+Time(s): 0.53 
+Mem(Kb): 18824
+
+
+synthesizer :trio
+prog : testcases/new_ref/list_last2.mls
+fix (f : list -> natopt) =
+  fun (x:list) ->
+    match x with
+      | Nil _ -> None
+      | Cons _ -> (match Un_Cons x . 1 with
+                     | Nil _ -> None
+                     | Cons _ -> (match Un_Cons (Un_Cons x . 1) . 1 with
+                                    | Nil _ -> Some (Un_Cons x . 0,
+                                                      Un_Cons (Un_Cons x . 1)
+                                                        . 0)
+                                    | Cons _ -> f (Un_Cons x . 1)))
+Size: 40
+Iter: 7
+
+Time(s): 0.52 
+Mem(Kb): 18812
+
+
+synthesizer :trio
+prog : testcases/new_ref/list_make.mls
+fix (f : nat -> list) =
+  fun (x:nat) -> match x with
+                   | O _ -> Nil
+                   | S _ -> Cons (0, f Un_S x)
+Size: 14
+Iter: 3
+
+Time(s): 0.02 
+Mem(Kb): 16332
+
+
+synthesizer :trio
+prog : testcases/new_ref/list_range.mls
+fix (f : nat * nat -> list) =
+  fun (x:nat * nat) ->
+    match x . 0 with
+      | O _ -> Cons (x . 0, Nil)
+      | S _ -> (match compare (x . 0) (x . 1) with
+                  | EQ _ -> Cons (x . 0, Nil)
+                  | GT _ -> Cons (x . 0, f (Un_S (x . 0), x . 1))
+                  | LT _ -> Nil)
+Size: 49
+Iter: 7
+
+Time(s): 0.30 
+Mem(Kb): 29892
+
+
+synthesizer :trio
+prog : testcases/new_ref/nat_mod.mls
+
+Uncaught exception:
+  
+  Stack overflow
+
+Raised at file "src/exn.ml" (inlined), line 102, characters 6-10
+Called from file "src/exn.ml" (inlined), line 122, characters 33-77
+Called from file "src/command.ml" (inlined), line 29, characters 11-41
+Called from file "src/command.ml" (inlined), line 2931, characters 4-659
+Called from file "app/BurstCmdLine.ml", line 424, characters 2-28
+Command exited with non-zero status 1
+Time(s): 0.14 
+Mem(Kb): 24060
+
+
+synthesizer :trio
+prog : testcases/new_ref/nat_mul.mls
+fix (f : nat * nat -> nat) =
+  fun (x:nat * nat) ->
+    match x . 0 with
+      | O _ -> x . 0
+      | S _ -> add (f (Un_S (x . 0), x . 1)) (x . 1)
+Size: 27
+Iter: 6
+
+Time(s): 0.76 
+Mem(Kb): 36172
+
+
+synthesizer :trio
+prog : testcases/new_ref/nat_sub.mls
+fix (f : nat * nat -> nat) =
+  fun (x:nat * nat) ->
+    match x . 0 with
+      | O _ -> x . 0
+      | S _ -> (match x . 1 with
+                  | O _ -> x . 0
+                  | S _ -> f (Un_S (x . 0), Un_S (x . 1)))
+Size: 29
+Iter: 6
+
+Time(s): 0.22 
+Mem(Kb): 35204
+
+
+synthesizer :trio
+prog : testcases/new_ref/tree_balanced.mls
+fix (f : tree -> bool) =
+  fun (x:tree) ->
+    match height x with
+      | O _ -> True
+      | S _ -> (match compare 1 Un_S (height x) with
+                  | EQ _ -> True
+                  | GT _ -> True
+                  | LT _ -> False)
+Size: 25
+Iter: 4
+
+Time(s): 8.42 
+Mem(Kb): 19056
+
+
+synthesizer :trio
+prog : testcases/new_ref/tree_height.mls
+fix (f : tree -> nat) =
+  fun (x:tree) ->
+    match x with
+      | Leaf _ -> 0
+      | Node _ -> (match Un_Node x . 1 with
+                     | Leaf _ -> S (f (Un_Node x . 2))
+                     | Node _ -> (match Un_Node x . 2 with
+                                    | Leaf _ -> S (f (Un_Node x . 1))
+                                    | Node _ -> 2))
+Size: 34
+Iter: 12
+
+Time(s): 45.22 
+Mem(Kb): 39464
+
+
+synthesizer :trio
+prog : testcases/new_ref/tree_lastleft.mls
+fix (f : tree -> nat) =
+  fun (x:tree) ->
+    match x with
+      | Leaf _ -> 0
+      | Node _ -> (match Un_Node x . 1 with
+                     | Leaf _ -> Un_Node x . 0
+                     | Node _ -> f (Un_Node x . 1))
+Size: 21
+Iter: 6
+
+Time(s): 8.13 
+Mem(Kb): 23428
+
+
+synthesizer :trio
+prog : testcases/new_ref/tree_max.mls
+fix (f : tree -> nat) = fun (x:tree) -> 0
+Size: 4
+Iter: 1
+
+Time(s): 8.39 
+Mem(Kb): 17968
+
+
+synthesizer :trio
+prog : testcases/new_ref/tree_notexist.mls
+fix (f : nat * tree -> bool) =
+  fun (x:nat * tree) ->
+    match x . 1 with
+      | Leaf _ -> True
+      | Node _ -> (match compare (x . 0) (Un_Node (x . 1) . 0) with
+                     | EQ _ -> False
+                     | GT _ -> band (f (x . 0, Un_Node (x . 1) . 1))
+                                 (f (x . 0, Un_Node (x . 1) . 2))
+                     | LT _ -> band (f (x . 0, Un_Node (x . 1) . 1))
+                                 (f (x . 0, Un_Node (x . 1) . 2)))
+Size: 79
+Iter: 8
+
+Time(s): 7.29 
+Mem(Kb): 23088
+
+

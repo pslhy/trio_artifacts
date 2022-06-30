@@ -8,9 +8,10 @@ from telnetlib import theNULL
 args = sys.argv
 file = args[2]
 synth = args[1]
+to = 120
 print("synthesizer :" + synth)
 if synth == "trio" :
-    cmd = "gtime -f 'Time(s): %e \nMem(Kb): %M' timeout 10m burst/BurstCmdLine.exe -print-data -use-trio " + file
+    cmd = "gtime -f 'Time(s): %e \nMem(Kb): %M' timeout 120 burst/BurstCmdLine.exe -print-data -use-trio " + file
     proc = subprocess.run(cmd,capture_output=True, text=True, shell=True)
 
     print("prog : "+file)
@@ -18,7 +19,7 @@ if synth == "trio" :
     print(proc.stderr)
 
 elif synth == "burst" :
-    cmd = "gtime -f 'Time(s): %e \nMem(Kb): %M' timeout 10m burst/BurstCmdLine.exe -print-data " + file
+    cmd = "gtime -f 'Time(s): %e \nMem(Kb): %M' timeout 120 burst/BurstCmdLine.exe -print-data " + file
     proc = subprocess.run(cmd,capture_output=True, text=True, shell=True)
 
     print("prog : "+file)
@@ -26,7 +27,7 @@ elif synth == "burst" :
     print(proc.stderr)
 
 elif synth == "smyth" :
-    cmd = "gtime -f 'Time(s): %e \nMem(Kb): %M' timeout 10m burst/BurstCmdLine.exe -print-data -use-smyth " + file
+    cmd = "gtime -f 'Time(s): %e \nMem(Kb): %M' timeout 120 burst/BurstCmdLine.exe -print-data -use-smyth " + file
     proc = subprocess.run(cmd,capture_output=True, text=True, shell=True)
 
     print("prog : "+file)
