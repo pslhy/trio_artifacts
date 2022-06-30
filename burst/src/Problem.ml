@@ -3,6 +3,8 @@ open Lang
 
 open Typecheck
 
+let init_uioes : (Expr.t list * Expr.t) list ref = ref []
+
 type unprocessed_spec =
   | UIOEs of (Expr.t list * Expr.t) list
   | UPost of Expr.t
@@ -140,7 +142,7 @@ let st_to_pair
         end)
     ([],synth_type)
 
-let process_spec
+let rec process_spec
     (ec:Context.Exprs.t)
     (tc:Context.Types.t)
     (vc:Context.Variants.t)
@@ -187,6 +189,12 @@ let process_spec
       in
       IOEs examples
     | UEquiv e ->
+      let _ = 
+        if not (List.is_empty !init_uioes) then 
+          match process_spec ec tc vc i_e synth_type (UIOEs !init_uioes) with 
+          IOEs examples -> EnumerativeVerifier.T.init_ios := examples
+          | _ -> assert false 
+      in
       let t = Typecheck.typecheck_exp ec tc vc e in
       assert (Typecheck.type_equiv tc t synth_type);
       let runner =

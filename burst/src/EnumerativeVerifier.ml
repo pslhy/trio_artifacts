@@ -2,6 +2,9 @@ open MyStdLib
 open Lang
 
 module T = struct
+  (* let ios_sofar : (Value.t * Value.t) list ref = ref [] 
+  let init_ios : (Value.t * Value.t) list ref = ref []  *)
+  let cexs : Value.t list ref = ref [] 
   let _NUM_CHECKS_ = 4096
   let _MAX_SIZE_ = 32
 
@@ -138,15 +141,75 @@ module T = struct
         _NUM_CHECKS_
     in
     Sequence.find_map
-      ~f:(fun (i,o) ->
-          begin match o with
-            | Some o ->
-              if checker i o then
-                 None
-              else
-                 Some i
-            | None ->
-              Some i
-          end)
-      io_finite
+    ~f:(fun (i,o) ->
+      begin match o with
+        | Some o ->
+          if checker i o then
+            None
+          else
+            Some i
+        | None ->
+          Some i
+      end) 
+    io_finite 
+    (* let beam_size = 2 in 
+    let new_cexs = ref [] in
+    for i = 1 to beam_size do
+      new_cexs := 
+      Sequence.filter_map
+        ~f:(fun (i,o) ->
+            begin match o with
+              | Some o ->
+                if checker i o then
+                  None
+                else
+                  Some i
+              | None ->
+                Some i
+            end) 
+        io_finite 
+        |> (fun seq -> Sequence.take seq beam_size) 
+        |> Sequence.to_list 
+        |> (fun x -> x @ !new_cexs)
+    done;
+    if List.is_empty !new_cexs then None 
+    else 
+      let _ = cexs := !new_cexs in
+      Some (List.hd_exn !new_cexs) *)
+    (* try
+      List.find_exn !cex_opts ~f:(fun i -> 
+        List.for_all !ios_sofar ~f:(fun (i',_) -> 
+            match (Value.node i, Value.node i') with 
+            | Tuple is, Tuple is' -> 
+              if (List.length is) <> (List.length is') then false 
+              else 
+                List.exists2_exn is is' ~f:(fun i i' -> 
+                  match (Value.node i, Value.node i') with 
+                  | Ctor (i, _), Ctor (i', _) -> not (Id.equal i i')
+                  | _ -> false
+                )
+            | Ctor (i, _), Ctor (i', _) -> 
+              not (Id.equal i i')
+            | _ -> false 
+          )
+      ) |> (fun x -> Some x )
+      (* List.find_exn !cex_opts ~f:(fun cex_opt -> 
+        match cex_opt with 
+        | None -> false
+        | Some i -> List.for_all !ios_sofar ~f:(fun (i',_) -> 
+            match (Value.node i, Value.node i') with 
+            | Tuple is, Tuple is' -> 
+              if (List.length is) <> (List.length is') then false 
+              else 
+                List.exists2_exn is is' ~f:(fun i i' -> 
+                  match (Value.node i, Value.node i') with 
+                  | Ctor (i, _), Ctor (i', _) -> not (Id.equal i i')
+                  | _ -> false
+                )
+            | Ctor (i, _), Ctor (i', _) -> 
+              not (Id.equal i i')
+            | _ -> false 
+          )
+      ) *)
+    with _ -> Some (List.hd_exn !cex_opts) *)
 end

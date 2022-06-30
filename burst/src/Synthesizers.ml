@@ -225,6 +225,13 @@ module VerifiedEquiv = struct
           (sacc:S.t)
           (ios:(Value.t * Value.t) list)
         : Expr.t =
+        let ios = 
+          List.fold !EnumerativeVerifier.T.init_ios ~init:ios 
+            ~f:(fun ios (i,o) -> 
+              if List.mem ios (i,o) ~equal:(fun (v11,v12) (v21,v22) -> (Value.equal v11 v12) && (Value.equal v21 v22)) then ios 
+              else (i,o) :: ios
+            )
+        in 
         let (sacc,cand) =
           Consts.time
             Consts.full_synth_times
@@ -235,6 +242,15 @@ module VerifiedEquiv = struct
         begin match cex_o with
           | None -> cand
           | Some cex ->
+            (* let ios' = 
+              List.fold !EnumerativeVerifier.T.cexs ~init:ios 
+                ~f:(fun ios cex -> 
+                  let cex_out = runner cex in
+                  ((cex,cex_out)::ios)
+                )
+            in
+            Consts.loop_count := !Consts.loop_count+1;
+            synth_internal sacc ios' *)
             Consts.log (fun _ -> "CEx Found: " ^ (Value.show cex));
             Consts.loop_count := !Consts.loop_count+1;
             let cex_out = runner cex in

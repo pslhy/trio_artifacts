@@ -92,8 +92,8 @@ imports:
 spec:
     | exs=examples
       {Problem.UIOEs exs}
-    | EQUIV e=exp
-      {Problem.UEquiv e}
+    | exs=examples EQUIV e=exp
+      {Problem.init_uioes := exs; Problem.UEquiv e}
     | e=exp
       {Problem.UPost e}
 
