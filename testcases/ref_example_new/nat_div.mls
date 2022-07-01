@@ -1,7 +1,7 @@
 type nat =
   | O
   | S of nat
-  
+
 type cmp =
   | LT
   | EQ
@@ -33,12 +33,12 @@ let sub =
 
 synth nat -> nat -> nat satisfying
 
-equiv
-
-fix (f : nat -> nat -> nat) =
-    fun (n1 : nat) ->
-      fun (n2 : nat) ->
-        match compare n1 n2 with
-        | LT -> n1
-        | EQ -> O
-        | GT -> (f (sub n1 n2) n2)
+[0,2] -> 0,
+[0,0] -> 0,
+[1,0] -> 0,
+[5,3] -> 1,
+[9,5] -> 1,
+[6,3] -> 2,
+[4,2] -> 2,
+[7,2] -> 3,
+[3,1] -> 3,

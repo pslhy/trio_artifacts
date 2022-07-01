@@ -2,10 +2,9 @@ type nat =
   | O
   | S of nat
 
-type list =
-  | Nil
-  | Cons of nat * list
-
+type bool =
+  | True
+  | False
 type cmp =
   | LT
   | EQ
@@ -24,12 +23,24 @@ let compare =
                 | S x2 -> compare x1 x2)
 ;;
 
-synth nat -> nat -> list satisfying
+synth nat -> nat -> nat satisfying
 
-[0,0] -> Cons(0,Nil),
-[0,1] -> Cons(0,Nil),
-[3,1] -> Cons(3,Cons(2,Cons(1, Nil))),
-[5,2] -> Cons(5,Cons(4,Cons(3,Cons(2, Nil)))),
-[2,2] -> Cons(2,Nil),
-[4,1] -> Cons(4,Cons(3,Cons(2,Cons(1, Nil)))),
-[1,0] -> Cons(1,Cons(0,Nil)),
+[0,0] -> 0,
+[0,1] -> 1,
+[0,2] -> 2,
+[1,0] -> 1,
+[1,1] -> 1,
+[1,2] -> 2,
+[2,0] -> 2,
+[2,1] -> 2,
+[2,2] -> 2
+
+equiv
+
+fix (f : nat * nat -> nat) =
+  fun (n1:nat) ->
+    fun (n2:nat) ->
+      match compare n1 n2 with
+        | LT _ -> n2
+        | EQ _ -> n1
+        | GT _ -> n1

@@ -1,7 +1,7 @@
 type nat =
   | O
   | S of nat
-  
+
 type cmp =
   | LT
   | EQ
@@ -32,6 +32,10 @@ let sub =
 ;;
 
 synth nat -> nat -> nat satisfying
+
+[0,0] -> 0,
+[1,0] -> 1,
+[2,1] -> 0,
 
 equiv
 

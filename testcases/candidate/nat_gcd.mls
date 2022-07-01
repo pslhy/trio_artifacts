@@ -1,7 +1,7 @@
 type nat =
   | O
   | S of nat
-  
+
 type cmp =
   | LT
   | EQ
@@ -37,8 +37,8 @@ equiv
 
 fix (f : nat -> nat -> nat) =
     fun (n1 : nat) ->
-      fun (n2 : nat) ->
-        match compare n1 n2 with
-        | LT -> n1
-        | EQ -> O
-        | GT -> (f (sub n1 n2) n2)
+        fun (n2 : nat) ->
+            match compare n1 n2 with
+            | LT -> f n1 (sub n2 n1)
+            | EQ -> n1
+            | GT -> f (sub n1 n2) n2

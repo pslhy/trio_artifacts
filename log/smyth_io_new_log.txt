@@ -234,27 +234,10 @@ Mem(Kb): 31632
 
 synthesizer :smyth
 prog : testcases/new/tree_notexist.mls
-fun (x:nat * tree) ->
-  (fix (f : ) =
-     fun (x1:) ->
-       fun (x0:) ->
-         match x0 with
-           | Node y1 -> (match y1 . 1 with
-                           | Node y2 -> (match y1 . 2 with
-                                           | Node y3 -> False
-                                           | Leaf y3 -> True)
-                           | Leaf y2 -> (match x1 with
-                                           | S y3 -> True
-                                           | O y3 -> False))
-           | Leaf y1 -> (match compare x1 O y1 with
-                           | LT y2 -> ()
-                           | GT y2 -> True
-                           | EQ y2 -> True))
-    (x . 0) (x . 1)
-Size: 50
-Iter: 0
 
-Time(s): 1.02 
-Mem(Kb): 31148
+Command exited with non-zero status 124
+Time(s): 120.01
+Mem(Kb): 36368
+
 
 

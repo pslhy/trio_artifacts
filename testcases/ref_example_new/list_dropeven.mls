@@ -23,6 +23,12 @@ let is_even =
 
 synth list -> list satisfying
 
+[Nil] -> Nil, 
+[Cons(2,Cons(1,Nil))] -> Cons(1,Nil),
+[Cons(3,Cons(5,Nil))] -> Cons(3,Cons(5,Nil)),
+[Cons(1,Cons(4,Cons(7,Nil)))] -> Cons(1,Cons(7,Nil)),
+[Cons(4,Nil)] -> Nil,
+
 equiv
 
 fix (f : list -> list) =

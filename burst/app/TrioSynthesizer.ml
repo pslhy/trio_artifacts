@@ -227,7 +227,6 @@ module T : Burst.Synthesizers.IOSynth.S = struct
     : Expr.t =
     (* ios preprocess *)
     let trio_ios = List.map ~f:(fun (v1,v2) -> (convert_value_to_trio v1, convert_value_to_trio v2)) ios in
-
     if (List.length ios = 0) then
       term_of_type (context a) (Type.mk_arrow (tin a) (tout a))
     else

@@ -1,0 +1,717 @@
+synthesizer :trio
+prog : testcases/ref_example/bool_always_false.mls
+fix (f : bool -> bool) = fun (x:bool) -> False
+Size: 4
+Iter: 0
+
+Time(s): 0.16 
+Mem(Kb): 14272
+
+
+synthesizer :trio
+prog : testcases/ref_example/bool_always_true.mls
+fix (f : bool -> bool) = fun (x:bool) -> True
+Size: 4
+Iter: 0
+
+Time(s): 0.01 
+Mem(Kb): 14232
+
+
+synthesizer :trio
+prog : testcases/ref_example/bool_band.mls
+fix (f : bool * bool -> bool) =
+  fun (x:bool * bool) -> match x . 0 with
+                           | False _ -> x . 0
+                           | True _ -> x . 1
+Size: 14
+Iter: 0
+
+Time(s): 0.02 
+Mem(Kb): 15924
+
+
+synthesizer :trio
+prog : testcases/ref_example/bool_bor.mls
+fix (f : bool * bool -> bool) =
+  fun (x:bool * bool) -> match x . 0 with
+                           | False _ -> x . 1
+                           | True _ -> x . 0
+Size: 14
+Iter: 0
+
+Time(s): 0.02 
+Mem(Kb): 15900
+
+
+synthesizer :trio
+prog : testcases/ref_example/bool_impl.mls
+fix (f : bool * bool -> bool) =
+  fun (x:bool * bool) -> match x . 0 with
+                           | False _ -> True
+                           | True _ -> x . 1
+Size: 13
+Iter: 0
+
+Time(s): 0.02 
+Mem(Kb): 15888
+
+
+synthesizer :trio
+prog : testcases/ref_example/bool_neg.mls
+fix (f : bool -> bool) =
+  fun (x:bool) -> match x with
+                    | False _ -> True
+                    | True _ -> False
+Size: 8
+Iter: 0
+
+Time(s): 0.02 
+Mem(Kb): 14440
+
+
+synthesizer :trio
+prog : testcases/ref_example/bool_xor.mls
+
+Uncaught exception:
+  
+  (Failure "No solution within depth of 6.")
+
+Raised at file "stdlib.ml", line 29, characters 17-33
+Called from file "trio/bidirectional.ml", line 1300, characters 4-83
+Called from file "trio/bidirectional.ml", line 1324, characters 2-47
+Called from file "app/TrioSynthesizer.ml", line 280, characters 8-41
+Called from file "src/Synthesizers.ml" (inlined), line 238, characters 23-39
+Called from file "src/consts.ml" (inlined), line 26, characters 12-16
+Called from file "src/Synthesizers.ml" (inlined), line 236, characters 10-98
+Called from file "src/Synthesizers.ml" (inlined), line 257, characters 12-52
+Called from file "src/Synthesizers.ml", line 260, characters 6-61
+Called from file "app/BurstCmdLine.ml" (inlined), line 78, characters 2-44
+Called from file "app/BurstCmdLine.ml", line 263, characters 8-251
+Called from file "app/BurstCmdLine.ml", line 363, characters 6-227
+Called from file "app/BurstCmdLine.ml", line 406, characters 8-326
+Called from file "src/command.ml" (inlined), line 1294, characters 18-33
+Called from file "src/command.ml" (inlined), line 2819, characters 6-70
+Called from file "src/command.ml" (inlined), line 2937, characters 8-205
+Called from file "src/exn.ml" (inlined), line 102, characters 6-10
+Called from file "src/exn.ml" (inlined), line 122, characters 33-77
+Called from file "src/command.ml" (inlined), line 29, characters 11-41
+Called from file "src/command.ml" (inlined), line 2931, characters 4-659
+Called from file "app/BurstCmdLine.ml", line 424, characters 2-28
+Re-raised at file "src/exn.ml" (inlined), line 102, characters 6-10
+Called from file "src/exn.ml" (inlined), line 122, characters 33-77
+Called from file "src/command.ml" (inlined), line 29, characters 11-41
+Called from file "src/command.ml" (inlined), line 2931, characters 4-659
+Called from file "app/BurstCmdLine.ml", line 424, characters 2-28
+Command exited with non-zero status 1
+Time(s): 0.02 
+Mem(Kb): 16032
+
+
+synthesizer :trio
+prog : testcases/ref_example/list_append.mls
+fix (f : list * list -> list) =
+  fun (x:list * list) ->
+    match x . 0 with
+      | Nil _ -> x . 1
+      | Cons _ -> Cons (Un_Cons (x . 0) . 0, f (Un_Cons (x . 0) . 1, x . 1))
+Size: 31
+Iter: 1
+
+Time(s): 0.40 
+Mem(Kb): 22020
+
+
+synthesizer :trio
+prog : testcases/ref_example/list_compress.mls
+
+Uncaught exception:
+  
+  (Failure "No solution within depth of 6.")
+
+Raised at file "stdlib.ml", line 29, characters 17-33
+Called from file "trio/bidirectional.ml", line 1300, characters 4-83
+Called from file "trio/bidirectional.ml", line 1324, characters 2-47
+Called from file "app/TrioSynthesizer.ml", line 280, characters 8-41
+Called from file "src/Synthesizers.ml" (inlined), line 238, characters 23-39
+Called from file "src/consts.ml" (inlined), line 26, characters 12-16
+Called from file "src/Synthesizers.ml" (inlined), line 236, characters 10-98
+Called from file "src/Synthesizers.ml", line 260, characters 6-61
+Called from file "app/BurstCmdLine.ml" (inlined), line 78, characters 2-44
+Called from file "app/BurstCmdLine.ml", line 263, characters 8-251
+Called from file "app/BurstCmdLine.ml", line 363, characters 6-227
+Called from file "app/BurstCmdLine.ml", line 406, characters 8-326
+Called from file "src/command.ml" (inlined), line 1294, characters 18-33
+Called from file "src/command.ml" (inlined), line 2819, characters 6-70
+Called from file "src/command.ml" (inlined), line 2937, characters 8-205
+Called from file "src/exn.ml" (inlined), line 102, characters 6-10
+Called from file "src/exn.ml" (inlined), line 122, characters 33-77
+Called from file "src/command.ml" (inlined), line 29, characters 11-41
+Called from file "src/command.ml" (inlined), line 2931, characters 4-659
+Called from file "app/BurstCmdLine.ml", line 424, characters 2-28
+Re-raised at file "src/exn.ml" (inlined), line 102, characters 6-10
+Called from file "src/exn.ml" (inlined), line 122, characters 33-77
+Called from file "src/command.ml" (inlined), line 29, characters 11-41
+Called from file "src/command.ml" (inlined), line 2931, characters 4-659
+Called from file "app/BurstCmdLine.ml", line 424, characters 2-28
+Command exited with non-zero status 1
+Time(s): 0.13 
+Mem(Kb): 26148
+
+
+synthesizer :trio
+prog : testcases/ref_example/list_concat.mls
+fix (f : llist -> list) =
+  fun (x:llist) ->
+    match x with
+      | LNil _ -> Nil
+      | LCons _ -> append (Un_LCons x . 0) (f (Un_LCons x . 1))
+Size: 19
+Iter: 1
+
+Time(s): 1.02 
+Mem(Kb): 19564
+
+
+synthesizer :trio
+prog : testcases/ref_example/list_drop.mls
+fix (f : list * nat -> list) =
+  fun (x:list * nat) ->
+    match x . 0 with
+      | Nil _ -> x . 0
+      | Cons _ -> (match x . 1 with
+                     | O _ -> x . 0
+                     | S _ -> f (Un_Cons (x . 0) . 1, Un_S (x . 1)))
+Size: 31
+Iter: 0
+
+Time(s): 0.33 
+Mem(Kb): 20388
+
+
+synthesizer :trio
+prog : testcases/ref_example/list_even_parity.mls
+
+Uncaught exception:
+  
+  (Failure "No solution within depth of 6.")
+
+Raised at file "stdlib.ml", line 29, characters 17-33
+Called from file "trio/bidirectional.ml", line 1300, characters 4-83
+Called from file "trio/bidirectional.ml", line 1324, characters 2-47
+Called from file "app/TrioSynthesizer.ml", line 280, characters 8-41
+Called from file "src/Synthesizers.ml" (inlined), line 238, characters 23-39
+Called from file "src/consts.ml" (inlined), line 26, characters 12-16
+Called from file "src/Synthesizers.ml" (inlined), line 236, characters 10-98
+Called from file "src/Synthesizers.ml" (inlined), line 257, characters 12-52
+Called from file "src/Synthesizers.ml", line 260, characters 6-61
+Called from file "app/BurstCmdLine.ml" (inlined), line 78, characters 2-44
+Called from file "app/BurstCmdLine.ml", line 263, characters 8-251
+Called from file "app/BurstCmdLine.ml", line 363, characters 6-227
+Called from file "app/BurstCmdLine.ml", line 406, characters 8-326
+Called from file "src/command.ml" (inlined), line 1294, characters 18-33
+Called from file "src/command.ml" (inlined), line 2819, characters 6-70
+Called from file "src/command.ml" (inlined), line 2937, characters 8-205
+Called from file "src/exn.ml" (inlined), line 102, characters 6-10
+Called from file "src/exn.ml" (inlined), line 122, characters 33-77
+Called from file "src/command.ml" (inlined), line 29, characters 11-41
+Called from file "src/command.ml" (inlined), line 2931, characters 4-659
+Called from file "app/BurstCmdLine.ml", line 424, characters 2-28
+Re-raised at file "src/exn.ml" (inlined), line 102, characters 6-10
+Called from file "src/exn.ml" (inlined), line 122, characters 33-77
+Called from file "src/command.ml" (inlined), line 29, characters 11-41
+Called from file "src/command.ml" (inlined), line 2931, characters 4-659
+Called from file "app/BurstCmdLine.ml", line 424, characters 2-28
+Command exited with non-zero status 1
+Time(s): 0.05 
+Mem(Kb): 18172
+
+
+synthesizer :trio
+prog : testcases/ref_example/list_filter.mls
+fix (f : (nat -> bool) * list -> list) =
+  fun (x:(nat -> bool) * list) ->
+    match x . 1 with
+      | Nil _ -> x . 1
+      | Cons _ -> (match x . 0 (Un_Cons (x . 1) . 0) with
+                     | False _ -> f (x . 0, Un_Cons (x . 1) . 1)
+                     | True _ -> Cons (Un_Cons (x . 1) . 0,
+                                        f (x . 0, Un_Cons (x . 1) . 1)))
+Size: 56
+Iter: 5
+
+Time(s): 1.30 
+Mem(Kb): 22024
+
+
+synthesizer :trio
+prog : testcases/ref_example/list_fold.mls
+fix (f : (nat -> nat -> nat) * nat * list -> nat) =
+  fun (x:(nat -> nat -> nat) * nat * list) ->
+    match x . 2 with
+      | Nil _ -> x . 1
+      | Cons _ -> x . 0 (f (x . 0, x . 1, Un_Cons (x . 2) . 1))
+                    (Un_Cons (x . 2) . 0)
+Size: 42
+Iter: 5
+
+Time(s): 4.13 
+Mem(Kb): 36312
+
+
+synthesizer :trio
+prog : testcases/ref_example/list_hd.mls
+fix (f : list -> nat) =
+  fun (x:list) -> match x with
+                    | Nil _ -> 0
+                    | Cons _ -> Un_Cons x . 0
+Size: 10
+Iter: 0
+
+Time(s): 0.17 
+Mem(Kb): 18084
+
+
+synthesizer :trio
+prog : testcases/ref_example/list_inc.mls
+fix (f : list -> list) =
+  fun (x:list) ->
+    match x with
+      | Nil _ -> x
+      | Cons _ -> Cons (S (Un_Cons x . 0), f (Un_Cons x . 1))
+Size: 18
+Iter: 0
+
+Time(s): 0.39 
+Mem(Kb): 18680
+
+
+synthesizer :trio
+prog : testcases/ref_example/list_last.mls
+fix (f : list -> natopt) =
+  fun (x:list) ->
+    match x with
+      | Nil _ -> None
+      | Cons _ -> (match Un_Cons x . 1 with
+                     | Nil _ -> Some (Un_Cons x . 0)
+                     | Cons _ -> f (Un_Cons x . 1))
+Size: 22
+Iter: 0
+
+Time(s): 0.32 
+Mem(Kb): 18492
+
+
+synthesizer :trio
+prog : testcases/ref_example/list_length.mls
+fix (f : list -> nat) =
+  fun (x:list) -> match x with
+                    | Nil _ -> 0
+                    | Cons _ -> S (f (Un_Cons x . 1))
+Size: 13
+Iter: 0
+
+Time(s): 0.31 
+Mem(Kb): 18564
+
+
+synthesizer :trio
+prog : testcases/ref_example/list_map.mls
+fix (f : (nat -> nat) * list -> list) =
+  fun (x:(nat -> nat) * list) ->
+    match x . 1 with
+      | Nil _ -> x . 1
+      | Cons _ -> Cons (x . 0 (Un_Cons (x . 1) . 0),
+                         f (x . 0, Un_Cons (x . 1) . 1))
+Size: 37
+Iter: 0
+
+Time(s): 0.55 
+Mem(Kb): 18780
+
+
+synthesizer :trio
+prog : testcases/ref_example/list_nth.mls
+fix (f : list * nat -> nat) =
+  fun (x:list * nat) ->
+    match x . 0 with
+      | Nil _ -> 0
+      | Cons _ -> (match x . 1 with
+                     | O _ -> Un_Cons (x . 0) . 0
+                     | S _ -> f (Un_Cons (x . 0) . 1, Un_S (x . 1)))
+Size: 33
+Iter: 0
+
+Time(s): 0.33 
+Mem(Kb): 19076
+
+
+synthesizer :trio
+prog : testcases/ref_example/list_pairwise_swap.mls
+
+Uncaught exception:
+  
+  (Failure "No solution within depth of 6.")
+
+Raised at file "stdlib.ml", line 29, characters 17-33
+Called from file "trio/bidirectional.ml", line 1300, characters 4-83
+Called from file "trio/bidirectional.ml", line 1324, characters 2-47
+Called from file "app/TrioSynthesizer.ml", line 280, characters 8-41
+Called from file "src/Synthesizers.ml" (inlined), line 238, characters 23-39
+Called from file "src/consts.ml" (inlined), line 26, characters 12-16
+Called from file "src/Synthesizers.ml", line 236, characters 10-98
+Called from file "app/BurstCmdLine.ml" (inlined), line 78, characters 2-44
+Called from file "app/BurstCmdLine.ml", line 263, characters 8-251
+Called from file "app/BurstCmdLine.ml", line 363, characters 6-227
+Called from file "app/BurstCmdLine.ml", line 406, characters 8-326
+Called from file "src/command.ml" (inlined), line 1294, characters 18-33
+Called from file "src/command.ml" (inlined), line 2819, characters 6-70
+Called from file "src/command.ml" (inlined), line 2937, characters 8-205
+Called from file "src/exn.ml" (inlined), line 102, characters 6-10
+Called from file "src/exn.ml" (inlined), line 122, characters 33-77
+Called from file "src/command.ml" (inlined), line 29, characters 11-41
+Called from file "src/command.ml" (inlined), line 2931, characters 4-659
+Called from file "app/BurstCmdLine.ml", line 424, characters 2-28
+Re-raised at file "src/exn.ml" (inlined), line 102, characters 6-10
+Called from file "src/exn.ml" (inlined), line 122, characters 33-77
+Called from file "src/command.ml" (inlined), line 29, characters 11-41
+Called from file "src/command.ml" (inlined), line 2931, characters 4-659
+Called from file "app/BurstCmdLine.ml", line 424, characters 2-28
+Command exited with non-zero status 1
+Time(s): 15.40 
+Mem(Kb): 29100
+
+
+synthesizer :trio
+prog : testcases/ref_example/list_rev_append.mls
+fix (f : list -> list) =
+  fun (x:list) ->
+    match x with
+      | Nil _ -> x
+      | Cons _ -> append (f (Un_Cons x . 1)) Cons (Un_Cons x . 0, Nil)
+Size: 22
+Iter: 2
+
+Time(s): 1.10 
+Mem(Kb): 19692
+
+
+synthesizer :trio
+prog : testcases/ref_example/list_rev_fold.mls
+fix (f : list -> list) = fun (x:list) -> fold snoc Nil x
+Size: 10
+Iter: 0
+
+Time(s): 0.60 
+Mem(Kb): 18764
+
+
+synthesizer :trio
+prog : testcases/ref_example/list_rev_snoc.mls
+fix (f : list -> list) =
+  fun (x:list) ->
+    match x with
+      | Nil _ -> x
+      | Cons _ -> snoc (f (Un_Cons x . 1)) (Un_Cons x . 0)
+Size: 18
+Iter: 0
+
+Time(s): 0.76 
+Mem(Kb): 19476
+
+
+synthesizer :trio
+prog : testcases/ref_example/list_rev_tailcall.mls
+
+Command exited with non-zero status 124
+Time(s): 120.01 
+Mem(Kb): 61956
+
+
+synthesizer :trio
+prog : testcases/ref_example/list_snoc.mls
+fix (f : list * nat -> list) =
+  fun (x:list * nat) ->
+    match x . 0 with
+      | Nil _ -> Cons (x . 1, x . 0)
+      | Cons _ -> Cons (Un_Cons (x . 0) . 0, f (Un_Cons (x . 0) . 1, x . 1))
+Size: 36
+Iter: 0
+
+Time(s): 0.34 
+Mem(Kb): 18528
+
+
+synthesizer :trio
+prog : testcases/ref_example/list_sort_sorted_insert.mls
+fix (f : list -> list) =
+  fun (x:list) ->
+    match x with
+      | Nil _ -> x
+      | Cons _ -> insert (f (Un_Cons x . 1)) (Un_Cons x . 0)
+Size: 18
+Iter: 0
+
+Time(s): 1.17 
+Mem(Kb): 19732
+
+
+synthesizer :trio
+prog : testcases/ref_example/list_sorted_insert.mls
+fix (f : list * nat -> list) =
+  fun (x:list * nat) ->
+    match x . 0 with
+      | Nil _ -> Cons (x . 1, x . 0)
+      | Cons _ -> (match compare (x . 1) (Un_Cons (x . 0) . 0) with
+                     | EQ _ -> x . 0
+                     | GT _ -> Cons (Un_Cons (x . 0) . 0,
+                                      f (Un_Cons (x . 0) . 1, x . 1))
+                     | LT _ -> Cons (x . 1, x . 0))
+Size: 60
+Iter: 0
+
+Time(s): 0.66 
+Mem(Kb): 22024
+
+
+synthesizer :trio
+prog : testcases/ref_example/list_stutter.mls
+fix (f : list -> list) =
+  fun (x:list) ->
+    match x with
+      | Nil _ -> x
+      | Cons _ -> Cons (Un_Cons x . 0,
+                         Cons (Un_Cons x . 0, f (Un_Cons x . 1)))
+Size: 23
+Iter: 0
+
+Time(s): 0.33 
+Mem(Kb): 18492
+
+
+synthesizer :trio
+prog : testcases/ref_example/list_sum.mls
+fix (f : list -> nat) = fun (x:list) -> fold add 0 x
+Size: 10
+Iter: 0
+
+Time(s): 0.66 
+Mem(Kb): 18688
+
+
+synthesizer :trio
+prog : testcases/ref_example/list_take.mls
+fix (f : nat * list -> list) =
+  fun (x:nat * list) ->
+    match x . 1 with
+      | Nil _ -> x . 1
+      | Cons _ -> (match x . 0 with
+                     | O _ -> Nil
+                     | S _ -> Cons (Un_Cons (x . 1) . 0,
+                                     f (Un_S (x . 0), Un_Cons (x . 1) . 1)))
+Size: 38
+Iter: 0
+
+Time(s): 0.32 
+Mem(Kb): 18040
+
+
+synthesizer :trio
+prog : testcases/ref_example/list_tl.mls
+fix (f : list -> list) =
+  fun (x:list) -> match x with
+                    | Nil _ -> x
+                    | Cons _ -> Un_Cons x . 1
+Size: 9
+Iter: 0
+
+Time(s): 0.16 
+Mem(Kb): 18260
+
+
+synthesizer :trio
+prog : testcases/ref_example/nat_add.mls
+fix (f : nat * nat -> nat) =
+  fun (x:nat * nat) ->
+    match x . 0 with
+      | O _ -> x . 1
+      | S _ -> S (f (Un_S (x . 0), x . 1))
+Size: 22
+Iter: 0
+
+Time(s): 0.13 
+Mem(Kb): 35708
+
+
+synthesizer :trio
+prog : testcases/ref_example/nat_iseven.mls
+fix (f : nat -> bool) =
+  fun (x:nat) ->
+    match x with
+      | O _ -> True
+      | S _ -> (match Un_S x with
+                  | O _ -> False
+                  | S _ -> f Un_S (Un_S x))
+Size: 16
+Iter: 0
+
+Time(s): 0.02 
+Mem(Kb): 15924
+
+
+synthesizer :trio
+prog : testcases/ref_example/nat_max.mls
+fix (f : nat * nat -> nat) =
+  fun (x:nat * nat) ->
+    match compare (x . 0) (x . 1) with
+      | EQ _ -> x . 1
+      | GT _ -> x . 0
+      | LT _ -> x . 1
+Size: 23
+Iter: 0
+
+Time(s): 0.18 
+Mem(Kb): 36176
+
+
+synthesizer :trio
+prog : testcases/ref_example/nat_pred.mls
+fix (f : nat -> nat) = fun (x:nat) -> match x with
+                                        | O _ -> x
+                                        | S _ -> Un_S x
+Size: 7
+Iter: 0
+
+Time(s): 0.02 
+Mem(Kb): 15912
+
+
+synthesizer :trio
+prog : testcases/ref_example/tree_binsert.mls
+
+Command exited with non-zero status 124
+Time(s): 120.02 
+Mem(Kb): 146020
+
+
+synthesizer :trio
+prog : testcases/ref_example/tree_collect_leaves.mls
+fix (f : tree -> list) =
+  fun (x:tree) ->
+    match x with
+      | Leaf _ -> Nil
+      | Node _ -> append (f (Un_Node x . 0))
+                    Cons (Un_Node x . 1, f (Un_Node x . 2))
+Size: 27
+Iter: 0
+
+Time(s): 5.32 
+Mem(Kb): 17964
+
+
+synthesizer :trio
+prog : testcases/ref_example/tree_count_leaves.mls
+fix (f : tree -> nat) =
+  fun (x:tree) ->
+    match x with
+      | Leaf _ -> 1
+      | Node _ -> sum (f (Un_Node x . 0)) (f (Un_Node x . 2))
+Size: 22
+Iter: 0
+
+Time(s): 5.46 
+Mem(Kb): 17956
+
+
+synthesizer :trio
+prog : testcases/ref_example/tree_count_nodes.mls
+fix (f : tree -> nat) =
+  fun (x:tree) ->
+    match x with
+      | Leaf _ -> 0
+      | Node _ -> sum (f (Un_Node x . 0)) S (f (Un_Node x . 2))
+Size: 22
+Iter: 0
+
+Time(s): 7.63 
+Mem(Kb): 30948
+
+
+synthesizer :trio
+prog : testcases/ref_example/tree_inorder.mls
+fix (f : tree -> list) =
+  fun (x:tree) ->
+    match x with
+      | Leaf _ -> Nil
+      | Node _ -> append (f (Un_Node x . 0))
+                    Cons (Un_Node x . 1, f (Un_Node x . 2))
+Size: 27
+Iter: 0
+
+Time(s): 7.83 
+Mem(Kb): 20396
+
+
+synthesizer :trio
+prog : testcases/ref_example/tree_map.mls
+fix (f : (nat -> nat) * tree -> tree) =
+  fun (x:(nat -> nat) * tree) ->
+    match x . 1 with
+      | Leaf _ -> x . 1
+      | Node _ -> Node (f (x . 0, Un_Node (x . 1) . 0),
+                         x . 0 (Un_Node (x . 1) . 1),
+                         f (x . 0, Un_Node (x . 1) . 2))
+Size: 49
+Iter: 0
+
+Time(s): 5.65 
+Mem(Kb): 21116
+
+
+synthesizer :trio
+prog : testcases/ref_example/tree_nodes_at_level.mls
+fix (f : tree * nat -> nat) =
+  fun (x:tree * nat) ->
+    match x . 0 with
+      | Leaf _ -> 0
+      | Node _ -> (match x . 1 with
+                     | O _ -> S (x . 1)
+                     | S _ -> sum (f (Un_Node (x . 0) . 0, Un_S (x . 1)))
+                                (f (Un_Node (x . 0) . 2, Un_S (x . 1))))
+Size: 47
+Iter: 0
+
+Time(s): 4.57 
+Mem(Kb): 25556
+
+
+synthesizer :trio
+prog : testcases/ref_example/tree_postorder.mls
+fix (f : tree -> list) =
+  fun (x:tree) ->
+    match x with
+      | Leaf _ -> Nil
+      | Node _ -> append (append (f (Un_Node x . 0)) (f (Un_Node x . 2)))
+                    Cons (Un_Node x . 1, Nil)
+Size: 32
+Iter: 0
+
+Time(s): 8.43 
+Mem(Kb): 31208
+
+
+synthesizer :trio
+prog : testcases/ref_example/tree_preorder.mls
+fix (f : tree -> list) =
+  fun (x:tree) ->
+    match x with
+      | Leaf _ -> Nil
+      | Node _ -> append Cons (Un_Node x . 1, f (Un_Node x . 0))
+                    (f (Un_Node x . 2))
+Size: 27
+Iter: 0
+
+Time(s): 7.94 
+Mem(Kb): 20376
+
+
