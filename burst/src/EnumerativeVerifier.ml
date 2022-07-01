@@ -2,8 +2,8 @@ open MyStdLib
 open Lang
 
 module T = struct
-  (* let ios_sofar : (Value.t * Value.t) list ref = ref [] 
-  let init_ios : (Value.t * Value.t) list ref = ref []  *)
+  (* let ios_sofar : (Value.t * Value.t) list ref = ref [] *)
+  let init_ios : (Value.t * Value.t) list ref = ref []  
   let cexs : Value.t list ref = ref [] 
   let _NUM_CHECKS_ = 4096
   let _MAX_SIZE_ = 32
