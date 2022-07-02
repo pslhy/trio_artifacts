@@ -50,14 +50,25 @@ let height =
                              | Node w -> S(max (height (y.1)) (height (y.2)))
 ;;
 
+let band =
+ fix (band : bool -> bool -> bool) =
+  fun (x: bool) ->
+   fun (y: bool) ->
+    match x with
+     | False ->
+        x
+     | True ->
+        y
+;;
+
 synth tree -> bool satisfying
 
 [Leaf] -> True,
 [Node (2, Leaf, Leaf)] -> True,
 [Node (0, Node (1, Leaf, Leaf), Leaf)] -> True,
 [Node (0, Node (1, Node (2, Leaf, Leaf), Leaf), Leaf)] -> False,
-[Node (0, Node (1, Node (3, Leaf, Leaf), Node (4, Leaf, Leaf)), Node (2, Leaf, Leaf))] -> True,
-[Node (0, Node (1, Node (3, Leaf, Leaf), Node (4, Leaf, Node (5, Leaf, Leaf))), Node (2, Leaf, Leaf))] ->  False
+[Node (0, Leaf, Node (1, Node (2, Leaf, Leaf), Leaf))] -> False,
+[Node (0, Node (1, Node (1, Leaf, Leaf), Node (0, Leaf, Leaf)), Node (1, Leaf, Leaf))] -> True,
 
 equiv
 
@@ -66,10 +77,10 @@ fix (f : tree -> bool) =
         match x with
         | Leaf _ -> True
         | Node (v,l,r) -> match compare (height l) (height r) with
-                          | EQ _ -> True
+                          | EQ _ -> band (f r) (f l) 
                           | LT _ -> (match compare S((height l)) (height r) with
                                     | LT _ -> False
-                                    | _ -> True)
+                                    | _ -> band (f r) (f l) )
                           | GT _ -> (match compare S((height r)) (height l) with
                                     | LT _ -> False
-                                    | _ -> True)
+                                    | _ -> band (f r) (f l) )
