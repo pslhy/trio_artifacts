@@ -568,7 +568,7 @@ let branching_infos =
 			List.for_all (fun (_, pts) -> not (BatList.is_empty pts)) branches 
 		) branching_infos 
 	in 
-	if BatSet.is_empty branching_infos' then 
+	if BatSet.is_empty branching_infos' && parent_expr = Wildcard then 
 		BatSet.filter (fun (_, branches) -> 
 			List.exists (fun (_, pts) -> not (BatList.is_empty pts)) branches 
 		) branching_infos 
