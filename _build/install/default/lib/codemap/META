@@ -1,0 +1,6 @@
+description = ""
+requires = "unicode"
+archive(byte) = "codemap.cma"
+archive(native) = "codemap.cmxa"
+plugin(byte) = "codemap.cma"
+plugin(native) = "codemap.cmxs"

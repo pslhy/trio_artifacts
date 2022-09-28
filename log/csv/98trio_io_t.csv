@@ -1,0 +1,16 @@
+file,size,iter,time,mem
+testcases/io_new/tree_sum.mls,28,0,1.02,36080
+testcases/io_new/nat_mul.mls,27,0,1.48,39348
+testcases/io_new/tree_height.mls,0,0,120.00,36088
+testcases/io_new/list_dropeven.mls,28,0,0.04,16604
+testcases/io_new/tree_notexist.mls,0,0,120.00,42840
+testcases/io_new/list_last2.mls,40,0,0.04,17524
+testcases/io_new/list_range.mls,60,0,0.31,34068
+testcases/io_new/expr.mls,36,0,10.14,39180
+testcases/io_new/tree_lastleft.mls,21,0,0.28,27740
+testcases/io_new/expr_sub.mls,0,0,120.00,63904
+testcases/io_new/tree_balanced.mls,0,0,120.01,30988
+testcases/io_new/expr_b.mls,0,0,120.01,71140
+testcases/io_new/nat_sub.mls,29,0,0.12,35992
+testcases/io_new/list_make.mls,14,0,0.02,16428
+testcases/io_new/expr_div.mls,0,0,120.01,187516

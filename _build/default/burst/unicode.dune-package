@@ -1,0 +1,32 @@
+(lang dune 2.9)
+(name unicode)
+(library
+ (name unicode)
+ (kind normal)
+ (archives (byte unicode.cma) (native unicode.cmxa))
+ (plugins (byte unicode.cma) (native unicode.cmxs))
+ (native_archives unicode.a)
+ (main_module_name Unicode)
+ (modes byte native)
+ (modules
+  (wrapped
+   (main_module_name Unicode)
+   (modules
+    ((name Encoding)
+     (obj_name unicode__Encoding)
+     (visibility public)
+     (impl)
+     (intf))
+    ((name UChar) (obj_name unicode__UChar) (visibility public) (impl) (intf))
+    ((name UString)
+     (obj_name unicode__UString)
+     (visibility public)
+     (impl)
+     (intf)))
+   (alias_module
+    (name Unicode)
+    (obj_name unicode)
+    (visibility public)
+    (kind alias)
+    (impl))
+   (wrapped true))))

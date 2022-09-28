@@ -1,0 +1,15 @@
+version = "0.6b"
+description = ""
+requires =
+"bin_prot
+ collections
+ myStdLib
+ ppx_compare.runtime-lib
+ ppx_deriving.runtime
+ ppx_hash.runtime-lib
+ ppx_here.runtime-lib
+ ppx_sexp_conv.runtime-lib"
+archive(byte) = "timbuk.cma"
+archive(native) = "timbuk.cmxa"
+plugin(byte) = "timbuk.cma"
+plugin(native) = "timbuk.cmxs"

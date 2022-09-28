@@ -1,0 +1,6 @@
+description = ""
+requires = ""
+archive(byte) = "unicode.cma"
+archive(native) = "unicode.cmxa"
+plugin(byte) = "unicode.cma"
+plugin(native) = "unicode.cmxs"

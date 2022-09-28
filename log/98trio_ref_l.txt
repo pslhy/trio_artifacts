@@ -1,0 +1,212 @@
+testcases/ref_new
+tree_sum.mls
+synthesizer :trio
+prog : testcases/ref_new/tree_sum.mls
+fix (f : tree -> nat) =
+  fun (x:tree) ->
+    match x with
+      | Leaf _ -> 0
+      | Node _ -> add (f (Un_Node x . 1))
+                    (add (f (Un_Node x . 2)) (Un_Node x . 0))
+Size: 28
+Iter: 5
+
+Time(s): 9.33 
+Mem(Kb): 27192
+
+
+nat_mul.mls
+synthesizer :trio
+prog : testcases/ref_new/nat_mul.mls
+fix (f : nat * nat -> nat) =
+  fun (x:nat * nat) ->
+    match x . 0 with
+      | O _ -> x . 0
+      | S _ -> add (f (Un_S (x . 0), x . 1)) (x . 1)
+Size: 27
+Iter: 6
+
+Time(s): 1.00 
+Mem(Kb): 36236
+
+
+tree_height.mls
+synthesizer :trio
+prog : testcases/ref_new/tree_height.mls
+fix (f : tree -> nat) =
+  fun (x:tree) ->
+    match x with
+      | Leaf _ -> 0
+      | Node _ -> max S (f (Un_Node x . 1)) S (f (Un_Node x . 2))
+Size: 23
+Iter: 6
+
+Time(s): 10.89 
+Mem(Kb): 30812
+
+
+list_dropeven.mls
+synthesizer :trio
+prog : testcases/ref_new/list_dropeven.mls
+fix (f : list -> list) =
+  fun (x:list) ->
+    match x with
+      | Nil _ -> x
+      | Cons _ -> (match is_even (Un_Cons x . 0) with
+                     | False _ -> Cons (Un_Cons x . 0, f (Un_Cons x . 1))
+                     | True _ -> Un_Cons x . 1)
+Size: 28
+Iter: 6
+
+Time(s): 0.45 
+Mem(Kb): 18572
+
+
+tree_notexist.mls
+synthesizer :trio
+prog : testcases/ref_new/tree_notexist.mls
+
+Command exited with non-zero status 124
+Time(s): 120.00 
+Mem(Kb): 28996
+
+
+list_last2.mls
+synthesizer :trio
+prog : testcases/ref_new/list_last2.mls
+fix (f : list -> natopt) =
+  fun (x:list) ->
+    match x with
+      | Nil _ -> None
+      | Cons _ -> (match Un_Cons x . 1 with
+                     | Nil _ -> None
+                     | Cons _ -> (match Un_Cons (Un_Cons x . 1) . 1 with
+                                    | Nil _ -> Some (Un_Cons x . 0,
+                                                      Un_Cons (Un_Cons x . 1)
+                                                        . 0)
+                                    | Cons _ -> f (Un_Cons x . 1)))
+Size: 40
+Iter: 7
+
+Time(s): 0.65 
+Mem(Kb): 18956
+
+
+list_range.mls
+synthesizer :trio
+prog : testcases/ref_new/list_range.mls
+fix (f : nat * nat -> list) =
+  fun (x:nat * nat) ->
+    match x . 0 with
+      | O _ -> Cons (x . 0, Nil)
+      | S _ -> (match compare (x . 0) (x . 1) with
+                  | EQ _ -> Cons (x . 0, Nil)
+                  | GT _ -> Cons (x . 0, f (Un_S (x . 0), x . 1))
+                  | LT _ -> Nil)
+Size: 49
+Iter: 7
+
+Time(s): 0.95 
+Mem(Kb): 29652
+
+
+expr.mls
+synthesizer :trio
+prog : testcases/ref_new/expr.mls
+fix (f : exp -> nat) =
+  fun (x:exp) ->
+    match x with
+      | INT _ -> Un_INT x
+      | ADD _ -> add (f (Un_ADD x . 0)) (f (Un_ADD x . 1))
+      | MUL _ -> mul (f (Un_MUL x . 0)) (f (Un_MUL x . 1))
+Size: 36
+Iter: 9
+
+Time(s): 13.51 
+Mem(Kb): 41496
+
+
+tree_lastleft.mls
+synthesizer :trio
+prog : testcases/ref_new/tree_lastleft.mls
+fix (f : tree -> nat) =
+  fun (x:tree) ->
+    match x with
+      | Leaf _ -> 0
+      | Node _ -> (match Un_Node x . 1 with
+                     | Leaf _ -> Un_Node x . 0
+                     | Node _ -> f (Un_Node x . 1))
+Size: 21
+Iter: 6
+
+Time(s): 9.40 
+Mem(Kb): 24224
+
+
+expr_sub.mls
+synthesizer :trio
+prog : testcases/ref_new/expr_sub.mls
+
+Command exited with non-zero status 124
+Time(s): 120.00 
+Mem(Kb): 57672
+
+
+tree_balanced.mls
+synthesizer :trio
+prog : testcases/ref_new/tree_balanced.mls
+
+Command exited with non-zero status 124
+Time(s): 120.00 
+Mem(Kb): 36088
+
+
+expr_b.mls
+synthesizer :trio
+prog : testcases/ref_new/expr_b.mls
+
+Command exited with non-zero status 124
+Time(s): 120.00 
+Mem(Kb): 52104
+
+
+nat_sub.mls
+synthesizer :trio
+prog : testcases/ref_new/nat_sub.mls
+fix (f : nat * nat -> nat) =
+  fun (x:nat * nat) ->
+    match x . 0 with
+      | O _ -> x . 0
+      | S _ -> (match x . 1 with
+                  | O _ -> x . 0
+                  | S _ -> f (Un_S (x . 0), Un_S (x . 1)))
+Size: 29
+Iter: 6
+
+Time(s): 0.27 
+Mem(Kb): 35248
+
+
+list_make.mls
+synthesizer :trio
+prog : testcases/ref_new/list_make.mls
+fix (f : nat -> list) =
+  fun (x:nat) -> match x with
+                   | O _ -> Nil
+                   | S _ -> Cons (0, f Un_S x)
+Size: 14
+Iter: 3
+
+Time(s): 0.03 
+Mem(Kb): 16364
+
+
+expr_div.mls
+synthesizer :trio
+prog : testcases/ref_new/expr_div.mls
+
+Command exited with non-zero status 124
+Time(s): 120.01 
+Mem(Kb): 109316
+
+

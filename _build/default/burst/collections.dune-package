@@ -1,0 +1,68 @@
+(lang dune 2.9)
+(name collections)
+(library
+ (name collections)
+ (kind normal)
+ (archives (byte collections.cma) (native collections.cmxa))
+ (plugins (byte collections.cma) (native collections.cmxs))
+ (native_archives collections.a)
+ (requires
+  myStdLib
+  ppx_sexp_conv.runtime-lib
+  ppx_compare.runtime-lib
+  ppx_hash.runtime-lib
+  ppx_deriving.runtime
+  ppx_here.runtime-lib
+  bin_prot)
+ (main_module_name Collections)
+ (modes byte native)
+ (modules
+  (wrapped
+   (main_module_name Collections)
+   (modules
+    ((name Collections) (obj_name collections) (visibility public) (impl))
+    ((name DynArray)
+     (obj_name collections__DynArray)
+     (visibility public)
+     (impl)
+     (intf))
+    ((name Graph)
+     (obj_name collections__Graph)
+     (visibility public)
+     (impl)
+     (intf))
+    ((name HashSet)
+     (obj_name collections__HashSet)
+     (visibility public)
+     (impl)
+     (intf))
+    ((name HashTable)
+     (obj_name collections__HashTable)
+     (visibility public)
+     (impl)
+     (intf))
+    ((name List)
+     (obj_name collections__List)
+     (visibility public)
+     (impl)
+     (intf))
+    ((name Map) (obj_name collections__Map) (visibility public) (impl) (intf))
+    ((name PriorityQueue)
+     (obj_name collections__PriorityQueue)
+     (visibility public)
+     (impl)
+     (intf))
+    ((name Set) (obj_name collections__Set) (visibility public) (impl) (intf))
+    ((name UnionFind)
+     (obj_name collections__UnionFind)
+     (visibility public)
+     (impl)
+     (intf))
+    ((name Vec) (obj_name collections__Vec) (visibility public) (impl) (intf)))
+   (alias_module
+    (name Collections__)
+    (obj_name collections__)
+    (visibility public)
+    (kind alias)
+    (impl))
+   (wrapped true))))

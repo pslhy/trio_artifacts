@@ -1,0 +1,199 @@
+testcases/io_new
+tree_sum.mls
+synthesizer :trio
+prog : testcases/io_new/tree_sum.mls
+fix (f : tree -> nat) =
+  fun (x:tree) ->
+    match x with
+      | Leaf _ -> 0
+      | Node _ -> add (f (Un_Node x . 1))
+                    (add (f (Un_Node x . 2)) (Un_Node x . 0))
+Size: 28
+Iter: 0
+
+Time(s): 1.15 
+Mem(Kb): 36088
+
+
+nat_mul.mls
+synthesizer :trio
+prog : testcases/io_new/nat_mul.mls
+fix (f : nat * nat -> nat) =
+  fun (x:nat * nat) ->
+    match x . 1 with
+      | O _ -> x . 1
+      | S _ -> add (f (Un_S (x . 1), x . 0)) (x . 0)
+Size: 27
+Iter: 0
+
+Time(s): 4.33 
+Mem(Kb): 39596
+
+
+tree_height.mls
+synthesizer :trio
+prog : testcases/io_new/tree_height.mls
+
+Command exited with non-zero status 124
+Time(s): 120.00 
+Mem(Kb): 36072
+
+
+list_dropeven.mls
+synthesizer :trio
+prog : testcases/io_new/list_dropeven.mls
+fix (f : list -> list) =
+  fun (x:list) ->
+    match x with
+      | Nil _ -> x
+      | Cons _ -> (match is_even (Un_Cons x . 0) with
+                     | False _ -> Cons (Un_Cons x . 0, f (Un_Cons x . 1))
+                     | True _ -> Un_Cons x . 1)
+Size: 28
+Iter: 0
+
+Time(s): 0.03 
+Mem(Kb): 16616
+
+
+tree_notexist.mls
+synthesizer :trio
+prog : testcases/io_new/tree_notexist.mls
+
+Command exited with non-zero status 124
+Time(s): 120.00 
+Mem(Kb): 39208
+
+
+list_last2.mls
+synthesizer :trio
+prog : testcases/io_new/list_last2.mls
+fix (f : list -> natopt) =
+  fun (x:list) ->
+    match x with
+      | Nil _ -> None
+      | Cons _ -> (match Un_Cons x . 1 with
+                     | Nil _ -> None
+                     | Cons _ -> (match Un_Cons (Un_Cons x . 1) . 1 with
+                                    | Nil _ -> Some (Un_Cons x . 0,
+                                                      Un_Cons (Un_Cons x . 1)
+                                                        . 0)
+                                    | Cons _ -> f (Un_Cons x . 1)))
+Size: 40
+Iter: 0
+
+Time(s): 0.04 
+Mem(Kb): 17528
+
+
+list_range.mls
+synthesizer :trio
+prog : testcases/io_new/list_range.mls
+fix (f : nat * nat -> list) =
+  fun (x:nat * nat) ->
+    match x . 0 with
+      | O _ -> Cons (x . 0, Nil)
+      | S _ -> (match compare (x . 1) Un_S (x . 0) with
+                  | EQ _ -> Cons (x . 0, Cons (x . 1, Nil))
+                  | GT _ -> Cons (x . 0, Nil)
+                  | LT _ -> Cons (x . 0, f (Un_S (x . 0), x . 1)))
+Size: 60
+Iter: 0
+
+Time(s): 0.34 
+Mem(Kb): 34040
+
+
+expr.mls
+synthesizer :trio
+prog : testcases/io_new/expr.mls
+
+Command exited with non-zero status 124
+Time(s): 120.00 
+Mem(Kb): 64376
+
+
+tree_lastleft.mls
+synthesizer :trio
+prog : testcases/io_new/tree_lastleft.mls
+fix (f : tree -> nat) =
+  fun (x:tree) ->
+    match x with
+      | Leaf _ -> 0
+      | Node _ -> (match Un_Node x . 1 with
+                     | Leaf _ -> Un_Node x . 0
+                     | Node _ -> f (Un_Node x . 1))
+Size: 21
+Iter: 0
+
+Time(s): 0.28 
+Mem(Kb): 27728
+
+
+expr_sub.mls
+synthesizer :trio
+prog : testcases/io_new/expr_sub.mls
+
+Command exited with non-zero status 124
+Time(s): 120.01 
+Mem(Kb): 101992
+
+
+tree_balanced.mls
+synthesizer :trio
+prog : testcases/io_new/tree_balanced.mls
+
+Command exited with non-zero status 124
+Time(s): 120.00 
+Mem(Kb): 30948
+
+
+expr_b.mls
+synthesizer :trio
+prog : testcases/io_new/expr_b.mls
+
+Command exited with non-zero status 124
+Time(s): 120.01 
+Mem(Kb): 113376
+
+
+nat_sub.mls
+synthesizer :trio
+prog : testcases/io_new/nat_sub.mls
+fix (f : nat * nat -> nat) =
+  fun (x:nat * nat) ->
+    match x . 0 with
+      | O _ -> x . 0
+      | S _ -> (match x . 1 with
+                  | O _ -> x . 0
+                  | S _ -> f (Un_S (x . 0), Un_S (x . 1)))
+Size: 29
+Iter: 0
+
+Time(s): 0.12 
+Mem(Kb): 35992
+
+
+list_make.mls
+synthesizer :trio
+prog : testcases/io_new/list_make.mls
+fix (f : nat -> list) =
+  fun (x:nat) -> match x with
+                   | O _ -> Nil
+                   | S _ -> Cons (0, f Un_S x)
+Size: 14
+Iter: 0
+
+Time(s): 0.02 
+Mem(Kb): 16412
+
+
+expr_div.mls
+synthesizer :trio
+prog : testcases/io_new/expr_div.mls
+
+Command exited with non-zero status 124
+Time(s): 120.22 
+Mem(Kb): 129808
+
+

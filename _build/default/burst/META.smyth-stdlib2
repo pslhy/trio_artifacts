@@ -1,0 +1,7 @@
+version = "~dev"
+description = ""
+requires = ""
+archive(byte) = "stdlib2.cma"
+archive(native) = "stdlib2.cmxa"
+plugin(byte) = "stdlib2.cma"
+plugin(native) = "stdlib2.cmxs"

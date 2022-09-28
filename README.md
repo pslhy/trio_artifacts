@@ -1,4 +1,4 @@
-# Artifacts for "Inductive Synthesis of Structurally Recursive Functional Programs from Non-Recursive Expressions
+# Artifacts for "Inductive Synthesis of Structurally Recursive Functional Programs from Non-Recursive Expressions"
 
 ##Build
 ```
