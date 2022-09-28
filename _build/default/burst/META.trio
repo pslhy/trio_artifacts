@@ -1,6 +1,0 @@
-description = ""
-requires = "batteries ppx_compare.runtime-lib ppx_deriving.runtime"
-archive(byte) = "trio.cma"
-archive(native) = "trio.cmxa"
-plugin(byte) = "trio.cma"
-plugin(native) = "trio.cmxs"

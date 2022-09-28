@@ -1,7 +1,0 @@
-version = "0.6b"
-description = ""
-requires = "codemap collections timbuk unicode"
-archive(byte) = "timbukSpec.cma"
-archive(native) = "timbukSpec.cmxa"
-plugin(byte) = "timbukSpec.cma"
-plugin(native) = "timbukSpec.cmxs"

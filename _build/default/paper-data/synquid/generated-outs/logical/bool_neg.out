@@ -1,5 +1,0 @@
-bool_neg :: p:Boolean -> {Boolean|_v != p}
-bool_neg = \p . 
-  match p with
-    T -> F
-    F -> T
