@@ -1,6 +1,6 @@
 # Artifacts for "Inductive Synthesis of Structurally Recursive Functional Programs from Non-Recursive Expressions"
 
-##Build
+## Build
 ```
 $ git clone https://github.com/pslhy/trio_artifacts.git
 $ cd trio_artifacts

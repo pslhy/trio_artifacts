@@ -350,6 +350,7 @@ let handle_inputs
     ~(print_data:bool)
     ~(tc_synth:bool)
     ~(use_random:bool)
+    ~(trio_options:string option)
   : unit =
   Consts.use_random := use_random;
   begin match (check_equiv1,check_equiv2) with
@@ -360,18 +361,38 @@ let handle_inputs
         ~ce2
     | (Some _, None) | (None, Some _) -> failwith "need both check equivs given"
     | _ ->
-      synthesize_solution
-        ~fname
-        ~use_myth
-        ~use_smyth
-        ~use_trio
-        ~use_simple
-        ~use_l2
-        ~log
-        ~no_experiments
-        ~print_times
-        ~print_data
-        ~tc_synth
+      match trio_options with
+      | Some s ->
+      (* set option of Trio *)
+        let trio_argv = ["trio_argv"] @ BatString.nsplit s " " in
+        let trio_argv = Array.of_list trio_argv in
+        let usage = Printf.sprintf "Usage: follow Trio options" in
+        let _ = Arg.parse_argv trio_argv Trio.Options.options (fun x -> ()) usage in
+        synthesize_solution
+          ~fname
+          ~use_myth
+          ~use_smyth
+          ~use_trio
+          ~use_simple
+          ~use_l2
+          ~log
+          ~no_experiments
+          ~print_times
+          ~print_data
+          ~tc_synth
+      | None -> 
+        synthesize_solution
+          ~fname
+          ~use_myth
+          ~use_smyth
+          ~use_trio
+          ~use_simple
+          ~use_l2
+          ~log
+          ~no_experiments
+          ~print_times
+          ~print_data
+          ~tc_synth
   end
 
 open MyStdLib.Command.Let_syntax
@@ -392,6 +413,7 @@ let param =
       and check_equiv2   = flag "check-equiv2" (optional string) ~doc:"check equivalence of two synthesized solutions"
       and tc_synth   = flag "tc-synth" no_arg ~doc:"use the FTA synthesizer with trace complete examples"
       and use_random   = flag "use-random" no_arg ~doc:"print timbuk to vata mapping"
+      and trio_options = flag "trio-options" (optional string) ~doc:"trio_options set \"options\" for trio"
       (*and no_grammar_output   = flag "no-grammar-output" no_arg ~doc:"do not output the discovered grammar"
         and log_progress   = flag "log-progress" no_arg ~doc:"output the progress log"
         and print_runtime_specs  = flag "print-runtime-specs" no_arg ~doc:"output the runtime specs"
@@ -418,6 +440,7 @@ let param =
           ~check_equiv1
           ~check_equiv2
           ~use_random
+          ~trio_options
     ]
 
 let () =

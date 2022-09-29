@@ -2,11 +2,13 @@
 
 all:
 	make -C burst
+	#make -C synquid
+	#make -C leon
 
 clean:
 	make -C burst clean
-	make -C synquid clean
-	make -C leon clean
+	#make -C synquid clean
+	#make -C leon clean
 
 clean-data:
 	make -C burst clean-data
