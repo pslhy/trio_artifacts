@@ -1,8 +1,0 @@
-data Boolean where
-  T :: Boolean
-  F :: Boolean
-
-bool_band :: p:Boolean -> q:Boolean -> { Boolean |
-  (_v == T)
-}
-bool_band = ??

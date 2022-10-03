@@ -1,2 +1,0 @@
-bool_band :: p:Boolean -> q:Boolean -> {Boolean|_v == (T)}
-bool_band = \p . \q . T

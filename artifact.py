@@ -95,7 +95,7 @@ def make_csv(benchmark="io"):
     for filename in lists:
         # del .mls
         fname = filename.strip()
-        file = fname[:-4]
+        csv_string += fname[:-4] + ","
         for solver in solvers:
             solfilename = prefix + "/" + fname + "." + solver + ".sol"
             csvfilename = prefix + "/" + fname + "." + solver + ".csv"
@@ -104,7 +104,7 @@ def make_csv(benchmark="io"):
             try:
                 with open(csvfilename, 'r') as csvfile:
                     szie_data, iter_data, time_data, mem_data = csvfile.read().split(",")
-                    csv_string += (file + "," + time_data + "," + szie_data + ",")
+                    csv_string += (time_data + "," + szie_data + ",")
                     if (benchmark == "io"):
                         correctfile = path + "result/correct/" + fname + ".out"
                         correctdata = check_equal(correctfile, solfilename, path + "benchmarks/" + benchmark + "/" + fname)
@@ -150,6 +150,7 @@ def main():
     # file ="list_fold.mls"
     # check_equal(path + "/result/correct/"+file+".out",path + "/result/io_result/"+file+".smyth.sol", path + "/benchmarks/io/"+file+"")
     # exit()
+    make_csv("io")
     make_csv("ref")
     exit()
     args = parse_args()

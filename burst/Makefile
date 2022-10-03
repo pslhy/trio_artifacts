@@ -44,11 +44,3 @@ endif
 documentation:
 	jbuilder build @docs
 
-generate-data: all
-	$(GENERATE_DATA) ./BurstCmdLine.exe benchmarks/ref benchmarks/logical benchmarks/io
-
-generate-outs: all
-	$(CREATE_DEFAULT_ANSWERS) ./BurstCmdLine.exe benchmarks/logical benchmarks/io
-
-kick-the-tires: all
-	./BurstCmdLine.exe benchmarks/logical/list_append.mls
