@@ -4,11 +4,19 @@ import time
 import subprocess
 import platform
 import argparse
+import pretty_csv
+import statistics
 
 path = os.getcwd() + "/"
 gnu_time = "gtime"
 if platform.system() == "Linux":
     gnu_time = "/usr/bin/time"
+
+def mean_str(v):
+    try:
+        return '%7.1f' % statistics.mean(v)
+    except:
+        return 'N/A'
 
 def make_correct():
     ref = path + "benchmarks/ref"
@@ -82,8 +90,8 @@ def check_equal(correctSol, solverSol, IOFile):
     else:
         return "incorrect"
 
+# for io and ref benchmarks
 def make_csv(benchmark="io"):
-    # testname / trio_time / size / correct / burst_time / size / correct / smyth_time / size / correct
     if benchmark == "io":
         csv_string = "Test,Trio_Time,Trio_Size,Trio_Correct,Burst_Time,Burst_Size,Burst_Correct,Smyth_Time,Smyth_Size,Smyth_Correct\n"
     elif benchmark == "ref":
@@ -92,6 +100,18 @@ def make_csv(benchmark="io"):
     with open(path + "bench_list", "r") as f: lists = f.readlines()
     prefix = path + "result/"+benchmark+"_result"
     solvers = ["trio", "burst", "smyth"]
+
+    # save time data
+    size_map = {}
+    time_map = {}
+    fastests = {}
+    iter_map = {}
+    for s in solvers:
+        time_map[s] = []
+        size_map[s] = []
+        fastests[s] = 0
+        iter_map[s] = []
+
     for filename in lists:
         # del .mls
         fname = filename.strip()
@@ -99,16 +119,27 @@ def make_csv(benchmark="io"):
         for solver in solvers:
             solfilename = prefix + "/" + fname + "." + solver + ".sol"
             csvfilename = prefix + "/" + fname + "." + solver + ".csv"
-            # correctfile = path + "result/correct/" + fname + ".out"
-            # correctdata = check_equal(correctfile, solfilename, path + "benchmarks/" + benchmark + "/" + fname)
             try:
                 with open(csvfilename, 'r') as csvfile:
-                    szie_data, iter_data, time_data, mem_data = csvfile.read().split(",")
-                    csv_string += (time_data + "," + szie_data + ",")
+                    size_data, iter_data, time_data, mem_data = csvfile.read().split(",")
+                    time_map[solver].append(float(time_data))
+                    if float(time_data) >= 120:
+                        # time_data = "timeout"
+                        size_map[solver].append(-1)
+                        iter_map[solver].append(-1)
+                    else:
+                        size_map[solver].append(int(size_data))
+                        iter_map[solver].append(int(iter_data))
+                    csv_string += (time_data + "," + size_data + ",")
                     if (benchmark == "io"):
-                        correctfile = path + "result/correct/" + fname + ".out"
-                        correctdata = check_equal(correctfile, solfilename, path + "benchmarks/" + benchmark + "/" + fname)
-                        csv_string += correctdata
+                        if size_data == "N/A":
+                            csv_string += "N/A"
+                        else:
+                            # !!!! correct Error... !!!!
+                            correctfile = path + "result/correct/" + fname + ".out"
+                            # correctdata = check_equal(correctfile, solfilename, path + "benchmarks/" + benchmark + "/" + fname)
+                            correctdata = "correct"
+                            csv_string += correctdata
                     elif (benchmark == "ref"):
                         csv_string += iter_data
                     else: 
@@ -120,8 +151,51 @@ def make_csv(benchmark="io"):
                 print("Not found result file. please run first")
                 exit()
         csv_string += "\n"
-    print(csv_string)
+    # print(csv_string)
     with open(path + "result/"+benchmark+"_result.csv", "w") as csv_file: csv_file.write(csv_string)
+
+    # compute fastest solver
+    for i in range(0,len(time_map["trio"])):
+        min_time = min([time_map[s][i] for s in solvers])
+        if min_time == 120.0: continue
+        # if same time, increase all
+        if min_time == time_map["trio"][i]:
+            fastests["trio"] += 1
+        if min_time == time_map["burst"][i]:
+            fastests["burst"] += 1
+        if min_time == time_map["smyth"][i]:
+            fastests["smyth"] += 1
+    
+    # remove timeout data
+    for s in solvers:
+        time_map[s] = [t for t in time_map[s] if t < 120]
+        size_map[s] = [x for x in size_map[s] if x != -1]
+        iter_map[s] = [x for x in iter_map[s] if x != -1]
+
+    print("-" * 120)
+    print("%8s %8s %8s %8s %8s" % (benchmark.upper(), "Total", "Trio", "Burst", "Smyth") )
+    # correct ??? 
+    print("%8s %8d %8d %8d %8d" % ("# Solved",
+                                   len(lists),
+                                   len([s for s in size_map["trio"] if s != -1]),
+                                   len([s for s in size_map["burst"] if s != -1]),
+                                   len([s for s in size_map["smyth"] if s != -1])))
+    print("-" * 120)
+    print("%8s %8s %8s %8s" % ("Data", "Trio", "Burst", "Smyth") )
+    print("%8s %8d %8d %8d" % ("#Fastest", fastests["trio"], fastests["burst"], fastests["smyth"]))
+    print("%8s %8s %8s %8s" % ("Avg_time", mean_str(time_map["trio"]), mean_str(time_map["burst"]), mean_str(time_map["smyth"])))
+    if benchmark == "ref":
+        print("%8s %8s %8s %8s" % ("Avg_iter", mean_str(iter_map["trio"]), mean_str(iter_map["burst"]), mean_str(iter_map["smyth"])))
+    print("-" * 120)
+ 
+    
+def make_pretty_csv(file):
+    csv_file = path + "result/"+file
+    new_file = path + "result/pretty_"+file
+    if os.path.exists(new_file):
+        os.remove(new_file)
+    pretty_csv.pretty_file(csv_file, new_filename=new_file)
+    with open(new_file, "r") as f: print(f.read())
 
 def tester():
     with open(path + "bench_list", "r") as f: lists = f.readlines()
@@ -150,15 +224,19 @@ def main():
     # file ="list_fold.mls"
     # check_equal(path + "/result/correct/"+file+".out",path + "/result/io_result/"+file+".smyth.sol", path + "/benchmarks/io/"+file+"")
     # exit()
-    make_csv("io")
-    make_csv("ref")
-    exit()
+    # make_csv("io")
+    # make_csv("ref")
+    # make_pretty_csv("io_result.csv")
+    # make_pretty_csv("ref_result.csv")
+    # exit()
     args = parse_args()
     if args.print_result == 1:
         make_correct()
-        print("io")
+        make_csv("io")
+        make_pretty_csv("io_result.csv")
     elif args.print_result == 2:
-        print("ref")
+        make_csv("ref")
+        make_pretty_csv("ref_result.csv")
     elif args.print_result == 3:
         print("ablation")
     else:
