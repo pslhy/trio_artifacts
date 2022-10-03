@@ -1,4 +1,0 @@
-fix (f : bool -> bool) =
-  fun (x:bool) -> match x with
-                    | False -> True
-                    | True -> False

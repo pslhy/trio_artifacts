@@ -1,9 +1,0 @@
-fix (f : list -> bool) =
-  fun (x:list) ->
-    match x with
-      | Nil -> True
-      | Cons (h,t) -> (match h with
-                      | False -> f t
-                      | True -> (match f t with
-                                | False -> True
-                                | True -> False ))

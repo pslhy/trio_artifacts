@@ -1,7 +1,0 @@
-fix (f : nat * nat -> nat) =
-  fun (n1:nat) ->
-    fun (n2:nat) ->
-      match compare n1 n2 with
-        | LT _ -> n2
-        | EQ _ -> n1
-        | GT _ -> n1

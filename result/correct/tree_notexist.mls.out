@@ -1,9 +1,0 @@
-fix (f : nat -> tree -> bool) =
-  fun (x:nat) -> 
-   fun (t:tree) ->
-    match t with
-      | Leaf _ -> True
-      | Node (v,l,r) -> (match compare x v with
-                        | EQ _ -> False
-                        | LT _ -> band (f x l) (f x r)
-                        | GT _ -> band (f x l) (f x r))

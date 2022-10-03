@@ -1,6 +1,0 @@
-fix (f : list -> natopt) =
-  fun (x:list) ->
-    match x with
-      | Nil -> None
-      | Cons (h,Nil) -> Some h
-      | Cons (h,t) -> f t

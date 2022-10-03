@@ -1,5 +1,0 @@
-fix (f : llist -> list) =
-  fun (x:llist) ->
-    match x with
-      | LNil -> Nil
-      | LCons (hl,tll) -> append hl (f tll)

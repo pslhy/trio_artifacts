@@ -1,7 +1,0 @@
-fix (f : tree -> nat) =
-  fun (x:tree) ->
-    match x with
-      | Leaf _ -> 0
-      | Node y -> (match y.1 with
-                     | Leaf _ -> y.0
-                     | Node _ -> f y.1)

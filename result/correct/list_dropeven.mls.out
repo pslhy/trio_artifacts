@@ -1,7 +1,0 @@
-fix (f : list -> list) =
-  fun (x:list) ->
-    match x with
-    | Nil -> Nil
-    | Cons (h,tl) -> match is_even h with
-                     | True -> tl
-                     | False -> Cons(h, f tl)

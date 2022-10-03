@@ -1,6 +1,0 @@
-fix (f : list -> nat -> list) =
-  fun (l:list) ->
-    fun (e:nat) ->
-      match l with
-        | Nil -> Cons (e, Nil)
-        | Cons (h,t) -> Cons (h, f t e)

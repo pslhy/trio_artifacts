@@ -1,6 +1,0 @@
-fix (f : exp -> nat) =
-  fun (x:exp) ->
-    match x with
-      | INT n -> n
-      | ADD (e1,e2) -> add (f e1) (f e2)
-      | MUL (e1,e2) -> mul (f e1) (f e2)

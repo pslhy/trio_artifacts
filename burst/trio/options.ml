@@ -10,8 +10,8 @@ let print_traces = ref false
 let always_recursive = ref false 
 let concolic_eval_threshold = ref 100
 let max_match_depth = ref 3 
-let no_filter = ref true
-let no_invmap = ref true
+let no_filter = ref false
+let no_invmap = ref false
 let options = 
 	[
 	 ("-print_traces", Arg.Set print_traces, "Print all trace expressions");	
