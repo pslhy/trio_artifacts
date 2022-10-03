@@ -1,0 +1,1 @@
+fix (f : bool -> bool) = fun (x:bool) -> True

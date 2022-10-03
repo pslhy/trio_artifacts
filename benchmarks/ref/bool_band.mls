@@ -1,4 +1,6 @@
-include "bool.decls"
+type bool =
+  | False
+  | True
 
 synth bool -> bool -> bool satisfying
 

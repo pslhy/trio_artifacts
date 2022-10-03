@@ -1,0 +1,9 @@
+fix (f : tree -> nat -> tree) =
+  fun (t:tree) ->
+    fun (n:nat) ->
+      match t with
+        | Leaf -> Node (Leaf, n, Leaf)
+        | Node (l,x,r) -> (match comp_nat x n with
+                       | CEq -> t
+                       | CLt -> Node (f l n, x, r)
+                       | CGt -> Node (l, x, f r n))

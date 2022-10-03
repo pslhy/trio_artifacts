@@ -1,0 +1,5 @@
+fix (f : bool -> bool -> bool) =
+  fun (b1:bool) ->
+    fun (b2:bool) -> match b1 with
+                           | False _ -> True
+                           | True _ -> b2

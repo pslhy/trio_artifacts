@@ -1,0 +1,6 @@
+fix (map : (nat -> nat) -> list -> list) =
+  fun (f:(nat -> nat)) ->
+    fun (l:list) ->
+      match l with
+        | Nil -> Nil
+        | Cons (h,t) -> Cons (f h, map f t)
