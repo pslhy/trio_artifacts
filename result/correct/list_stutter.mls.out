@@ -1,0 +1,5 @@
+fix (f : list -> list) =
+  fun (x:list) ->
+    match x with
+      | Nil -> x
+      | Cons (h,t) -> Cons (h, Cons (h, f t))

@@ -1,0 +1,8 @@
+fix (f : formula -> bool) =
+  fun (x:formula) ->
+    match x with
+      | BOOL b -> b
+      | NOT e -> bnot (f e)
+      | ANDALSO (e1,e2) -> band (f e1) (f e2)
+      | IMPLY (e1,e2) -> bor (bnot (f e1)) (f e2)
+      | ORELSE (e1,e2) -> bor (f e1) (f e2)

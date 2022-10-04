@@ -1,0 +1,66 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{listings} 
+\usepackage{hyperref}
+\usepackage{lmodern}
+\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
+\usepackage[T1]{fontenc}
+\title{POPL 2023 Artifact Evaluation\\ Inductive Synthesis of Structurally Recursive Functional Programs from Non-Recursive Expressions}
+\date{}
+\begin{document}
+\setlength\parindent{0pt}
+\maketitle
+\section{Introduction}
+This document describes the artifact evaluation of the paper ``Inductive Synthesis of Structurally Recursive Functional Programs from Non-Recursive Expressions''. Section 2 describes the setup and Section 3 desctibes how to perform experiment.
+\\
+\\ The experiments take a time of 1-2 hours to complete. You can build the artifacts from the source available at \url{https://github.com/pslhy/trio_artifacts}.
+\\
+
+\textbf{Experiment Description:}
+\begin{itemize}
+    \item Reproduce the results of Table 2 (in Section 6.2) and Table 3 (in section 6.3) in the paper.
+    \item Reproduce the ablation study of Section 6.3
+\end{itemize}
+
+\section{Setup}
+To build from source, you need to install the following packages:
+\begin{itemize}
+    \item cmake
+    \item python3
+\end{itemize}
+Before running, you need to install the opam package manager and the OCaml compiler. The artifact is tested on macOS Big Sur and Ubuntu 16.04.7 LTS. The artifact required OCaml 4.10.0+flambda. You can automatically install the required OCaml compiler by running the following command:
+
+\begin{lstlisting}
+    $ git clone https://github.com/pslhy/trio_artifacts.git
+    $ cd trio_artifacts
+    $ ./build
+    $ . setenv (or $ bash setenv)
+    $ make
+\end{lstlisting}
+
+\section{Running}
+\subsection{Running All the Experiments}
+To run all the IO Example Benchmarks, run the following command:
+\begin{lstlisting}
+    $ python3 artifact.py io [--timeout <sec> (default: 120)]
+\end{lstlisting}
+
+The command will run each 3 tools (Trio, Burst, Smyth) for all synthesis problems with IO specifications. The results will be saved in the ``results'' directory. You can set a timeout by option ``--timeout''. default timeout is 120 seconds.
+
+The following command will run all the Reference Implementation Benchmarks in the paper:
+\begin{lstlisting}
+    $ python3 artifact.py ref [--timeout <sec> (default: 120)]
+\end{lstlisting}
+
+\subsection{Effectiveness of Trio with IO Specifications}
+After the Running commands finish, you can reproduce the results of Table 2 in the paper by running the following command:
+\begin{lstlisting}
+    $ python3 artifact.py --print_stat 1
+\end{lstlisting}
+Note: @@@WHY DIFFERENT WITH PAPER?
+\subsection{Effectiveness of Trio with Ref Specifications}
+You can reproduce the results of Table 3 in the paper by running the following command:
+\begin{lstlisting}
+    $ python3 artifact.py --print_stat 2
+\end{lstlisting}
+\end{document}

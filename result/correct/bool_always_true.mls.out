@@ -1,0 +1,1 @@
+fun (x:bool) -> True

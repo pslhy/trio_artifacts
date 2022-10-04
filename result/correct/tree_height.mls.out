@@ -1,0 +1,5 @@
+fix (f : tree -> nat) =
+    fun (x : tree) ->
+        match x with
+        | Leaf _ -> O
+        | Node y -> S (max (f (y.1)) (f (y.2)))

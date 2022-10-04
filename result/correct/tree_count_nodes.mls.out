@@ -1,0 +1,5 @@
+fix (f : tree -> nat) =
+  fun (x:tree) ->
+    match x with
+      | Leaf -> 0
+      | Node (l,_,r) -> S (sum (f l) (f r))

@@ -1,0 +1,8 @@
+fix (filter : (nat -> bool) -> list -> list) =
+  fun (f:nat -> bool) ->
+    fun (l:list) ->
+    match l with
+      | Nil -> Nil
+      | Cons (h,t) -> (match f h with
+                     | True _ -> Cons (h, filter f t)
+                     | False _ -> filter f t)
