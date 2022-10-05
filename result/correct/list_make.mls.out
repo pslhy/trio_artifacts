@@ -1,4 +1,0 @@
-fix (f : nat -> list) =
-  fun (x:nat) -> match x with
-                   | O -> Nil
-                   | S x1p -> Cons (0, f x1p)

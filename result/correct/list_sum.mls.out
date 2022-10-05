@@ -1,1 +1,0 @@
-fun (x:list) -> (fold add 0 x)

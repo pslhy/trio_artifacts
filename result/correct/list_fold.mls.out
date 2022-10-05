@@ -1,7 +1,0 @@
-fix (fold : (nat -> nat -> nat) -> nat -> list -> nat) =
-  fun (f:(nat -> nat -> nat)) ->
-    fun (init:nat) ->
-      fun (l:list) ->
-        match l with
-          | Nil -> init
-          | Cons (h,t) -> f (fold f init t) h

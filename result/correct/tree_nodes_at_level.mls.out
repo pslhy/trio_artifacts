@@ -1,9 +1,0 @@
-fix (f : tree -> nat -> nat) =
-  fun (t:tree) ->
-    fun (n:nat) ->
-      match t with
-        | Leaf -> O
-        | Node (l,_,r) ->
-          (match n with
-           | O -> S O
-           | S np -> sum (f l np) (f r np))

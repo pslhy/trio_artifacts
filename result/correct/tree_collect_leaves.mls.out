@@ -1,6 +1,0 @@
-fix (f : tree -> list) =
-  fun (x:tree) ->
-    match x with
-      | Leaf -> Nil
-      | Node (l,x,r) ->
-        append (f l) (Cons (x, f r))

@@ -65,7 +65,7 @@ synth tree -> bool satisfying
 
 [Leaf] -> True,
 [Node (0, Leaf, Leaf)] -> True,
-[Node (0, Node (0, Leaf, Leaf), Leaf)] -> True,
-[Node (0, Node (0, Node (0, Leaf, Leaf), Leaf), Leaf)] -> False,
-[Node (0, Node (0, Node (0, Leaf, Leaf), Node (0, Leaf, Leaf)), Node (0, Leaf, Leaf))] -> True,
-[Node (0, Node (0, Node (0, Leaf, Leaf), Node (0, Leaf, Node (0, Leaf, Leaf))), Node (0, Leaf, Leaf))] -> False
+[Node (0, Node (1, Leaf, Leaf), Leaf)] -> True,
+[Node (0, Node (1, Node (1, Leaf, Leaf), Leaf), Leaf)] -> False,
+[Node (0, Node (1, Node (1, Leaf, Leaf), Node (1, Leaf, Leaf)), Node (1, Leaf, Leaf))] -> True,
+[Node (0, Node (1, Node (1, Leaf, Leaf), Node (1, Leaf, Node (1, Leaf, Leaf))), Node (1, Leaf, Leaf))] -> False

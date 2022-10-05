@@ -9,6 +9,7 @@ import pretty_csv
 import statistics
 from tqdm import tqdm
 
+num_of_line = 60
 path = os.getcwd() + "/"
 gnu_time = "gtime"
 if platform.system() == "Linux":
@@ -22,7 +23,22 @@ def mean_str(v):
 
 def sum_str(v):
     try:
-        return '%7.1f' % sum(v)
+        return '%8.0f' % sum(v)
+    except:
+        return 'N/A'
+
+def mem_mean_str(v):
+    m = statistics.mean(v)
+    try:
+        return '%7.1f' % (m / 1024)
+    except:
+        return 'N/A'
+
+def max_str(v):
+    try:
+        m = max(v)
+        mb = m / 1024
+        return '%7.1f' % mb
     except:
         return 'N/A'
 
@@ -110,7 +126,8 @@ def check_equal(correctSol, solverSol, IOFile):
 # for io and ref benchmarks
 def make_csv(benchmark="io"):
     if benchmark == "io":
-        csv_string = "Test,Trio_Time,Trio_Size,Trio_Correct,Burst_Time,Burst_Size,Burst_Correct,Smyth_Time,Smyth_Size,Smyth_Correct\n"
+        # csv_string = "Test,Trio_Time,Trio_Size,Trio_Correct,Burst_Time,Burst_Size,Burst_Correct,Smyth_Time,Smyth_Size,Smyth_Correct\n"
+        csv_string = "Test,Trio_Time,Trio_Size,Burst_Time,Burst_Size,Smyth_Time,Smyth_Size\n"
     elif benchmark == "ref":
         csv_string = "Test,Trio_Time,Trio_Size,Trio_Iter,Burst_Time,Burst_Size,Burst_Iter,Smyth_Time,Smyth_Size,Smyth_Iter\n"
     else: print("fail to make csv"); return -1
@@ -123,11 +140,13 @@ def make_csv(benchmark="io"):
     time_map = {}
     fastests = {}
     iter_map = {}
+    mem_map = {}
     for s in solvers:
         time_map[s] = []
         size_map[s] = []
         fastests[s] = 0
         iter_map[s] = []
+        mem_map[s] = []
 
     for filename in lists:
         # del .mls
@@ -141,6 +160,7 @@ def make_csv(benchmark="io"):
                     size_data, iter_data, time_data, mem_data = csvfile.read().split(",")
                     # print(size_data.strip(), iter_data.strip(), time_data.strip(), mem_data.strip())
                     time_map[solver].append(float(time_data))
+                    mem_map[solver].append(int(mem_data))
                     if float(time_data) >= 120:
                         # time_data = "timeout"
                         size_map[solver].append(-1)
@@ -148,21 +168,21 @@ def make_csv(benchmark="io"):
                     else:
                         size_map[solver].append(int(size_data))
                         iter_map[solver].append(int(iter_data))
-                    csv_string += (time_data + "," + size_data + ",")
-                    if (benchmark == "io"):
-                        if size_data == "N/A":
-                            csv_string += "N/A"
-                        else:
+                    csv_string += (time_data + "," + size_data)
+                    # if (benchmark == "io"):
+                    #     if size_data == "N/A":
+                    #         csv_string += "N/A"
+                    #     else:
                             # !!!! correct Error... !!!!
-                            correctfile = path + "result/correct/" + fname + ".out"
-                            correctdata = check_equal(correctfile, solfilename, path + "benchmarks/" + benchmark + "/" + fname)
+                            # correctfile = path + "result/correct/" + fname + ".out"
+                            # correctdata = check_equal(correctfile, solfilename, path + "benchmarks/" + benchmark + "/" + fname)
                             # correctdata = "correct"
-                            csv_string += correctdata
-                    elif (benchmark == "ref"):
-                        csv_string += iter_data
-                    else: 
-                        print("fail to make csv")
-                        return -1
+                            # csv_string += correctdata
+                    if (benchmark == "ref"):
+                        csv_string += ","+iter_data
+                    # else: 
+                    #     print("fail to make csv")
+                    #     return -1
                     if (solver != "smyth"):
                         csv_string += ","
             except FileNotFoundError:
@@ -190,21 +210,23 @@ def make_csv(benchmark="io"):
         size_map[s] = [x for x in size_map[s] if x != -1]
         iter_map[s] = [x for x in iter_map[s] if x != -1]
 
-    print("-" * 120)
-    print("%8s %8s %8s %8s %8s" % (benchmark.upper(), "Total", "Trio", "Burst", "Smyth") )
+    print("-" * num_of_line)
+    print("%12s %8s %8s %8s %8s" % (benchmark.upper(), "Trio", "Burst", "Smyth", "Total") )
     # correct ??? 
-    print("%8s %8d %8d %8d %8d" % ("# Solved",
-                                   len(lists),
+    print("%12s %8d %8d %8d %8d" % ("# Solved",
                                    len([s for s in size_map["trio"] if s != -1]),
                                    len([s for s in size_map["burst"] if s != -1]),
-                                   len([s for s in size_map["smyth"] if s != -1])))
-    print("-" * 120)
-    print("%8s %8s %8s %8s" % ("Data", "Trio", "Burst", "Smyth") )
-    print("%8s %8d %8d %8d" % ("#Fastest", fastests["trio"], fastests["burst"], fastests["smyth"]))
-    print("%8s %8s %8s %8s" % ("Avg_time", mean_str(time_map["trio"]), mean_str(time_map["burst"]), mean_str(time_map["smyth"])))
+                                   len([s for s in size_map["smyth"] if s != -1]),
+                                   len(lists)))
+    print("-" * num_of_line)
+    # print("%12s %8s %8s %8s" % ("", "Trio", "Burst", "Smyth") )
+    print("%12s %8d %8d %8d" % ("# Fastest", fastests["trio"], fastests["burst"], fastests["smyth"]))
+    print("%12s %8s %8s %8s" % ("Avg_time(s)", mean_str(time_map["trio"]), mean_str(time_map["burst"]), mean_str(time_map["smyth"])))
     if benchmark == "ref":
-        print("%8s %8s %8s %8s" % ("Avg_iter", mean_str(iter_map["trio"]), mean_str(iter_map["burst"]), mean_str(iter_map["smyth"])))
-    print("-" * 120)
+        print("%12s %8s %8s %8s" % ("Avg_iter", mean_str(iter_map["trio"]), mean_str(iter_map["burst"]), mean_str(iter_map["smyth"])))
+    print("-" * num_of_line)
+    print("%12s %8s %8s %8s" % ("Avg_mem(Mb)", mem_mean_str(mem_map["trio"]), mem_mean_str(mem_map["burst"]), mem_mean_str(mem_map["smyth"])))
+    print("%12s %8s %8s %8s" % ("peak_mem(Mb)", max_str(mem_map["trio"]), max_str(mem_map["burst"]), max_str(mem_map["smyth"])))
  
 def make_ablation_data():
     with open(path + "ablation_list", "r") as f: lists = f.readlines()
@@ -243,7 +265,7 @@ def make_ablation_data():
     
     # print result
     print("# Solved")
-    print("-" * 120)
+    print("-" * num_of_line)
     print("%8s %8s %8s %8s %8s %8s" % ("", "Total", "Trio", "Trio_T", "Trio_L", "Trio_--") )
     for c in categories:
         print("%8s %8d %8d %8d %8d %8d" % (c,
@@ -252,17 +274,7 @@ def make_ablation_data():
                                             len([s for s in size_map[("trio_T", c)] if s != -1 ]),
                                             len([s for s in size_map[("trio_L", c)] if s != -1 ]),
                                             len([s for s in size_map[("trio_--", c)] if s != -1 ])))
-    print("-" * 120)
-    print("Synthesis Time(s)" )
-    print("-" * 120)
-    print("%8s %8s %8s %8s %8s %8s" % ("", "","Trio", "Trio_T", "Trio_L", "Trio_--") )
-    for c in categories:
-        print("%8s %8s %8s %8s %8s %8s" % (c,"",
-                                        sum_str(time_map[("trio", c)]),
-                                        sum_str(time_map[("trio_T", c)]),
-                                        sum_str(time_map[("trio_L", c)]),
-                                        sum_str(time_map[("trio_--", c)])))
-    print("-" * 120)
+    print("-" * num_of_line)
     
 def make_pretty_csv(file):
     csv_file = path + "result/"+file
@@ -301,7 +313,7 @@ def parse_args():
 def main():
     args = parse_args()
     if args.print_result == 1:
-        make_correct()
+        # make_correct()
         make_csv("io")
         make_pretty_csv("io_result.csv")
     elif args.print_result == 2:
