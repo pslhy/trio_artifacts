@@ -7,8 +7,9 @@ import argparse
 from unicodedata import category
 import pretty_csv
 import statistics
-# from tqdm import tqdm
+from tqdm import tqdm
 
+# !pip3 install tqdm
 num_of_line = 60
 path = os.getcwd() + "/"
 gnu_time = "gtime"
@@ -42,6 +43,11 @@ def max_str(v):
     except:
         return 'N/A'
 
+def check_already_done(file):
+    if os.path.exists(file):
+        return True
+    return False
+
 def make_correct():
     ref = path + "benchmarks/ref"
     os.makedirs(path + "result/correct", exist_ok=True)
@@ -69,12 +75,14 @@ def run_solver(timeout=120, benchmark="io", ablation=False):
     os.makedirs(prefix, exist_ok=True)
     # with open(path + "bench_list", "r") as f: lists = f.readlines()
     for solver in solvers:
-        print(solver + "synthesis...")
-        for fname in lists:
+        print(solver + " synthesis...")
+        for fname in tqdm(lists):
             file = fname.strip()
             file_locate = path + "benchmarks/" + benchmark + "/" + file
             solfilename = prefix + "/" + file + "." + solver + ".sol"
             csvfilename = prefix + "/" + file + "." + solver + ".csv"
+            if check_already_done(solfilename):
+                continue
             if solver == "trio":
                 cmd = gnu_time + " -f 'Time(s): %e \nMem(Kb): %M' timeout " + timeout +" burst/BurstCmdLine.exe -print-data -use-trio " + file_locate
             elif solver == "burst":
@@ -192,8 +200,18 @@ def make_csv(benchmark="io"):
                     if (solver != "smyth"):
                         csv_string += ","
             except FileNotFoundError:
-                print("Not found result file. please run first")
-                exit()
+                time_map[solver].append(float(120))
+                mem_map[solver].append(int(0))
+                size_map[solver].append(-1)
+                iter_map[solver].append(-1)
+                csv_string += "N/A, N/A"
+                if (benchmark == "ref"):
+                        csv_string += ",N/A"
+                if (solver != "smyth"):
+                        csv_string += ","
+                # print("Not found result file. please run first")
+                # continue
+                # exit()
         csv_string += "\n"
     # print(csv_string)
     with open(path + "result/"+benchmark+"_result.csv", "w+") as csv_file: csv_file.write(csv_string)
@@ -261,8 +279,10 @@ def make_ablation_data():
                         else:
                             size_map[(s,c)].append(int(size_data))
                 except FileNotFoundError:
-                    print("Not found result file. please run first")
-                    exit()
+                    # print("Not found result file. please run first")
+                    # exit()
+                    time_map[(s,c)].append(float(120))
+                    size_map[(s,c)].append(-1)
     # remove timeout data
     for s in solvers:
         for c in categories:
