@@ -75,7 +75,7 @@ def run_solver(timeout=120, benchmark="io", ablation=False):
     os.makedirs(prefix, exist_ok=True)
     # with open(path + "bench_list", "r") as f: lists = f.readlines()
     for solver in solvers:
-        print("Running" + solver)
+        print("Running " + solver)
         for fname in tqdm(lists):
             file = fname.strip()
             file_locate = path + "benchmarks/" + benchmark + "/" + file
