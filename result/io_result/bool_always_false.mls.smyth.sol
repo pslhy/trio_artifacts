@@ -1,1 +1,0 @@
-fix (f : ) = fun (x0:) -> False

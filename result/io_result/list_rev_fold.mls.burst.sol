@@ -1,1 +1,0 @@
-fix (f : list -> list) = fun (x:list) -> fold snoc Nil x
