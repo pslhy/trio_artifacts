@@ -7,7 +7,7 @@ import argparse
 from unicodedata import category
 import pretty_csv
 import statistics
-from tqdm import tqdm
+# from tqdm import tqdm
 
 num_of_line = 60
 path = os.getcwd() + "/"
@@ -70,7 +70,7 @@ def run_solver(timeout=120, benchmark="io", ablation=False):
     # with open(path + "bench_list", "r") as f: lists = f.readlines()
     for solver in solvers:
         print(solver + "synthesis...")
-        for fname in tqdm(lists):
+        for fname in lists:
             file = fname.strip()
             file_locate = path + "benchmarks/" + benchmark + "/" + file
             solfilename = prefix + "/" + file + "." + solver + ".sol"
@@ -95,17 +95,23 @@ def run_solver(timeout=120, benchmark="io", ablation=False):
             sol = ""
             # size, iter, time, mem
             csv_data =""
+            if type(proc.stdout) == bytes:
+                out_std = proc.stdout.decode('utf-8')
+                out_err = proc.stderr.decode('utf-8')
+            else:
+                out_std = proc.stdout
+                out_err = proc.stderr
             # stdout = proc.stdout.decode('utf-8')
             # proc.stdout = proc.stdout.replace("\r", "")
             if (proc.returncode == 0):
-                (s, temp) = str(proc.stdout).split("Size: ")
+                (s, temp) = str(out_std).split("Size: ")
                 (size, iter) = temp.split("Iter: ")
-                (err, tm) = str(proc.stderr).split("Time(s): ")
+                (err, tm) = str(out_err).split("Time(s): ")
                 (time, mem) = tm.split("Mem(Kb): ")
                 sol = s.strip()
                 csv_data += (size.strip() + "," + iter.strip() + "," + time.strip() + "," + mem.strip())
             else:
-                (err, mem) = str(proc.stderr).split("Mem(Kb): ")
+                (err, mem) = str(out_err).split("Mem(Kb): ")
                 csv_data += ("N/A,N/A," + timeout +"," + mem.strip())
             with open(solfilename, "w+") as sol_file:
                 sol_file.write(sol)
