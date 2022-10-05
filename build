@@ -7,5 +7,6 @@ then
 fi
 opam switch create $OCAML_VERSION
 eval `opam config env`
+eval $(opam env)
 opam install --yes dune core ppx_deriving menhir bark batteries
 pip3 install tqdm
