@@ -2,7 +2,8 @@ OCAML_VERSION=4.10.0+flambda
 if ! command -v opam &> /dev/null
 then
 	echo "OPAM could not be found. Installing OPAM..."
-	sh <(curl -sL https://raw.githubusercontent.com/ocaml/opam/master/shell/install.sh)
+	# if you have trouble with curl, just download the script and run sh install.sh
+	bash -c "sh <(curl -fsSL https://raw.githubusercontent.com/ocaml/opam/master/shell/install.sh)"
 	opam init --auto-setup --disable-sandboxing --yes --compiler=$OCAML_VERSION && opam clean
 fi
 opam switch create $OCAML_VERSION
