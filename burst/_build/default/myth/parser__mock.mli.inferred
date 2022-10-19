@@ -1,0 +1,86 @@
+type token =
+    WITH
+  | UNIT
+  | UNDERSCORE
+  | UID of string
+  | TYPE
+  | STAR
+  | SEMI
+  | RPAREN
+  | REC
+  | RBRACKET
+  | RBRACE
+  | PROJ of int
+  | PIPE
+  | OF
+  | MATCH
+  | LPAREN
+  | LID of string
+  | LET
+  | LBRACKET
+  | LBRACE
+  | INT of int
+  | IN
+  | IMPLIES
+  | HOLE
+  | FUN
+  | FATARR
+  | EQ
+  | EOF
+  | DOT
+  | COMMA
+  | COLON
+  | ARR
+val ctor_of_int : int -> Lang.exp
+val list_of_exps : Lang.exp list -> Lang.exp
+val appify : Lang.exp -> Lang.exp list -> Lang.exp
+val menhir_begin_marker : int
+val xv_typ_unit : Lang.typ
+val xv_typ_tuple_list_one : Lang.typ list
+val xv_typ_tuple_list : Lang.typ list
+val xv_typ_tuple : Lang.typ
+val xv_typ_rcd_list : (string * Lang.typ) list
+val xv_typ_rcd : Lang.typ
+val xv_typ_paren : Lang.typ
+val xv_typ_non_arrow : Lang.typ
+val xv_typ_base : Lang.typ
+val xv_typ_arrow : Lang.typ
+val xv_typ : Lang.typ
+val xv_synth_problem : Lang.synth_problem
+val xv_record_proj_exp : Lang.exp
+val xv_record_patterns : (string * Lang.pattern) list
+val xv_prog : Lang.prog
+val xv_pattern_list_one : Lang.pattern list
+val xv_pattern : Lang.pattern
+val xv_pat : Lang.pat
+val xv_letbind : Lang.decl
+val xv_exp_semi_list_one : Lang.exp list
+val xv_exp_semi_list : Lang.exp list
+val xv_exp_lexps_list : (string * Lang.exp) list
+val xv_exp_comma_list_one : Lang.exp list
+val xv_exp_base : Lang.exp
+val xv_exp_app_list : Lang.exp list
+val xv_exp_app : Lang.exp
+val xv_exp : Lang.exp
+val xv_evidencelist_one : Lang.exp list
+val xv_evidencelist : Lang.exp list
+val xv_evidence : Lang.exp
+val xv_ev_val_semi_list_one : Lang.exp list
+val xv_ev_val_semi_list : Lang.exp list
+val xv_ev_val_list_one : Lang.exp list
+val xv_ev_val_ios_one : (Lang.exp * Lang.exp) list
+val xv_ev_val_ios : Lang.exp
+val xv_ev_val_io_one : Lang.exp
+val xv_ev_val_io : Lang.exp * Lang.exp
+val xv_ev_val_base : Lang.exp
+val xv_ev_val : Lang.exp
+val xv_ev_lvals_list : (string * Lang.exp) list
+val xv_decls : Lang.decl list
+val xv_datatype : Lang.decl
+val xv_ctors : Lang.ctor list
+val xv_ctor : Lang.ctor
+val xv_branches : Lang.branch list
+val xv_branch : Lang.branch
+val xv_arg_list : Lang.arg list
+val xv_arg : Lang.arg
+val menhir_end_marker : int

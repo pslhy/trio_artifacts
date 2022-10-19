@@ -1,0 +1,26 @@
+(** @canonical Dune__exe.BurstCmdLine *)
+module BurstCmdLine = Dune__exe__BurstCmdLine
+
+
+(** @canonical Dune__exe.FromSmythConverter *)
+module FromSmythConverter = Dune__exe__FromSmythConverter
+
+
+(** @canonical Dune__exe.L2SynthesisCaller *)
+module L2SynthesisCaller = Dune__exe__L2SynthesisCaller
+
+
+(** @canonical Dune__exe.MythSynthesisCaller *)
+module MythSynthesisCaller = Dune__exe__MythSynthesisCaller
+
+
+(** @canonical Dune__exe.SmythSynthesizer *)
+module SmythSynthesizer = Dune__exe__SmythSynthesizer
+
+
+(** @canonical Dune__exe.ToSmythConverter *)
+module ToSmythConverter = Dune__exe__ToSmythConverter
+
+
+(** @canonical Dune__exe.TrioSynthesizer *)
+module TrioSynthesizer = Dune__exe__TrioSynthesizer
