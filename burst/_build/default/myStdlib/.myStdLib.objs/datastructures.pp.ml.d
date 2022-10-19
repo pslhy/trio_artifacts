@@ -1,1 +1,0 @@
-myStdlib/datastructures.pp.ml: My_dict My_disjoint_set My_hash_cons My_hash_cons_dict My_hash_cons_set My_heap My_list_extensions My_maximals My_memoizer My_priority_queue My_set My_tree
