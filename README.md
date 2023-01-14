@@ -37,13 +37,13 @@ You can reproduce the results of Table 3 in the paper by running the following c
 ```
 $ python3 artifact.py --print_result 2
 ```
-## Effectiveness of the trace-based(simple expression-based) pruning and library sampling techniques
+## Effectiveness of the block-based pruning and library sampling techniques
 To run following command, you can see the summary of ablation study:
 ```
 $ python3 artifact.py --print_result 3
 ```
 
-## Running Trio for single benchmark
+## Running Trio for a single benchmark
 You can run Trio to solve single benchmark as follows:
 ```
 $ burst/BusrtCmdLine.exe -use-trio [benchmark file]
@@ -70,4 +70,5 @@ Iter: 0
 ```
 At 1-5 lines show solution, and other lines shows solution size and num of iter times by -print-data option.
 
-
+## Acknowledgement 
+This artifact is based on the artifact for [Burst](https://github.com/amiltner/BurstArtifactEvaluation)
