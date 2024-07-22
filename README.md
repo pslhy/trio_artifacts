@@ -46,17 +46,17 @@ $ python3 artifact.py --print_result 3
 ## Running Trio for a single benchmark
 You can run Trio to solve single benchmark as follows:
 ```
-$ burst/BusrtCmdLine.exe -use-trio [benchmark file]
+$ burst/BurstCmdLine.exe -use-trio [benchmark file]
 ```
 and if you run with option of Trio,
 
 ```
-$ burst/BusrtCmdLine.exe -use-trio -trio-options “<trio options>” [benchmark file]
+$ burst/BurstCmdLine.exe -use-trio -trio-options “<trio options>” [benchmark file]
 ```
 
 For example, to solve the single benchmark in benchmarks/io/nat_mul.mls
 ```
-$ burst/BusrtCmdLine.exe -print-data -use-trio benchmarks/io/nat_mul.mls
+$ burst/BurstCmdLine.exe -print-data -use-trio benchmarks/io/nat_mul.mls
 ```
 will print the following output:
 ```
