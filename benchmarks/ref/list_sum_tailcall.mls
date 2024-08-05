@@ -1,0 +1,27 @@
+type nat =
+  | O
+  | S of nat
+
+type list =
+  | Nil
+  | Cons of nat * list
+
+let add =
+  fix (add : nat -> nat -> nat) =
+    fun (n1 : nat) ->
+      fun (n2 : nat) ->
+        match n1 with
+        | O -> n2
+        | S n1p -> S (add n1p n2)
+;;
+
+synth list -> nat -> nat satisfying
+
+equiv
+
+fix (f : list -> nat -> nat) =
+  fun (x:list) ->
+    fun (n:nat) ->
+      match x with
+      | Nil -> n
+      | Cons (h,t) -> f t (add h n)

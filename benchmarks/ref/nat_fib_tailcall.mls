@@ -1,0 +1,24 @@
+type nat =
+  | O
+  | S of nat
+ 
+let add =
+  fix (add : nat -> nat -> nat) =
+    fun (n1 : nat) ->
+      fun (n2 : nat) ->
+        match n1 with
+        | O -> n2
+        | S n1p -> S (add n1p n2)
+;;
+
+synth nat -> nat -> nat -> nat satisfying
+
+equiv
+
+fix (f : nat -> nat -> nat -> nat) =
+  fun (n:nat) ->
+    fun (a:nat) ->
+      fun (b:nat) ->
+        match n with
+        | O -> a
+        | S np -> f np b (add a b)
